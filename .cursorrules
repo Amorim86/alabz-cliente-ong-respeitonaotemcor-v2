@@ -1,0 +1,16 @@
+# DIRETRIZES GLOBAIS DE DESENVOLVIMENTO
+
+## 🛑 BLOQUEIO DE CODIFICAÇÃO PRECOCE (REGRA DE INTEGRIDADE)
+*   **Proibição Absoluta:** É ESTRITAMENTE PROIBIDO iniciar a codificação, criação de arquivos de layout/seções ou alterações estruturais de páginas novas antes de apresentar as 3 opções de macroestrutura e obter aprovação explícita do mockup/wireframe pelo Amorim.
+*   **Ordem de Execução:** Briefing → Stitch Extract (se houver) → Apresentação das 3 Macroestruturas + ASCII Wireframes → Escolha do Método de Validação (A, B ou C) → Geração do Mockup/Wireframe → Aprovação → Criação do `.alabz/design-contract.md` → Apenas após isso, iniciar a escrita do código.
+*   **Uso do StitchMCP:** É proibido chamar ferramentas do `StitchMCP` proativamente nas etapas de planejamento (Passos 1 a 4). Só use se o usuário escolher a Opção C ou pedir diretamente.
+
+
+## Proatividade no Refinamento (Versão v1)
+*   **Oferta Proativa:** Sempre que estivermos trabalhando na versão base (`v1`) do projeto ou página, você DEVE oferecer proativamente ao usuário a execução da skill `/refinamento` para polir a estrutura e realizar a faxina/ajustes iniciais necessários.
+*   **Encaminhamento de Fluxo:** Ao concluir e apresentar a estrutura `v1`, lembre o usuário da disponibilidade da skill de refinamento para garantir um resultado inicial impecável e pergunte se ele gostaria de rodar o `/refinamento` naquele momento.
+
+## Inicialização de Design System (ui-ux-pro-max)
+*   **Detecção de Briefing/Nicho:** Sempre que o usuário iniciar um novo projeto, passar o briefing do cliente ou citar o nicho de mercado (ex: "vamos fazer um site para uma clínica odontológica"), você DEVE rodar imediatamente o motor do `/ui-ux-pro-max` passando esses dados.
+*   **Etapa Obrigatória (Passo 3.5):** Gere o design-system/MASTER.md e aplique as variáveis CSS no `globals.css` antes de prosseguir para a criação do layout base.
+

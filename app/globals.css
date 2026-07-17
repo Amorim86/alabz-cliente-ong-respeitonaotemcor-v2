@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Outfit:wght@100..900&display=swap');
+
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem; /* compensação do header fixo */
+}
+
+:root {
+  --background: #FDFBF7;
+  --foreground: #152219;
+  --header-height: 4rem;
+
+  /* --- VARIÁVEIS DO DESIGN SYSTEM (ui-ux-pro-max) --- */
+  --color-primary: #1A331E;   /* Verde Floresta Escuro */
+  --color-secondary: #4D382B; /* Marrom Rústico (Madeira) */
+  --color-accent: #C5A880;    /* Ouro Quente / Trigo */
+  
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'Outfit', sans-serif;
+
+  /* Variáveis de Footer (Default) */
+  --color-footer-bg: #112214;   
+  --color-footer-text: #FDFBF7; 
+  
+  /* Variáveis de Tema (Template Master Alabz) */
+  --header-bg: rgba(253, 251, 247, 0.95);
+  --header-mobile-bg: rgba(26, 51, 30, 0.98); /* Para o menu sanduíche */
+  --gold-border: var(--color-accent);
+  --line: rgba(26, 51, 30, 0.1);
+  --dark-line: rgba(253, 251, 247, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-mono: Courier, monospace;
+
+  --color-brand-primary: var(--color-primary);
+  --color-brand-dark: var(--color-secondary);
+  --color-brand-accent: var(--color-accent);
+  --font-display: var(--font-display);
+
+  --color-brand-footer-bg: var(--color-footer-bg);
+  --color-brand-footer-text: var(--color-footer-text);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+/* Keyframes para Reviews Section */
+@keyframes starsPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes badgeShine {
+  0%, 74% { transform: translateX(-130%); }
+  100% { transform: translateX(130%); }
+}
+
+/* Keyframe para Location Section Carousel */
+@keyframes facadeCarousel {
+  0% { opacity: 0; transform: scale(1.01); }
+  8%, 32% { opacity: 1; }
+  42%, 100% { opacity: 0; transform: scale(1.055); }
+}
+
+/* Global Container Utility (Conforme Diretriz) */
+.container-alabz {
+  width: min(100% - 40px, 1335px);
+  margin: 0 auto;
+}
+
+/* Seções principais ocupam ao menos a viewport útil e podem crescer com o conteúdo. */
+.section-viewport {
+  min-height: calc(100dvh - var(--header-height));
+}
+
+/* Exceção explícita para faixas e blocos que devem manter altura natural. */
+.section-natural {
+  min-height: auto;
+}
+
+/* Grid reutilizável: cada seção define o menor card que seu conteúdo suporta. */
+.cards-grid {
+  --card-min: 16rem;
+  --card-gap: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, var(--card-min)), 1fr)
+  );
+  gap: var(--card-gap);
+}
+
+.cards-grid > * {
+  min-width: 0;
+}
+
+/* Compactação opcional: só atua em componentes que declaram a classe. */
+@media (max-height: 800px) and (min-width: 1024px) {
+  .laptop-compact {
+    --compact-space-block: clamp(2.5rem, 6vh, 5rem);
+    --compact-content-gap: clamp(1rem, 2.5vh, 2rem);
+  }
+}
+
+/* Ocultar elementos globais flutuantes quando o menu mobile está aberto */
+body.menu-open .whatsapp-floating-btn {
+  opacity: 0;
+  pointer-events: none;
+}

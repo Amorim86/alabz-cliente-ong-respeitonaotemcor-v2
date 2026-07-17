@@ -1,0 +1,7 @@
+interface:
+  display_name: "Frontend Design Toolkit"
+  short_description: "Design e implementacao de interfaces web"
+  default_prompt: "Use $frontend-design para analisar, desenhar ou refatorar uma interface web com composicao forte, responsividade e implementacao pronta para producao."
+
+policy:
+  allow_implicit_invocation: true

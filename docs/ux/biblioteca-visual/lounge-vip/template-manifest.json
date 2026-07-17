@@ -1,0 +1,27 @@
+{
+  "template_name": "lounge-vip",
+  "version": "1.0.0",
+  "purpose": "Portal premium de entrada (lounge) para apresentar projetos Alabz, validar valor comercial e engajar leads/clientes.",
+  "files": [
+    "README.md",
+    "template_lounge.html",
+    "template-contexto.md",
+    "template-prompt-mestre.md",
+    "template-checklist.md"
+  ],
+  "rules": [
+    "Thumb/slide sempre deve levar para a URL real de producao do cliente (sem links quebrados).",
+    "Usar previews reais e atualizadas do design/desenvolvimento do projeto.",
+    "A narrativa (DNA) deve ser personalizada e descrever os pontos fortes e a solidez comercial do cliente.",
+    "Os botoes de contato (WhatsApp e E-mail) devem conter mensagens pre-definidas personalizadas com o nome do cliente.",
+    "Garantir total legibilidade e performance da animacao de particulas tanto em desktop quanto em mobile."
+  ],
+  "recommended_flow": [
+    "Duplicar o template_lounge.html para o nome do novo cliente (ex: [cliente]_Lounge.html).",
+    "Preencher o template-contexto.md com os dados especificos da marca.",
+    "Utilizar o template-prompt-mestre.md para gerar a narrativa do cliente e mensagens de contato.",
+    "Atualizar as imagens de preview na pasta imagens/.",
+    "Configurar as variaveis de URL no script do HTML (ou servir via parametros de URL).",
+    "Validar a implementacao com o template-checklist.md antes da entrega."
+  ]
+}

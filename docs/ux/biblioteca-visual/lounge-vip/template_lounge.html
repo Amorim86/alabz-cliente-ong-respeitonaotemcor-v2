@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alabz - Soluções Digitais</title>
+    <link rel="icon" type="image/png" href="https://alabz.com.br/a.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --alabz-bg: #141414;
+            --alabz-surface: #0A0A0A;
+            --alabz-gold: #D4AF37;
+            --alabz-gold-dim: rgba(212, 175, 55, 0.5);
+            --alabz-white: #FFFFFF;
+            --alabz-gray: #A1A1AA;
+            --alabz-border: rgba(255, 255, 255, 0.07);
+            --alabz-border-gold: rgba(212, 175, 55, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--alabz-bg);
+            color: var(--alabz-white);
+            font-family: 'DM Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .marquee-container {
+            width: 100%;
+            background: rgba(212, 175, 55, 0.03);
+            border-bottom: 1px solid var(--alabz-border-gold);
+            padding: 8px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 20;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 40s linear infinite;
+        }
+
+        .marquee-item {
+            display: inline-block;
+            padding: 0 30px;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--alabz-gold);
+            opacity: 0.8;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .header-blend {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 160px;
+            background: #000000;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .header-blend-gradient {
+            position: absolute;
+            top: 160px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, #000000 0%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .lounge-container {
+            width: 100%;
+            max-width: 1100px;
+            padding: 10px 20px;
+            text-align: center;
+            z-index: 10;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-wrapper {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+            margin-top: 5px;
+        }
+
+        .logo-alabz img {
+            max-width: 380px;
+            height: auto;
+            width: 100%;
+        }
+
+        .client-greeting {
+            font-size: clamp(28px, 6vw, 60px);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin-bottom: 15px;
+            letter-spacing: -1px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.3s forwards;
+            background: linear-gradient(180deg, #FFFFFF 0%, #D1D1D6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .convince-text {
+            max-width: 750px;
+            margin: 0 auto 25px;
+            font-size: clamp(14px, 4vw, 16px);
+            line-height: 1.7;
+            color: var(--alabz-gray);
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 1s 0.6s forwards;
+            padding: 0 10px;
+        }
+
+        .convince-text b {
+            color: var(--alabz-white);
+            font-weight: 700;
+        }
+
+        .convince-text span {
+            color: var(--alabz-gold);
+            font-weight: 700;
+        }
+
+        .contact-section {
+            margin: 10px auto 30px;
+            max-width: 750px;
+            width: 100%;
+            padding: 0 20px;
+            opacity: 0;
+            animation: fadeInUp 1s 0.8s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .contact-title {
+            font-size: 22px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #D1D1D6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .contact-text {
+            color: var(--alabz-gray);
+            font-size: 15px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .contact-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: var(--alabz-white);
+            font-weight: 400;
+            font-size: 14px;
+            border: 1px solid var(--alabz-border);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--alabz-gold-dim);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .contact-item svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--alabz-gold);
+        }
+
+        .preview-card {
+            background: transparent;
+            padding: 0;
+            width: 100%;
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 1s 1.1s forwards;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slider-viewport {
+            width: 100%;
+            height: clamp(220px, 40vh, 380px);
+            position: relative;
+            background: transparent;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            cursor: pointer;
+        }
+
+        .slide-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 10s ease-out;
+            transform: scale(1.1);
+        }
+
+        .slide-image.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .preview-instruction {
+            padding: 15px 10px;
+            background: transparent;
+            text-align: center;
+        }
+
+        .preview-label {
+            font-size: 9px;
+            letter-spacing: 4px;
+            color: var(--alabz-gold);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+            font-weight: 700;
+        }
+
+        .preview-title {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+            color: #FFF;
+        }
+
+        .preview-hint {
+            color: var(--alabz-gray);
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .footer-branding {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 40px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--alabz-white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .slogan {
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--alabz-gold);
+            text-transform: uppercase;
+            font-weight: 700;
+            opacity: 0.8;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .lounge-container { padding: 10px; }
+            .logo-alabz img { max-width: 280px; }
+            .slider-viewport { height: 200px; }
+            .contact-grid { flex-direction: column; }
+            .contact-item { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow"></div>
+    <div class="header-blend"></div>
+    <div class="header-blend-gradient"></div>
+
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-item">DOMÍNIO DIGITAL ATIVADO</span>
+            <span class="marquee-item">ALTA CONVERSÃO GARANTIDA</span>
+            <span class="marquee-item">USER EXPERIENCE DE ELITE</span>
+            <span class="marquee-item">PERFORMANCE OTIMIZADA</span>
+            <span class="marquee-item">Storytelling Magnético</span>
+        </div>
+    </div>
+
+    <div class="lounge-container">
+        <div class="logo-wrapper">
+            <a href="https://alabz.com.br" target="_blank" style="text-decoration: none; display: inline-block;">
+                <div class="logo-alabz">
+                    <img src="imagens/header.png" alt="ALABZ SOLUTIONS">
+                </div>
+            </a>
+        </div>
+
+        <div class="content">
+            <h1 class="client-greeting" id="client-name">NOME DO CLIENTE</h1>
+            
+            <div id="convince-content" class="convince-text">
+                O que você está prestes a ver é a materialização digital da solidez que a sua empresa construiu no mercado.<br>
+                Projetamos esta experiência para ser sua <b>ferramenta definitiva de vendas</b>, capturando sua essência em cada detalhe.
+            </div>
+
+            <div class="preview-card">
+                <div class="preview-instruction">
+                    <span class="preview-label">A Nova Cara Digital do Seu Negócio</span>
+                    <h2 class="preview-title">VEJA COMO FICOU A SUA PÁGINA</h2>
+                    <p class="preview-hint">Toque na imagem para ver seu futuro site</p>
+                </div>
+                <div class="slider-viewport" onclick="openSite()">
+                    <img src="imagens/preview1.png" class="slide-image active" alt="Preview 1">
+                    <img src="imagens/preview2.png" class="slide-image" alt="Preview 2">
+                    <img src="imagens/preview3.png" class="slide-image" alt="Preview 3">
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <h3 class="contact-title">Gostou do que viu?</h3>
+                <p class="contact-text">Nós da <b>Alabz</b> preparamos este ativo para tornar sua visão de mercado uma realidade imbatível. Vamos dar o próximo passo?</p>
+                
+                <div class="contact-grid">
+                    <a id="whatsapp-link" href="#" class="contact-item" target="_blank">
+                        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                        (41) 98501-9126
+                    </a>
+                    <a id="email-link" href="#" class="contact-item">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        alabz.info@gmail.com
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-branding">
+                <a href="https://alabz.com.br" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+                    <p class="footer-text">ALABZ SOLUTIONS</p>
+                    <p class="slogan">Nós Criamos, você conquista</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particle System
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            particles = [];
+            for (let i = 0; i < 200; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2.5,
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    speedY: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random(),
+                    pulse: Math.random() * 0.05
+                });
+            }
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(212, 175, 55, ${p.alpha})`;
+                ctx.fill();
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.alpha += p.pulse;
+                if (p.alpha > 0.8 || p.alpha < 0.2) p.pulse *= -1;
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+            });
+            requestAnimationFrame(drawParticles);
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+        drawParticles();
+
+        // Simple Fade Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-image');
+        
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        setInterval(nextSlide, 4500);
+
+        // URL Parameters Injection
+        const urlParams = new URLSearchParams(window.location.search);
+        const clientName = urlParams.get('client') || 'CLIENTE';
+        const siteUrl = urlParams.get('url') || '#';
+        const clientDNA = urlParams.get('dna');
+
+        document.getElementById('client-name').innerText = clientName.toUpperCase();
+        
+        // If DNA text is provided via URL, replace the default convince text
+        if (clientDNA) {
+            document.getElementById('convince-content').innerHTML = decodeURIComponent(clientDNA);
+        }
+
+        // Dynamic Contact Links
+        const waMsg = encodeURIComponent(`Olá equipe Alabz! Sou da empresa ${clientName.toUpperCase()} e gostei muito do preview que prepararam. Vamos tornar isso realidade?`);
+        document.getElementById('whatsapp-link').href = `https://wa.me/5541985019126?text=${waMsg}`;
+        
+        const mailBody = encodeURIComponent(`Olá equipe Alabz,\n\nSou da empresa ${clientName.toUpperCase()} e vi o preview da nossa nova página digital. Gostei muito dos detalhes e gostaria de conversar sobre os próximos passos.`);
+        document.getElementById('email-link').href = `mailto:alabz.info@gmail.com?subject=Feedback%20Lounge%20VIP%20-%20${clientName.toUpperCase()}&body=${mailBody}`;
+
+        function openSite() {
+            if (siteUrl !== '#' && siteUrl !== '') window.open(siteUrl, '_blank');
+            else alert('Sua página está sendo preparada. Em breve você poderá acessá-la por aqui!');
+        }
+    </script>
+</body>
+
+</html>
