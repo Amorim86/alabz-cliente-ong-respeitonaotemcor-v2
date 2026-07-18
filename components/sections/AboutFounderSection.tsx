@@ -11,7 +11,6 @@ import {
 } from "framer-motion";
 
 const FOUNDER_IMAGES = [
-  "/images/fundadora/fundadora1.png",
   "/images/fundadora/fundadora2.webp",
   "/images/fundadora/fundadora3.webp",
 ];
@@ -51,10 +50,11 @@ export default function AboutFounderSection() {
   const smoothX = useSpring(pointerX, { damping: 22, stiffness: 110, mass: 0.55 });
   const smoothY = useSpring(pointerY, { damping: 22, stiffness: 110, mass: 0.55 });
 
-  const backgroundX = useTransform(smoothX, [-1, 1], [-26, 26]);
-  const backgroundY = useTransform(smoothY, [-1, 1], [-16, 16]);
-  const portraitX = useTransform(smoothX, [-1, 1], [-10, 10]);
-  const portraitY = useTransform(smoothY, [-1, 1], [-6, 6]);
+  const backgroundX = useTransform(smoothX, [-1, 1], [-12, 12]);
+  const backgroundY = useTransform(smoothY, [-1, 1], [-8, 8]);
+  const backgroundScale = useTransform(smoothY, [-1, 0, 1], [1.14, 1.09, 1.14]);
+  const portraitX = useTransform(smoothX, [-1, 1], [-7, 7]);
+  const portraitY = useTransform(smoothY, [-1, 1], [-4, 4]);
 
   useEffect(() => {
     const checkViewport = () => {
@@ -71,7 +71,7 @@ export default function AboutFounderSection() {
 
     const timer = window.setInterval(() => {
       setCurrentImgIndex((prev) => (prev + 1) % FOUNDER_IMAGES.length);
-    }, 4000);
+    }, 6500);
 
     return () => {
       window.removeEventListener("resize", checkViewport);
@@ -104,7 +104,7 @@ export default function AboutFounderSection() {
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ x: backgroundX, y: backgroundY, scale: 1.06 }}
+        style={{ x: backgroundX, y: backgroundY, scale: backgroundScale }}
       >
         <img
           src="/images/founder_bg.webp"
@@ -190,7 +190,7 @@ export default function AboutFounderSection() {
             className="absolute inset-x-0 bottom-0 mx-auto flex h-full max-h-[calc(100dvh-var(--header-height))] w-full items-end justify-center"
             style={{ x: portraitX, y: portraitY }}
           >
-            <div className="relative h-full w-full max-w-[500px]">
+            <div className="relative h-full w-full max-w-[550px]">
               <AnimatePresence initial={false} mode="wait">
                 <motion.img
                   key={activeImage}
