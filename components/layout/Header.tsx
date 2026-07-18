@@ -2,21 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { siteConfig } from "../../config/site";
 import MobileDrawer from "./MobileDrawer";
 
-import { Instagram, Linkedin, Facebook } from "../ui/SocialIcons";
+import { Instagram, Facebook } from "../ui/SocialIcons";
 import { MenuButton } from "./MenuButton";
-
-const LucideIcon = dynamic(
-  () =>
-    import("lucide-react").then((mod) => {
-      const IconComponent = mod[siteConfig?.logoIconName as keyof typeof mod];
-      return (IconComponent || mod.HeartPulse) as React.ComponentType<any>;
-    }),
-  { ssr: false }
-);
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -117,7 +107,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 isolate backdrop-blur-md border-b border-[var(--line)]" style={{ backgroundColor: "var(--header-bg)" }}>
+      <header className="fixed top-0 left-0 w-full z-50 isolate border-b border-[rgba(8,29,66,0.16)] shadow-[0_8px_24px_rgba(8,29,66,0.10)]" style={{ backgroundColor: "var(--header-bg)" }}>
         {/* Header Alabz Slim (Faixa estreita: h-[3.85rem]) */}
         <div
           className="grid h-[3.85rem] w-full grid-cols-[minmax(0,1fr)_auto] min-[1160px]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-5 box-border"
@@ -126,16 +116,14 @@ export default function Header() {
           
           {/* Extremidade Esquerda: Logo (Altura limitada h-[3.3rem]) */}
           <div className="min-w-0 flex items-center justify-self-start h-[3.3rem] z-10" data-header-logo>
-            <a href="#inicio" onClick={(e) => handleLinkClick(e, "#inicio")} className="flex items-center gap-2 h-full py-1">
-              <div className="h-full max-h-10 aspect-square bg-brand-primary/10 rounded-xl text-brand-primary flex items-center justify-center">
-                <LucideIcon className="w-5 h-5 object-contain" />
-              </div>
+            <a href="#inicio" onClick={(e) => handleLinkClick(e, "#inicio")} className="flex items-center gap-2.5 h-full py-1">
+              <img src="/images/favicon-sem-fundo.png" alt={siteConfig.name} className="h-full object-contain" />
               <div className="flex flex-col justify-center h-full">
-                <span className="font-bold text-base tracking-tight leading-tight text-foreground line-clamp-1">
+                <span className="font-display font-extrabold text-[0.98rem] tracking-[-0.02em] leading-tight text-[var(--color-primary)] line-clamp-1">
                   {siteConfig.name}
                 </span>
                 {siteConfig.subtitle && (
-                  <span className="text-[9px] text-brand-accent font-semibold tracking-widest uppercase leading-none mt-0.5 line-clamp-1">
+                  <span className="font-utility text-[9px] text-[var(--color-accent)] font-semibold tracking-[0.08em] uppercase leading-none mt-0.5 line-clamp-1">
                     {siteConfig.subtitle}
                   </span>
                 )}
@@ -144,7 +132,7 @@ export default function Header() {
           </div>
 
           {/* Centro: Navigation Desktop */}
-          <nav className="hidden min-[1160px]:flex items-center justify-center justify-self-center gap-2 z-0" data-header-nav>
+          <nav className="hidden min-[1160px]:flex items-center justify-center justify-self-center gap-1 z-0" data-header-nav>
             {siteConfig.navigation.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -153,14 +141,14 @@ export default function Header() {
                   key={item.label} 
                   href={item.href} 
                   onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`relative px-4 py-1.5 text-sm font-medium transition-colors duration-300 rounded-full ${
-                    isActive ? "text-brand-primary" : "text-foreground/70 hover:text-foreground"
+                  className={`relative px-3.5 py-2 font-display text-[0.72rem] font-bold uppercase tracking-[0.045em] transition-colors duration-300 ${
+                    isActive ? "text-[var(--color-primary)]" : "text-[var(--color-primary)]/72 hover:text-[var(--color-accent)]"
                   }`}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="desktopActiveSection"
-                      className="absolute inset-0 bg-brand-primary/10 rounded-full -z-10"
+                      className="absolute inset-0 bg-[var(--color-secondary)] rounded-[2px] -z-10 shadow-[3px_3px_0_rgba(245,207,0,0.18)]"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -174,31 +162,22 @@ export default function Header() {
           <div className="hidden min-[1160px]:flex min-w-0 items-center justify-self-end gap-5 z-10" data-header-actions>
             <div className="flex items-center gap-5">
               <a 
-                href="https://facebook.com" 
+                href={siteConfig.socials?.facebook || "#"}
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-foreground/75 hover:text-brand-accent transition-colors" 
+                className="text-[var(--color-primary)]/80 hover:text-[var(--color-accent)] transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a 
-                href="https://instagram.com" 
+                href={siteConfig.socials?.instagram || "#"}
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-foreground/75 hover:text-brand-accent transition-colors" 
+                className="text-[var(--color-primary)]/80 hover:text-[var(--color-accent)] transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-foreground/75 hover:text-brand-accent transition-colors" 
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
               </a>
             </div>
           </div>

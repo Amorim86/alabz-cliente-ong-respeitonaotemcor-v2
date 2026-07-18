@@ -1,23 +1,11 @@
-import dynamic from "next/dynamic";
-import { LucideProps, Mail, Phone, MapPin } from "lucide-react";
+import { Heart, Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "../config/site";
 import PacmanSignature from "./PacmanSignature";
 
 // Importação dinâmica do ícone correspondente ao Header do site (com fallback seguro)
-const LucideIcon = dynamic(
-  () =>
-    import("lucide-react").then((mod) => {
-      const IconComponent = mod[siteConfig.logoIconName as keyof typeof mod];
-      return (IconComponent || mod.HeartPulse) as React.ComponentType<LucideProps>;
-    }),
-  { ssr: true }
-);
-
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
-    <footer className="bg-brand-footer-bg text-brand-footer-text pt-16 pb-6 border-t border-brand-primary/20">
+    <footer className="bg-[#000000] text-brand-footer-text pt-16 pb-6 border-t border-black">
       <div className="max-w-[1400px] mx-auto px-6 md:px-8">
         
         {/* Upper Grid */}
@@ -26,8 +14,16 @@ export default function Footer() {
           {/* Brand Info */}
           <div className="md:col-span-4 flex flex-col items-center text-center md:items-start md:text-left">
             <div className="flex items-center gap-2 mb-4">
-              <div className="p-2 bg-brand-accent/10 rounded-xl text-brand-accent">
-                <LucideIcon className="w-6 h-6" />
+              <div className="relative flex h-[62px] w-[62px] shrink-0 items-center justify-center">
+                <Heart
+                  className="absolute inset-0 h-full w-full fill-[#D62828] text-[#D62828] drop-shadow-[0_0_18px_rgba(214,40,40,0.38)]"
+                  strokeWidth={1.4}
+                />
+                <img
+                  src="/images/favicon-sem-fundo.png"
+                  alt={siteConfig.name}
+                  className="relative z-10 h-12 w-auto object-contain"
+                />
               </div>
               <div className="flex flex-col text-left md:text-left">
                 <span className="font-bold text-lg tracking-tight leading-tight">
@@ -113,7 +109,7 @@ export default function Footer() {
         <div className="text-[11px] text-brand-footer-text/50 leading-relaxed">
           <div className="border-t border-brand-primary/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-brand-footer-text/80">
             <p className="font-bold">
-              {siteConfig.name} | {siteConfig.crm}
+              {siteConfig.name} | Todos os direitos reservados
             </p>
 
             

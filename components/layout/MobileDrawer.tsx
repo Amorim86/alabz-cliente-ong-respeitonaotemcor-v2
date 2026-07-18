@@ -117,7 +117,7 @@ export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }:
               <a
                 href="#contato"
                 onClick={(e) => handleLinkClick(e, "#contato")}
-                className="w-full max-w-[280px] bg-brand-primary text-white text-center px-6 py-4 rounded-full text-base font-bold hover:bg-brand-primary/90 transition-colors shadow-lg"
+                className="w-full max-w-[280px] bg-[var(--color-secondary)] text-[var(--color-primary)] text-center px-6 py-4 rounded-[2px] font-display text-base font-extrabold uppercase tracking-wide hover:bg-white transition-colors shadow-lg"
               >
                 Falar Conosco
               </a>

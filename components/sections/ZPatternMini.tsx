@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ShieldCheck, Crosshair, Award } from "lucide-react";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -14,7 +14,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
@@ -54,7 +54,7 @@ export default function ZPatternMini() {
               href="https://wa.me/5511999999999"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-[var(--color-accent)] hover:bg-[var(--color-accent)]/90 text-white px-8 py-4 rounded-full font-bold text-sm tracking-wider uppercase transition-all duration-300"
+              className="inline-block bg-[var(--color-accent)] px-8 py-4 text-sm font-bold uppercase tracking-wider text-white transition-colors duration-300 hover:bg-[var(--color-accent)]/90"
             >
               Falar com Especialista
             </a>

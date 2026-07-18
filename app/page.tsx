@@ -26,23 +26,38 @@ import Link from "next/link";
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
+import HeroSection from "../components/sections/HeroSection";
+import QuemSomosSection from "../components/sections/QuemSomosSection";
+import ComoAcolhemosSection from "../components/sections/ComoAcolhemosSection";
+import ProjetosFrentesSection from "../components/sections/ProjetosFrentesSection";
+import AboutFounderSection from "../components/sections/AboutFounderSection";
+import ReviewsSection from "../components/sections/ReviewsSection";
+import GalleryPlaceholderSection from "../components/sections/GalleryPlaceholderSection";
+import ContributionSection from "../components/sections/ContributionSection";
+import LocationSection from "../components/sections/LocationSection";
+import VisitInvitationSection from "../components/sections/VisitInvitationSection";
+
 export default function Home() {
   return (
     <>
       <Header />
 
-      <div className="flex min-h-screen flex-col pt-16">
-        {/* ── SEÇÕES DO CLIENTE ───────────────────────────────────────────────
-             Insira aqui os componentes de seção criados para este projeto.
-             Exemplo:
-               <HeroSection />
-               <ServicesSection />
-               <AboutSection />
-               <FaqSection />
-        ──────────────────────────────────────────────────────────────────── */}
+      <main className="flex min-h-screen flex-col">
+        <HeroSection />
+        <div className="lg:h-[calc(100dvh-var(--header-height))] lg:overflow-hidden">
+          <QuemSomosSection />
+          <ComoAcolhemosSection />
+        </div>
+        <ProjetosFrentesSection />
+        <AboutFounderSection />
+        <ReviewsSection />
+        <GalleryPlaceholderSection />
+        <ContributionSection />
+        <LocationSection />
+        <VisitInvitationSection />
+      </main>
 
-        <Footer />
-      </div>
+      <Footer />
 
       {/* ── Atalho de Desenvolvimento — visível apenas em localhost ─────────
            Não é renderizado em produção (process.env.NODE_ENV === "production"). */}
