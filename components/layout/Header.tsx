@@ -110,20 +110,20 @@ export default function Header() {
       <header className="fixed top-0 left-0 w-full z-50 isolate border-b border-[rgba(8,29,66,0.16)] shadow-[0_8px_24px_rgba(8,29,66,0.10)]" style={{ backgroundColor: "var(--header-bg)" }}>
         {/* Header Alabz Slim (Faixa estreita: h-[3.85rem]) */}
         <div
-          className="grid h-[3.85rem] w-full grid-cols-[minmax(0,1fr)_auto] min-[1160px]:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center px-5 box-border"
+          className="relative flex h-[3.85rem] w-full items-center justify-between px-5 box-border"
           data-header-row
         >
           
           {/* Extremidade Esquerda: Logo (Altura limitada h-[3.3rem]) */}
-          <div className="min-w-0 flex items-center justify-self-start h-[3.3rem] z-10" data-header-logo>
-            <a href="#inicio" onClick={(e) => handleLinkClick(e, "#inicio")} className="flex items-center gap-2.5 h-full py-1">
+          <div className="min-w-0 flex max-w-[calc(100vw-5.25rem)] min-[1365px]:w-[420px] min-[1365px]:shrink-0 items-center h-[2.95rem] min-[1365px]:h-[3.3rem] z-10" data-header-logo>
+            <a href="#inicio" onClick={(e) => handleLinkClick(e, "#inicio")} className="flex min-w-0 items-center gap-2 h-full py-1 min-[1365px]:gap-2.5">
               <img src="/images/favicon-sem-fundo.png" alt={siteConfig.name} className="h-full object-contain" />
-              <div className="flex flex-col justify-center h-full">
-                <span className="font-display font-extrabold text-[0.98rem] tracking-[-0.02em] leading-tight text-[var(--color-primary)] line-clamp-1">
+              <div className="flex min-w-0 flex-col justify-center h-full">
+                <span className="font-display font-extrabold text-[0.86rem] leading-tight text-[var(--color-primary)] line-clamp-1 min-[390px]:text-[0.92rem] min-[1365px]:text-[0.98rem] min-[1365px]:tracking-[-0.02em]">
                   {siteConfig.name}
                 </span>
                 {siteConfig.subtitle && (
-                  <span className="font-utility text-[9px] text-[var(--color-accent)] font-semibold tracking-[0.08em] uppercase leading-none mt-0.5 line-clamp-1">
+                  <span className="font-utility text-[7.5px] text-[var(--color-accent)] font-semibold tracking-[0.055em] uppercase leading-none mt-0.5 line-clamp-1 min-[390px]:text-[8px] min-[1365px]:text-[7.8px] min-[1365px]:tracking-[0.04em]">
                     {siteConfig.subtitle}
                   </span>
                 )}
@@ -132,7 +132,7 @@ export default function Header() {
           </div>
 
           {/* Centro: Navigation Desktop */}
-          <nav className="hidden min-[1160px]:flex items-center justify-center justify-self-center gap-1 z-0" data-header-nav>
+          <nav className="ml-auto mr-5 hidden min-[1365px]:flex shrink-0 items-center justify-end gap-0.5 z-0 min-[1920px]:absolute min-[1920px]:left-1/2 min-[1920px]:top-1/2 min-[1920px]:mr-0 min-[1920px]:-translate-x-1/2 min-[1920px]:-translate-y-1/2 min-[1920px]:justify-center" data-header-nav>
             {siteConfig.navigation.map((item) => {
               const sectionId = item.href.replace("#", "");
               const isActive = activeSection === sectionId;
@@ -141,7 +141,7 @@ export default function Header() {
                   key={item.label} 
                   href={item.href} 
                   onClick={(e) => handleLinkClick(e, item.href)}
-                  className={`relative px-3.5 py-2 font-display text-[0.72rem] font-bold uppercase tracking-[0.045em] transition-colors duration-300 ${
+                  className={`relative whitespace-nowrap px-2 py-2 font-display text-[0.64rem] font-bold uppercase tracking-[0.025em] transition-colors duration-300 min-[1500px]:px-3.5 min-[1500px]:text-[0.72rem] min-[1500px]:tracking-[0.045em] ${
                     isActive ? "text-[var(--color-primary)]" : "text-[var(--color-primary)]/72 hover:text-[var(--color-accent)]"
                   }`}
                 >
@@ -159,7 +159,7 @@ export default function Header() {
           </nav>
 
           {/* Extremidade Direita: Apenas Ícones Sociais no Slim Header */}
-          <div className="hidden min-[1160px]:flex min-w-0 items-center justify-self-end gap-5 z-10" data-header-actions>
+          <div className="hidden min-[1365px]:flex shrink-0 items-center gap-5 z-10" data-header-actions>
             <div className="flex items-center gap-5">
               <a 
                 href={siteConfig.socials?.facebook || "#"}
@@ -183,7 +183,7 @@ export default function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex min-[1160px]:hidden items-center justify-self-end z-10 h-full" data-header-mobile-action>
+          <div className="flex min-[1365px]:hidden items-center z-10 h-full" data-header-mobile-action>
             <MenuButton isOpen={isOpen} toggle={toggleMenu} />
           </div>
 

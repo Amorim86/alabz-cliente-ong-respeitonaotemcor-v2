@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { Mail } from "lucide-react";
 import { siteConfig } from "../../config/site";
 
 // SVGs das Redes Sociais
@@ -10,14 +9,6 @@ const Instagram = (props: React.SVGProps<SVGSVGElement>) => (
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-  </svg>
-);
-
-const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect x="2" y="9" width="4" height="12" />
-    <circle cx="4" cy="4" r="2" />
   </svg>
 );
 
@@ -34,6 +25,20 @@ interface MobileDrawerProps {
 }
 
 export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }: MobileDrawerProps) {
+  const mobileNavigation = siteConfig.navigation.filter((item) => item.href !== "#galeria");
+  const socialLinks = [
+    siteConfig.socials?.facebook
+      ? { label: "Facebook", href: siteConfig.socials.facebook, Icon: Facebook }
+      : null,
+    siteConfig.socials?.instagram
+      ? { label: "Instagram", href: siteConfig.socials.instagram, Icon: Instagram }
+      : null,
+  ].filter(Boolean) as Array<{
+    label: string;
+    href: string;
+    Icon: (props: React.SVGProps<SVGSVGElement>) => React.ReactElement;
+  }>;
+
   // Variantes de animação para os itens do Menu Mobile (Efeito Stagger/Cascata)
   const menuContainerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -75,7 +80,7 @@ export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }:
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -15 }}
           transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-40 min-[1160px]:hidden backdrop-blur-2xl flex flex-col items-center pt-24 pb-12 px-5 overflow-y-auto"
+          className="fixed inset-0 z-40 min-[1365px]:hidden backdrop-blur-2xl flex flex-col items-center overflow-y-auto px-5 pb-6 pt-20"
           style={{ backgroundColor: "var(--header-mobile-bg)" }}
         >
           {/* Contêiner de animação em cascata */}
@@ -84,24 +89,24 @@ export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }:
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="flex flex-col items-center justify-between h-full w-full max-w-[320px]"
+            className="flex min-h-full w-full max-w-[320px] flex-col items-center justify-start"
           >
             
             {/* Links de Navegação do Drawer */}
-            <nav className="flex flex-col items-center text-center gap-5 w-full mt-8">
-              {siteConfig.navigation.map((item) => {
+            <nav className="mt-2 flex w-full flex-col items-center gap-2 text-center">
+              {mobileNavigation.map((item) => {
                 const sectionId = item.href.replace("#", "");
                 const isActive = activeSection === sectionId;
                 return (
                   <motion.div 
                     key={item.label}
                     variants={menuItemVariants}
-                    className="w-full relative py-1"
+                    className="relative w-full"
                   >
                     <a 
                       href={item.href} 
                       onClick={(e) => handleLinkClick(e, item.href)} 
-                      className={`text-xl font-bold block transition-colors py-2 rounded-xl relative ${
+                      className={`relative block rounded-xl py-1.5 text-lg font-bold transition-colors ${
                         isActive ? "text-brand-accent font-extrabold" : "text-white/80 hover:text-white"
                       }`}
                     >
@@ -113,56 +118,36 @@ export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }:
             </nav>
 
             {/* Botão CTA Centralizado */}
-            <motion.div variants={menuItemVariants} className="w-full flex justify-center mt-6">
+            <motion.div variants={menuItemVariants} className="mt-4 flex w-full justify-center">
               <a
                 href="#contato"
                 onClick={(e) => handleLinkClick(e, "#contato")}
                 className="w-full max-w-[280px] bg-[var(--color-secondary)] text-[var(--color-primary)] text-center px-6 py-4 rounded-[2px] font-display text-base font-extrabold uppercase tracking-wide hover:bg-white transition-colors shadow-lg"
               >
-                Falar Conosco
+                Fale Conosco
               </a>
             </motion.div>
 
             {/* Redes Sociais no rodapé do Drawer com ícones e rótulos legíveis */}
-            <motion.div 
-              variants={menuItemVariants} 
-              className="w-full border-t border-white/10 mt-auto pt-6 flex justify-around items-center"
-            >
-              <a 
-                href="https://facebook.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex flex-col items-center gap-1.5 text-white/60 hover:text-white transition-colors"
+            {socialLinks.length > 0 && (
+              <motion.div
+                variants={menuItemVariants}
+                className="mt-auto flex w-full items-center justify-center gap-8 border-t border-white/10 pt-4"
               >
-                <Facebook className="w-5 h-5" />
-                <span className="text-[10px] uppercase font-bold tracking-wider">Facebook</span>
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex flex-col items-center gap-1.5 text-white/60 hover:text-white transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-                <span className="text-[10px] uppercase font-bold tracking-wider">Instagram</span>
-              </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="flex flex-col items-center gap-1.5 text-white/60 hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
-                <span className="text-[10px] uppercase font-bold tracking-wider">LinkedIn</span>
-              </a>
-              <a 
-                href={`mailto:${siteConfig.contact.email}`}
-                className="flex flex-col items-center gap-1.5 text-white/60 hover:text-white transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                <span className="text-[10px] uppercase font-bold tracking-wider">E-mail</span>
-              </a>
-            </motion.div>
+                {socialLinks.map(({ label, href, Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col items-center gap-1.5 text-white/60 transition-colors hover:text-white"
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
+                  </a>
+                ))}
+              </motion.div>
+            )}
 
           </motion.div>
         </motion.div>

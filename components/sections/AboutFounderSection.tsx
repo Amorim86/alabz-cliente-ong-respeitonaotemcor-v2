@@ -41,26 +41,27 @@ const reveal = {
 };
 
 export default function AboutFounderSection() {
-  const sceneRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const pointerX = useMotionValue(0);
   const pointerY = useMotionValue(0);
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const smoothX = useSpring(pointerX, { damping: 22, stiffness: 110, mass: 0.55 });
-  const smoothY = useSpring(pointerY, { damping: 22, stiffness: 110, mass: 0.55 });
+  const smoothOptions = { damping: 20, stiffness: 100, mass: 0.5 };
+  const smoothX = useSpring(pointerX, smoothOptions);
+  const smoothY = useSpring(pointerY, smoothOptions);
 
-  const backgroundX = useTransform(smoothX, [-1, 1], [-12, 12]);
-  const backgroundY = useTransform(smoothY, [-1, 1], [-8, 8]);
-  const backgroundScale = useTransform(smoothY, [-1, 0, 1], [1.14, 1.09, 1.14]);
-  const portraitX = useTransform(smoothX, [-1, 1], [-7, 7]);
-  const portraitY = useTransform(smoothY, [-1, 1], [-4, 4]);
+  const backgroundX = useTransform(smoothX, [-1, 1], [-30, 30]);
+  const backgroundY = useTransform(smoothY, [-1, 1], [-30, 30]);
+  const backgroundScale = useTransform(smoothY, [-1, 1], [1.08, 1.04]);
+  const portraitX = useTransform(smoothX, [-1, 1], [-12, 12]);
+  const portraitY = useTransform(smoothY, [-1, 1], [-12, 12]);
 
   useEffect(() => {
     const checkViewport = () => {
-      const desktop = window.matchMedia("(min-width: 1024px)").matches;
-      setIsDesktop(desktop);
-      if (!desktop) {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (mobile) {
         pointerX.set(0);
         pointerY.set(0);
       }
@@ -69,42 +70,42 @@ export default function AboutFounderSection() {
     checkViewport();
     window.addEventListener("resize", checkViewport);
 
+    const moveParallax = (event: MouseEvent) => {
+      if (window.innerWidth < 1024) return;
+
+      pointerX.set((event.clientX / window.innerWidth) * 2 - 1);
+      pointerY.set((event.clientY / window.innerHeight) * 2 - 1);
+    };
+
+    window.addEventListener("mousemove", moveParallax);
+
     const timer = window.setInterval(() => {
       setCurrentImgIndex((prev) => (prev + 1) % FOUNDER_IMAGES.length);
     }, 6500);
 
     return () => {
       window.removeEventListener("resize", checkViewport);
+      window.removeEventListener("mousemove", moveParallax);
       window.clearInterval(timer);
     };
   }, [pointerX, pointerY]);
-
-  const resetParallax = () => {
-    pointerX.set(0);
-    pointerY.set(0);
-  };
-
-  const moveParallax = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDesktop) return;
-
-    const bounds = sceneRef.current?.getBoundingClientRect();
-    if (!bounds) return;
-
-    pointerX.set(((event.clientX - bounds.left) / bounds.width) * 2 - 1);
-    pointerY.set(((event.clientY - bounds.top) / bounds.height) * 2 - 1);
-  };
 
   const activeImage = FOUNDER_IMAGES[currentImgIndex];
 
   return (
     <section
       id="fundadora"
+      ref={sectionRef}
       className="laptop-compact relative w-full scroll-mt-[4.5rem] overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-0"
     >
       <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
-        style={{ x: backgroundX, y: backgroundY, scale: backgroundScale }}
+        style={{
+          x: isMobile ? 0 : backgroundX,
+          y: isMobile ? 0 : backgroundY,
+          scale: isMobile ? 1 : backgroundScale,
+        }}
       >
         <img
           src="/images/founder_bg.webp"
@@ -159,7 +160,7 @@ export default function AboutFounderSection() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
                   className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: "50% 12%" }}
                 />
@@ -181,16 +182,13 @@ export default function AboutFounderSection() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.42, ease: "easeOut", delay: 0.08 }}
-          ref={sceneRef}
-          onMouseMove={moveParallax}
-          onMouseLeave={resetParallax}
           className="founder-scene relative hidden overflow-visible lg:col-span-5 lg:block lg:min-h-[calc(100dvh-var(--header-height))] lg:self-stretch"
         >
           <motion.div
             className="absolute inset-x-0 bottom-0 mx-auto flex h-full max-h-[calc(100dvh-var(--header-height))] w-full items-end justify-center"
-            style={{ x: portraitX, y: portraitY }}
+            style={{ x: isMobile ? 0 : portraitX, y: isMobile ? 0 : portraitY, scale: 1.02 }}
           >
-            <div className="relative h-full w-full max-w-[550px]">
+            <div className="relative h-full w-full max-w-[605px]">
               <AnimatePresence initial={false} mode="wait">
                 <motion.img
                   key={activeImage}
@@ -199,7 +197,7 @@ export default function AboutFounderSection() {
                   initial={{ opacity: 0, scale: 1.015 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.985 }}
-                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  transition={{ duration: 1.5, ease: "easeInOut" }}
                   className="founder-portrait absolute inset-0 h-full w-full object-contain object-bottom"
                 />
               </AnimatePresence>

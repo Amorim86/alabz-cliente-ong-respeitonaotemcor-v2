@@ -16,6 +16,8 @@ export const siteConfig = {
     { label: "Início", href: "#inicio" },
     { label: "Quem Somos", href: "#quem-somos" },
     { label: "Projetos", href: "#projetos" },
+    { label: "Fundadora", href: "#fundadora" },
+    { label: "Depoimentos", href: "#depoimentos" },
     { label: "Galeria", href: "#galeria" },
     { label: "Doações", href: "#contribua" },
     { label: "Localização", href: "#contato" },

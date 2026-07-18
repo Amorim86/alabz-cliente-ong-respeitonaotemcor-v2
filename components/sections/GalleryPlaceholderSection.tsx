@@ -29,7 +29,7 @@ export default function GalleryPlaceholderSection() {
   };
 
   return (
-    <section className="relative flex w-full overflow-hidden bg-[#F7F4EA] py-8 md:py-10 lg:h-[calc(100dvh-var(--header-height))] lg:min-h-0 lg:items-center lg:py-6" id="galeria" tabIndex={-1}>
+    <section className="relative hidden w-full overflow-hidden bg-[#F7F4EA] py-8 md:py-10 lg:flex lg:h-[calc(100dvh-var(--header-height))] lg:min-h-0 lg:items-center lg:py-6" id="galeria" tabIndex={-1}>
       <div className="mx-auto w-full max-w-[1400px] px-4 md:px-12">
         <div className="mx-auto mb-5 max-w-[920px] text-center">
           <span className="inline-flex items-center justify-center text-xs font-bold uppercase tracking-[0.34em] text-[var(--color-accent)] md:text-sm">
