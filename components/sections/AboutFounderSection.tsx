@@ -1,7 +1,20 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { Flag, Heart, Users } from "lucide-react";
-import { motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+
+const FOUNDER_IMAGES = [
+  "/images/fundadora/fundadora1.png",
+  "/images/fundadora/fundadora2.webp",
+  "/images/fundadora/fundadora3.webp",
+];
 
 const HIGHLIGHTS = [
   {
@@ -29,22 +42,79 @@ const reveal = {
 };
 
 export default function AboutFounderSection() {
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const [currentImgIndex, setCurrentImgIndex] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  const smoothX = useSpring(pointerX, { damping: 22, stiffness: 110, mass: 0.55 });
+  const smoothY = useSpring(pointerY, { damping: 22, stiffness: 110, mass: 0.55 });
+
+  const backgroundX = useTransform(smoothX, [-1, 1], [-26, 26]);
+  const backgroundY = useTransform(smoothY, [-1, 1], [-16, 16]);
+  const portraitX = useTransform(smoothX, [-1, 1], [-10, 10]);
+  const portraitY = useTransform(smoothY, [-1, 1], [-6, 6]);
+
+  useEffect(() => {
+    const checkViewport = () => {
+      const desktop = window.matchMedia("(min-width: 1024px)").matches;
+      setIsDesktop(desktop);
+      if (!desktop) {
+        pointerX.set(0);
+        pointerY.set(0);
+      }
+    };
+
+    checkViewport();
+    window.addEventListener("resize", checkViewport);
+
+    const timer = window.setInterval(() => {
+      setCurrentImgIndex((prev) => (prev + 1) % FOUNDER_IMAGES.length);
+    }, 4000);
+
+    return () => {
+      window.removeEventListener("resize", checkViewport);
+      window.clearInterval(timer);
+    };
+  }, [pointerX, pointerY]);
+
+  const resetParallax = () => {
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
+  const moveParallax = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDesktop) return;
+
+    const bounds = sceneRef.current?.getBoundingClientRect();
+    if (!bounds) return;
+
+    pointerX.set(((event.clientX - bounds.left) / bounds.width) * 2 - 1);
+    pointerY.set(((event.clientY - bounds.top) / bounds.height) * 2 - 1);
+  };
+
+  const activeImage = FOUNDER_IMAGES[currentImgIndex];
+
   return (
     <section
       id="fundadora"
-      className="laptop-compact relative w-full scroll-mt-[4.5rem] overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:h-[calc(100dvh-var(--header-height))] lg:min-h-0 lg:items-center lg:py-8"
+      className="laptop-compact relative w-full scroll-mt-[4.5rem] overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-0"
     >
-      <div className="pointer-events-none absolute inset-0">
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{ x: backgroundX, y: backgroundY, scale: 1.06 }}
+      >
         <img
           src="/images/founder_bg.webp"
           alt=""
-          aria-hidden="true"
-          className="h-full w-full object-cover opacity-[0.32]"
+          className="h-full w-full object-cover opacity-[0.28]"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_32%,rgba(245,207,0,0.16),transparent_26%),linear-gradient(90deg,#FDFBF7_0%,rgba(253,251,247,0.92)_44%,rgba(253,251,247,0.46)_70%,rgba(253,251,247,0.12)_100%)]" />
-      </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_32%,rgba(245,207,0,0.16),transparent_26%),linear-gradient(90deg,#FDFBF7_0%,rgba(253,251,247,0.94)_43%,rgba(253,251,247,0.62)_70%,rgba(253,251,247,0.18)_100%)]" />
+      </motion.div>
 
-      <div className="founder-grid relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-8 px-4 md:px-12 lg:grid-cols-12 lg:gap-8">
+      <div className="founder-grid relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-8 px-4 md:px-12 lg:min-h-[calc(100dvh-var(--header-height))] lg:grid-cols-12 lg:gap-8">
         <motion.div {...reveal} className="lg:col-span-7 lg:pr-8">
           <p className="mb-3 font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
             Sobre a fundadora
@@ -80,13 +150,20 @@ export default function AboutFounderSection() {
           </div>
 
           <div className="mt-6 flex items-center justify-center gap-4 border-t border-[var(--color-primary)]/12 pt-5 text-center">
-            <div className="h-[76px] w-[76px] shrink-0 overflow-hidden rounded-full border-2 border-[var(--color-secondary)] bg-[var(--color-primary)] shadow-[0_10px_24px_rgba(8,29,66,0.12)] lg:hidden">
-              <img
-                src="/images/fundadora/fundadora2.webp"
-                alt="Rosto de Negra Dirce"
-                className="h-full w-full object-cover scale-[1.78]"
-                style={{ objectPosition: "50% 10%" }}
-              />
+            <div className="relative h-[76px] w-[76px] shrink-0 overflow-hidden rounded-full border-2 border-[var(--color-secondary)] bg-[var(--color-primary)] shadow-[0_10px_24px_rgba(8,29,66,0.12)] lg:hidden">
+              <AnimatePresence initial={false} mode="wait">
+                <motion.img
+                  key={activeImage}
+                  src={activeImage}
+                  alt="Rosto de Negra Dirce"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: "50% 12%" }}
+                />
+              </AnimatePresence>
             </div>
             <div className="flex min-w-0 flex-col items-center">
               <img
@@ -104,14 +181,30 @@ export default function AboutFounderSection() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.42, ease: "easeOut", delay: 0.08 }}
-          className="founder-scene relative hidden overflow-hidden lg:col-span-5 lg:block lg:h-[min(38rem,calc(100dvh-var(--header-height)-4rem))] lg:self-center"
+          ref={sceneRef}
+          onMouseMove={moveParallax}
+          onMouseLeave={resetParallax}
+          className="founder-scene relative hidden overflow-visible lg:col-span-5 lg:block lg:min-h-[calc(100dvh-var(--header-height))] lg:self-stretch"
         >
-          <img
-            src="/images/fundadora/fundadora2.webp"
-            alt="Negra Dirce, fundadora da ONG Respeito Não Tem Cor"
-            className="founder-portrait absolute inset-0 h-full w-full object-contain object-bottom"
-          />
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#FDFBF7] to-transparent" />
+          <motion.div
+            className="absolute inset-x-0 bottom-0 mx-auto flex h-full max-h-[calc(100dvh-var(--header-height))] w-full items-end justify-center"
+            style={{ x: portraitX, y: portraitY }}
+          >
+            <div className="relative h-full w-full max-w-[500px]">
+              <AnimatePresence initial={false} mode="wait">
+                <motion.img
+                  key={activeImage}
+                  src={activeImage}
+                  alt="Negra Dirce, fundadora da ONG Respeito Não Tem Cor"
+                  initial={{ opacity: 0, scale: 1.015 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.985 }}
+                  transition={{ duration: 0.7, ease: "easeOut" }}
+                  className="founder-portrait absolute inset-0 h-full w-full object-contain object-bottom"
+                />
+              </AnimatePresence>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -187,35 +187,17 @@ h1, h2, h3, h4, h5, h6 {
   .founder-grid {
     height: calc(100dvh - var(--header-height));
   }
-
-  .founder-portrait {
-    transform: scale(1.16) rotateY(-2deg);
-    transform-origin: center bottom;
-  }
 }
 
 .founder-scene {
   perspective: 1100px;
+  transform-style: preserve-3d;
 }
 
 .founder-portrait {
-  transform: rotateY(-2deg);
   transform-origin: center bottom;
-  transition: transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.founder-scene:hover .founder-portrait {
-  transform: scale(1.025) rotateY(0deg);
-}
-
-@media (min-width: 1536px) {
-  .founder-portrait {
-    transform: scale(1.16) rotateY(-2deg);
-  }
-
-  .founder-scene:hover .founder-portrait {
-    transform: scale(1.18) rotateY(0deg);
-  }
+  image-rendering: auto;
+  backface-visibility: hidden;
 }
 
 /* Ocultar elementos globais flutuantes quando o menu mobile está aberto */
