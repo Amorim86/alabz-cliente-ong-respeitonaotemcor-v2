@@ -96,7 +96,7 @@ export default function AboutFounderSection() {
     <section
       id="nossa-origem"
       ref={sectionRef}
-      className="laptop-compact relative w-full scroll-mt-[4.5rem] overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-0"
+      className="laptop-compact relative w-full overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-0"
     >
       <motion.div
         aria-hidden="true"

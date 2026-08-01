@@ -81,21 +81,40 @@ export default function Header() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Rolagem suave
+  // Rolagem suave com desconto exato da altura do header
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
       e.preventDefault();
       const targetId = href.replace("#", "");
-      const targetElement = document.getElementById(targetId);
-      
+
       if (isOpen) {
         setIsOpen(false);
       }
 
+      if (targetId === "inicio") {
+        isScrollingRef.current = true;
+        setActiveSection("inicio");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.history.pushState(null, "", href);
+        setTimeout(() => {
+          isScrollingRef.current = false;
+        }, 800);
+        return;
+      }
+
+      const targetElement = document.getElementById(targetId);
       if (targetElement) {
         isScrollingRef.current = true;
         setActiveSection(targetId);
-        targetElement.scrollIntoView({ behavior: "smooth" });
+
+        const headerElement = document.querySelector("header");
+        const headerHeight = headerElement ? headerElement.getBoundingClientRect().height : 61.6;
+        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+        window.scrollTo({
+          top: Math.max(0, targetPosition),
+          behavior: "smooth",
+        });
         window.history.pushState(null, "", href);
 
         setTimeout(() => {

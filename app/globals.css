@@ -3,14 +3,13 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem; /* compensação do header fixo */
   overflow-x: clip;
 }
 
 :root {
   --background: #F7F4EA;
   --foreground: #171717;
-  --header-height: 4rem;
+  --header-height: 3.85rem;
 
   /* --- VARIÁVEIS DO DESIGN SYSTEM (ONG Respeito Não Tem Cor) --- */
   --color-primary: #081D42;   /* Azul Profundo */
@@ -56,6 +55,11 @@ body {
   font-family: var(--font-body), Arial, Helvetica, sans-serif;
   overflow-x: clip;
   text-rendering: optimizeLegibility;
+}
+
+section[id],
+[id] {
+  scroll-margin-top: var(--header-height);
 }
 
 @media (prefers-reduced-motion: reduce) {

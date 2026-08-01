@@ -29,7 +29,7 @@ const PILLARS = [
 export default function ComoAcolhemosSection() {
   return (
     <section
-      className="como-acolhemos section-natural relative flex scroll-mt-[4.5rem] w-full items-center overflow-hidden bg-[var(--color-secondary)] lg:h-[30%] lg:min-h-0"
+      className="como-acolhemos section-natural relative flex w-full items-center overflow-hidden bg-[var(--color-secondary)] py-12 md:py-16"
       id="como-acolhemos"
     >
       <div className="mx-auto flex h-full w-full max-w-[1400px] flex-col items-center justify-center gap-5 px-4 py-12 text-center md:px-12 lg:gap-3 lg:py-3">

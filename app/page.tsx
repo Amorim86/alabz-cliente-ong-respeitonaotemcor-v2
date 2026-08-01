@@ -45,10 +45,8 @@ export default function Home() {
 
       <main className="flex min-h-screen flex-col">
         <HeroSection />
-        <div className="lg:h-[calc(100dvh-var(--header-height))] lg:overflow-hidden">
-          <QuemSomosSection />
-          <ComoAcolhemosSection />
-        </div>
+        <QuemSomosSection />
+        <ComoAcolhemosSection />
         <ProjetosFrentesSection />
         <BrechoSection />
         <AboutFounderSection />
