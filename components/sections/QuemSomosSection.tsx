@@ -72,13 +72,13 @@ export default function QuemSomosSection() {
 
           <div className="mt-5 max-w-2xl space-y-3 text-base leading-relaxed text-[var(--foreground)]/74 md:text-lg lg:text-[clamp(0.8rem,0.88vw,1.05rem)]">
             <p>
-              Fundada por Negra Dirce, mãe, ativista e guerreira, a ONG Respeito Não Tem Cor nasceu da dor da violência e se fortaleceu no amor e na luta coletiva.
+              Fundada em 2019 sob a liderança de Negra Dirce, a ONG Respeito Não Tem Cor é uma instituição dedicada à garantia de direitos, dignidade e desenvolvimento comunitário.
             </p>
             <p>
-              Atuamos há mais de duas décadas na defesa dos direitos da população negra, especialmente mulheres, jovens e famílias em situação de vulnerabilidade.
+              Nossa missão se estrutura no acolhimento de famílias em vulnerabilidade, promovendo projetos sociais transformadores nas áreas de educação, cultura, assistência social e saúde emocional.
             </p>
             <p className="border-l-2 border-[var(--color-secondary)] pl-4 font-semibold text-[var(--color-primary)]">
-              Acreditamos que acolher é abrir caminho para dignidade, autonomia e reconstrução.
+              Acreditamos que acolher é abrir caminhos para a dignidade, a equidade e o fortalecimento de toda a comunidade.
             </p>
           </div>
         </motion.div>

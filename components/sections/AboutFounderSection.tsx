@@ -94,7 +94,7 @@ export default function AboutFounderSection() {
 
   return (
     <section
-      id="fundadora"
+      id="nossa-origem"
       ref={sectionRef}
       className="laptop-compact relative w-full scroll-mt-[4.5rem] overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-0"
     >
@@ -118,17 +118,17 @@ export default function AboutFounderSection() {
       <div className="founder-grid relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-8 px-4 md:px-12 lg:min-h-[calc(100dvh-var(--header-height))] lg:grid-cols-12 lg:gap-8">
         <motion.div {...reveal} className="lg:col-span-7 lg:pr-8">
           <p className="mb-3 font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
-            Sobre a fundadora
+            História e Liderança
           </p>
           <h2 className="font-display text-4xl font-bold leading-[0.98] text-[var(--color-primary)] md:text-5xl lg:text-[clamp(2.5rem,4.1vw,4.8rem)]">
-            Negra Dirce
+            Nossa Origem
           </h2>
           <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-[var(--foreground)]/78 md:text-lg lg:text-[0.96rem]">
-            Mulher negra, mãe e ativista, Negra Dirce transformou sua própria história de superação em um legado de acolhimento e emancipação para milhares de pessoas em São José dos Pinhais.
+            A ONG Respeito Não Tem Cor tem sua trajetória fundamentada pela dedicação de <strong>Negra Dirce</strong>, fundadora e presidente da instituição. Sua atuação transformou desafios em uma rede contínua de acolhimento social, justiça e emancipação comunitária em São José dos Pinhais.
           </p>
 
           <blockquote className="mt-5 max-w-[58ch] border-l-2 border-[var(--color-secondary)] pl-4 font-display text-xl font-medium leading-tight text-[var(--color-primary)] lg:text-[1.3rem]">
-            A delicadeza aqui não diminui a luta: ela mostra que cuidado também é força.
+            O acolhimento institucional é a base para construirmos autonomia, dignidade e futuro.
           </blockquote>
 
           <div className="mt-6 grid gap-4 sm:grid-cols-3 lg:mt-5">
@@ -173,7 +173,7 @@ export default function AboutFounderSection() {
                 className="h-auto w-[317px] max-w-full object-contain"
               />
               <p className="mt-1 font-utility text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-primary)]/68">
-                Fundadora — Respeito não tem cor
+                Fundadora e Presidente — Respeito não tem cor
               </p>
             </div>
           </div>

@@ -15,12 +15,11 @@ export const siteConfig = {
   navigation: [
     { label: "Início", href: "#inicio" },
     { label: "Quem Somos", href: "#quem-somos" },
+    { label: "Nossa Origem", href: "#nossa-origem" },
     { label: "Projetos", href: "#projetos" },
-    { label: "Fundadora", href: "#fundadora" },
-    { label: "Depoimentos", href: "#depoimentos" },
-    { label: "Galeria", href: "#galeria" },
+    { label: "Brechó Solidário", href: "#brecho" },
     { label: "Doações", href: "#contribua" },
-    { label: "Localização", href: "#contato" },
+    { label: "Contato", href: "#contato" },
   ],
   socials: {
     instagram: "https://www.instagram.com/ongrespeitonaotemcor/",

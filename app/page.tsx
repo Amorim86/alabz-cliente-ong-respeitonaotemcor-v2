@@ -30,6 +30,7 @@ import HeroSection from "../components/sections/HeroSection";
 import QuemSomosSection from "../components/sections/QuemSomosSection";
 import ComoAcolhemosSection from "../components/sections/ComoAcolhemosSection";
 import ProjetosFrentesSection from "../components/sections/ProjetosFrentesSection";
+import BrechoSection from "../components/sections/BrechoSection";
 import AboutFounderSection from "../components/sections/AboutFounderSection";
 import ReviewsSection from "../components/sections/ReviewsSection";
 import GalleryPlaceholderSection from "../components/sections/GalleryPlaceholderSection";
@@ -49,6 +50,7 @@ export default function Home() {
           <ComoAcolhemosSection />
         </div>
         <ProjetosFrentesSection />
+        <BrechoSection />
         <AboutFounderSection />
         <ReviewsSection />
         <GalleryPlaceholderSection />
