@@ -1,0 +1,4 @@
+interface:
+  display_name: "Transicao de Imagem no Footer"
+  short_description: "Funde imagem, secao e footer sem emendas visiveis."
+  default_prompt: "Use $footer-image-transition para integrar uma imagem suavemente entre a secao final e o footer."

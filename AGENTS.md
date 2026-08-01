@@ -1,4 +1,4 @@
-<!-- BEGIN:nextjs-agent-rules -->
+﻿<!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
@@ -14,6 +14,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Deploy de Infraestrutura
 É estritamente proibido usar a Vercel CLI ou tentar criar/nomear projetos diretamente na Vercel. O fluxo de deploy é 100% focado no repositório.
+
+## Padronização e Nomenclatura de Skills (Visíveis vs. Invisíveis)
+Quaisquer novas skills criadas a partir de agora na Alabz devem seguir estritamente o padrão de nomenclatura com prefixo para fins de organização no menu slash `/`:
+1. **`alabz-design-`**: Relacionadas a design, identidade visual, tipografia, estilos e engenharia de frontend.
+2. **`alabz-componentes-`**: Seções, componentes e blocos visuais prontos de layout.
+3. **`alabz-lapidacao-`**: Processos de qualidade, homologação, refinamento e pré-deploy.
+
+Skills internas, utilitárias ou embutidas que são executadas silenciosamente de forma automatizada por outras skills (como as ferramentas de checklist em cascata) não devem receber os prefixos e devem ser registradas na lista de exclusão do arquivo `.agents/skills.json` sob a chave `"exclude"`, impedindo que poluam o menu de comandos slash.
 
 ## Controle de Versão e Fluxo de Deploy (Homologação vs. Produção)
 Antes de executar qualquer operação de commit ou push, você é ESTRITAMENTE PROIBIDO de agir por conta própria. A regra de exibição de "VersionBadge" na UI está DEFINITIVAMENTE REVOGADA; não crie ou exiba elementos visuais de versão na interface.
@@ -39,10 +47,11 @@ ffmpeg -i hero-flow-original.mp4 -vf "scale=1920:1080,fps=30,format=yuv420p" -c:
 ### Protocolo Avançado de Compressão de Imagens (Blindagem Anti-Quebra)
 Quando o usuário solicitar a compressão de imagens, o agente DEVE seguir este protocolo atômico e exato para evitar quebra de referências (404) e perda de qualidade em áreas nobres:
 
-1. **Recursividade Obrigatória:** Qualquer script de conversão de imagens na pasta `public/` DEVE obrigatoriamente varrer TODAS as subpastas de forma recursiva. Nunca limite a varredura apenas à raiz.
-2. **Substituição Condicional no Código:** É ESTRITAMENTE PROIBIDO fazer um `replace` global cego ("trocar tudo de .png para .webp") nos arquivos `.tsx`. O agente deve atualizar as referências no código APENAS para os arquivos que ele efetivamente conseguiu converter e que existam fisicamente como `.webp`. 
-3. **Proteção da Hero Section (Alta Fidelidade):** Imagens de abertura (Hero Section, fundos de tela inteira, fotos executivas) não devem passar pelo rolo compressor de 90%. Para imagens C-Level e da primeira dobra, mantenha os originais pesados (PNG) ou use qualidade de `98%` no WebP. 
-4. **O Relatório Final:** Gerar o relatório de economia detalhado e confirmar a remoção apenas dos originais (png/jpg) que foram perfeitamente substituídos.
+1. **Ingestão de Arquivos (`/.tmp`):** Todos os arquivos de mídia enviados pelo usuário para o projeto estarão sempre na pasta raiz `/.tmp`. O agente deve processá-los a partir dali, movendo para o local correto no projeto (ex: `/public`) e executando a compressão necessária.
+2. **Recursividade Obrigatória:** Qualquer script de conversão de imagens na pasta `public/` DEVE obrigatoriamente varrer TODAS as subpastas de forma recursiva. Nunca limite a varredura apenas à raiz.
+3. **Substituição Condicional no Código:** É ESTRITAMENTE PROIBIDO fazer um `replace` global cego ("trocar tudo de .png para .webp") nos arquivos `.tsx`. O agente deve atualizar as referências no código APENAS para os arquivos que ele efetivamente conseguiu converter e que existam fisicamente como `.webp`. 
+4. **Proteção da Hero Section (Alta Fidelidade):** Imagens de abertura (Hero Section, fundos de tela inteira, fotos executivas) não devem passar pelo rolo compressor de 90%. Para imagens C-Level e da primeira dobra, mantenha os originais pesados (PNG) ou use qualidade de `98%` no WebP. 
+5. **Limpeza e Relatório Final:** Ao finalizar o processo de compressão, **efetue a limpeza imediata deletando todos os arquivos originais (.png, .jpg, etc)** que viraram .webp e foram aprovados/substituídos com sucesso no código. Em seguida, gere um relatório detalhado da economia de espaço gerada.
 
 ### Blindagem Mínima de Assets e Primeira Dobra
 As correções aprendidas em outros projetos devem ser consideradas parte do template, porque elas evitam que assets sumam após o push e que a primeira dobra fique quebrada em produção.
@@ -191,6 +200,11 @@ Para layouts que utilizam uma imagem ocupando uma lateral da seção e conteúdo
 Sempre que for solicitada a criação ou edição de uma seção Hero (especialmente para perfis executivos/C-Level), você deve seguir o seguinte template padrão para que a seção nasça pronta sem necessidade de re-explicação:
 - **Objetivo**: Criar um Hero Section cinematográfico com o carrossel de imagens rotacionando diretamente no background e ocupando no mínimo a altura dinâmica disponível da tela (`min-h-dvh` ou cálculo equivalente), sem altura rígida, bordas ou contêineres limitadores.
 - **Comportamento**: Carrossel automático (crossfade suave a cada 3 segundos), sem setas ou pontos de paginação visíveis.
+- **Transições de Slide (Efeito Ken Burns)**: Use Framer Motion (`motion.div` ou `motion.img`) para gerenciar a troca de slides. As imagens ativas devem fazer um zoom contínuo e suave (ex: de `scale(1.02)` a `scale(1.10)` em `5s`) e crossfade de opacidade de `1.5s` para uma transição fluida, evitando transições secas em CSS puro que conflitam com estilos nativos do Next.js.
+- **Efeito Mouse Parallax (Alta Performance)**: 
+  - Sempre vincule os eventos de pointer (`onPointerMove` e `onPointerLeave`) diretamente no elemento React da `<section>` do Hero, eliminando listeners globais no `window` e checagens constantes de `getBoundingClientRect()` que causam travamento (layout thrashing).
+  - Limite a movimentação do parallax a valores sutis em JS (máximo `24px` horizontal e `12px` vertical).
+  - No CSS, utilize transições suaves com curva amortecida de inércia: `transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);`.
 - **Layout & Texto**: O texto C-Level e os CTAs principais ficam posicionados à esquerda, ocupando cerca de 8 colunas do grid principal (ex: `col-span-12 lg:col-span-8`).
 - **Blend de Fusão**: Aplicar efeito de fusão suave de 2/3 à esquerda (gradiente escuro da cor de fundo para transparente) para integrar invisivelmente a foto à direita com a área de texto, garantindo contraste e legibilidade absolutos.
 
@@ -240,7 +254,7 @@ Para garantir que a Hero apareça integralmente assim que o site abrir, sem deix
 
 
 ### REGRA DE APLICAÇÃO DE FONTES DINÂMICAS (UI-UX-PRO-MAX)
-Toda vez que o design system for gerado pelo comando `/ui-ux-pro-max` ou `/frontend-design` com base em um briefing, você DEVE:
+Toda vez que o design system for gerado pelo comando `/alabz-design-ui-ux-pro-max` ou `/alabz-design-frontend` com base em um briefing, você DEVE:
 1. Substituir a diretiva `@import url(...)` localizada na PRIMEIRA LINHA do arquivo `app/globals.css` pelo novo link de importação sugerido pelo gerador.
 2. Atualizar as variáveis `--font-display` e `--font-body` no bloco `:root` de `app/globals.css` usando o nome exato da fonte importada do Google Fonts (ex: `'Outfit', sans-serif` ou `'Lora', serif`).
 3. Nunca manter ou declarar nomes de fontes proprietárias (como 'Satoshi') que não existam no escopo do Google Fonts importado.
@@ -249,15 +263,15 @@ Toda vez que o design system for gerado pelo comando `/ui-ux-pro-max` ou `/front
 É terminantemente proibido realizar entregas mecanizadas ou layouts com "cara de IA genérica / SaaS de tecnologia" para clientes que possuem negócios físicos, artesanais, rústicos, de lazer, saúde holística ou gastronomia regional.
 
 ### 1. Gatilho de Alerta de Fallback da CLI
-Sempre que rodar a CLI `.agents/ui-ux-pro-max/scripts/search.py` e o resultado sugerido for o estilo "Glassmorphism" ou "SaaS Dashboard" (ou similares voltados a software/tecnologia) para negócios que claramente demandam apelo físico, emocional e calor humano, o agente deve entrar em estado de Alerta de Incompatibilidade.
+Sempre que rodar a CLI `.agents/alabz-design-ui-ux-pro-max/scripts/search.py` e o resultado sugerido for o estilo "Glassmorphism" ou "SaaS Dashboard" (ou similares voltados a software/tecnologia) para negócios que claramente demandam apelo físico, emocional e calor humano, o agente deve entrar em estado de Alerta de Incompatibilidade.
 
 ### 2. Ação Obrigatória de Pivotagem
 Caso o Alerta de Incompatibilidade seja ativado, o agente fica PROIBIDO de implementar as cores e tipografias de fallback de forma direta no globals.css. Em vez disso, deve obrigatoriamente:
 1. Parar a execução automatizada.
 2. Alertar explicitamente o usuário no chat de que a busca automatizada da CLI resultou em uma estrutura inadequada para o tom de voz da marca daquele nicho específico.
 3. Propor ativamente e utilizar as seguintes skills alternativas para conceituar um design system manual e curado:
-   - `/taste-design`: Para definir uma especificação de design semântico e tipografia anti-genérica premium com alma.
-   - `/frontend-design` ou `/ux-front-end-architect`: Para estruturar a hierarquia de composição rústica, contraste, e sensação humana acolhedora.
+   - `/alabz-design-taste`: Para definir uma especificação de design semântico e tipografia anti-genérica premium com alma.
+   - `/alabz-design-frontend` ou `/ux-front-end-architect`: Para estruturar a hierarquia de composição rústica, contraste, e sensação humana acolhedora.
 
 ### 3. Curadoria Tipográfica Obrigatória (Sem Fontes de Robô)
 Negócios físicos e acolhedores não usam fontes corporativas frias (como 'Plus Jakarta Sans', 'Inter' ou 'Satoshi') in conjunto com serifas urbanas formais (como 'Playfair Display') de maneira padrão.
@@ -336,7 +350,7 @@ Absorva todos os insumos fornecidos: logo, assets, copy, paleta de identidade, r
 Leia `E:\_Antigravity Pro\.alabz\projects-log.json`. Use os dados para sugerir direções frescas e evitar monotonia estrutural, mas permita e acate solicitações explícitas do usuário para reutilizar combinações de sucesso de projetos anteriores.
 
 #### Passo 3 — Seleção das 3 Opções
-Com base no briefing e no log, selecione 3 macroestruturas do catálogo em `.agents/skills/frontend-design/references/macrostructures.md` que sejam adequadas ao nicho e estruturalmente diferentes entre si.
+Com base no briefing e no log, selecione 3 macroestruturas do catálogo em `.agents/skills/alabz-design-frontend/references/macrostructures.md` que sejam adequadas ao nicho e estruturalmente diferentes entre si.
 
 #### Passo 4 — Apresentação e Pergunta (OBRIGATÓRIO)
 Apresente as 3 macroestruturas com wireframe ASCII resumido de cada uma. Em seguida, pergunte EXPLICITAMENTE:
@@ -366,3 +380,5 @@ Ao criar ou editar seções finais de chamada para ação compostas por uma faix
 1. **Unificação de Seção:** Sempre consolide ambas as faixas em uma única seção lógica (section-natural), eliminando quebras desnecessárias.
 2. **Layout dos Cards de Benefício:** Prefira layout horizontal (lex-row items-center justify-center gap-5) com texto alinhado à esquerda para os cards de fatos. Isso evita o alongamento vertical excessivo e mantém a mesma altura proporcional da faixa de chamada superior.
 3. **Simetria de Padding:** Aplique exatamente a mesma densidade vertical (ex: py-8) em ambas as faixas para que pareçam partes do mesmo bloco visual homogêneo.
+
+

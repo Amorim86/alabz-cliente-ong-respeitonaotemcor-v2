@@ -1,0 +1,9 @@
+{
+  "exclude": [
+    "analytics-tag-integrator",
+    "conversion-microcopy",
+    "lead-capture-guardian",
+    "mobile-touch-optimizer",
+    "seo-metadata-architect"
+  ]
+}
