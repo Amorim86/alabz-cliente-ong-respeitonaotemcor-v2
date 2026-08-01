@@ -1,4 +1,4 @@
-﻿<!-- BEGIN:nextjs-agent-rules -->
+<!-- BEGIN:nextjs-agent-rules -->
 # This is NOT the Next.js you know
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
@@ -27,6 +27,12 @@ Skills internas, utilitárias ou embutidas que são executadas silenciosamente d
 Antes de executar qualquer operação de commit ou push, você é ESTRITAMENTE PROIBIDO de agir por conta própria. A regra de exibição de "VersionBadge" na UI está DEFINITIVAMENTE REVOGADA; não crie ou exiba elementos visuais de versão na interface.
 
 Toda vez que o usuário solicitar de forma genérica o deploy/envio do código, você DEVE apresentar o menu de opções abaixo. **EXCEÇÃO ABSOLUTA: SE O USUÁRIO MANDAR EXPLICITAMENTE O COMANDO "push main"**, VOCÊ DEVE IGNORAR O MENU DE CONFIRMAÇÃO E EXECUTAR O COMMIT E PUSH DIRETAMENTE PARA A MAIN IMEDIATAMENTE (só pare se houver um risco flagrante de quebra).
+
+### Regra de Execução Atômica ("push main" sem atrito de múltiplos cliques)
+Para evitar que o usuário precise autorizar 4 passos sequenciais na IDE (ex: `git status` -> `npm build` -> `git add/commit` -> `git push`):
+1. **Comando Encadeado Único:** Ao receber "push main", o agente DEVE compor e executar toda a esteira em uma **única chamada de ferramenta atômica** encadeada (ex: `cmd /c "git add . && git commit -m \"...\" && git push origin main"`).
+2. **Sem Perguntas Intermediárias:** Não faça perguntas sobre branches de release ou menus de confirmação.
+3. **Relatório Pós-Push:** Assim que a chamada única terminar com sucesso, informe no chat a mensagem utilizada e o hash gerado.
 
 1. **🔵 Apenas Commit Local (Sem Push):** Realiza apenas o commit na sua branch local para salvar o progresso atual.
 2. **🟡 Atualizar Homologação (Vercel Preview):** Envia o código exclusivamente para a branch `homologacao` para validação no preview do cliente.
