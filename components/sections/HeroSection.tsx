@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 const HERO_IMAGES = [
-  "/images/hero4.svg",
-  "/images/hero 2.svg",
-  "/images/hero 3.svg",
+  "/images/hero4.webp",
+  "/images/hero2.webp",
+  "/images/hero3.webp",
 ];
 
 const MOBILE_HERO_IMAGES = [
-  "/images/heromob1.svg",
-  "/images/heromob2.svg",
+  "/images/heromob1.webp",
+  "/images/heromob2.webp",
 ];
 
 export default function HeroSection() {

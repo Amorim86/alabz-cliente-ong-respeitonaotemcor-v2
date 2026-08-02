@@ -20,11 +20,24 @@ const inter = Inter({
 export const APP_VERSION = 'v2';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.respeito.org.br"),
+  metadataBase: new URL("https://respeito.org.br"),
   title: "ONG Respeito Não Tem Cor",
   description: "Acolhimento, igualdade racial e apoio comunitário",
   openGraph: {
-    images: ["/og-image.png"],
+    title: "ONG Respeito Não Tem Cor",
+    description: "Acolhimento, igualdade racial e apoio comunitário",
+    url: "https://respeito.org.br",
+    siteName: "ONG Respeito Não Tem Cor",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ONG Respeito Não Tem Cor - Acolhimento e Igualdade Racial",
+      },
+    ],
+    locale: "pt_BR",
+    type: "website",
   },
 };
 
@@ -39,7 +52,7 @@ export default function RootLayout({
       className={`${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <main className="flex-1">{children}</main>
+        {children}
         <WhatsAppFloating />
         <AnalyticsLoader />
         <CookieBanner />
