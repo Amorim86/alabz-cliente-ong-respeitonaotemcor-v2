@@ -15,40 +15,40 @@ const CATEGORIES = [
 
 export const GALLERY_ITEMS = [
   {
-    src: "/images/evento-natal.png",
-    title: "Eventos Comunitários",
-    text: "Ações festivas e distribuição de presentes para crianças da comunidade.",
-    category: "Eventos",
-  },
-  {
-    src: "/images/criancas-estudando.png",
-    title: "Acompanhamento Infantil",
-    text: "Atividades socioeducativas e reforço escolar para crianças e jovens.",
-    category: "Oficinas",
-  },
-  {
-    src: "/images/aula-formacao.png",
-    title: "Encontros e Formações",
-    text: "Aulas, cursos e rodas de conversa promovendo educação e emancipação.",
-    category: "Oficinas",
-  },
-  {
-    src: "/images/diversidade-mulheres.png",
-    title: "Rede de Apoio a Mulheres",
-    text: "Acolhimento, escuta e fortalecimento para mulheres em situação de vulnerabilidade.",
-    category: "Rede de Apoio",
-  },
-  {
-    src: "/images/crianca-pintura.png",
+    src: "/images/crianca-pintura.webp",
     title: "Alegria e Acolhimento",
     text: "Promovemos momentos de lazer e descontração, garantindo o direito de brincar.",
     category: "Acolhimento",
   },
   {
-    src: "/images/brecho-roupas.png",
+    src: "/images/criancas-estudando.webp",
+    title: "Acompanhamento Infantil",
+    text: "Atividades socioeducativas e reforço escolar para crianças e jovens.",
+    category: "Oficinas",
+  },
+  {
+    src: "/images/aula-formacao.webp",
+    title: "Encontros e Formações",
+    text: "Aulas, cursos e rodas de conversa promovendo educação e emancipação.",
+    category: "Oficinas",
+  },
+  {
+    src: "/images/brecho-roupas.webp",
     title: "Brechó",
     text: "Curadoria e comercialização acessível de roupas e itens que apoiam diretamente as ações da ONG.",
     category: "Comunidade",
+  },
+  {
+    src: "/images/evento-natal.webp",
+    title: "Eventos Comunitários",
+    text: "Ações festivas e distribuição de presentes para crianças da comunidade.",
+    category: "Eventos",
+  },
+  {
+    src: "/images/diversidade-mulheres.webp",
+    title: "Rede de Apoio a Mulheres",
+    text: "Acolhimento, escuta e fortalecimento para mulheres em situação de vulnerabilidade.",
+    category: "Rede de Apoio",
   },
 ];
 

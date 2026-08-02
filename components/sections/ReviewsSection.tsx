@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const REVIEWS = [
   { name: "Selma Soares", text: "Acolhedora, receptiva e um lugar maravilhoso de letramento racial e atendimentos profissionais." },
@@ -49,17 +50,29 @@ export default function ReviewsSection() {
     <section className="laptop-compact relative flex w-full overflow-hidden bg-[#F7F4EA] py-10 md:py-14 lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-8" id="depoimentos" tabIndex={-1}>
       <div className="mx-auto w-full max-w-[1400px] px-4 md:px-12">
         <div className="grid grid-cols-1 items-center gap-6 lg:grid-cols-12 lg:gap-12">
-          <div className="col-span-12 mx-auto flex w-full max-w-[42rem] flex-col justify-center text-center lg:col-span-6 lg:mx-0 lg:text-left">
-            <span className="mb-3 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">Nossa reputação</span>
-            <h2 className="mx-auto mb-4 max-w-[12ch] font-display text-[2rem] font-extrabold leading-[1.04] text-[var(--color-primary)] md:text-5xl lg:mx-0 lg:mb-6 lg:max-w-none">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="col-span-12 mx-auto flex w-full max-w-[42rem] flex-col justify-center text-center lg:col-span-6 lg:mx-0 lg:text-left"
+          >
+            <span className="mb-3 font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">Nossa reputação</span>
+            <h2 className="mx-auto mb-4 max-w-[12ch] font-display text-[2rem] font-bold uppercase leading-[1.04] text-[var(--color-primary)] md:text-5xl lg:mx-0 lg:mb-6 lg:max-w-none">
               Acolhimento reconhecido por quem viveu de perto.
             </h2>
             <p className="mx-auto mb-4 max-w-[36rem] text-sm leading-relaxed text-[var(--foreground)]/74 md:text-base lg:mx-0 lg:mb-8 lg:text-justify">
               O impacto do nosso trabalho aparece nas histórias de quem encontrou escuta, orientação e uma rede de apoio dentro da comunidade.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="hidden lg:col-span-6 lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-6">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
+            className="hidden lg:col-span-6 lg:grid lg:grid-cols-2 lg:items-stretch lg:gap-6"
+          >
             <div className="flex flex-col justify-center gap-4">
               {staticReviews.map((review) => (
                 <article key={review.name} className="min-w-0 bg-[var(--color-primary)] p-5 text-white shadow-[0_14px_36px_rgba(8,29,66,0.16)]">
@@ -70,7 +83,7 @@ export default function ReviewsSection() {
               ))}
             </div>
             <ReviewCard review={REVIEWS[currentIndex]} />
-          </div>
+          </motion.div>
 
           <div className="col-span-12 flex justify-center px-1 lg:hidden">
             <ReviewCard review={REVIEWS[currentIndex]} isCompact />

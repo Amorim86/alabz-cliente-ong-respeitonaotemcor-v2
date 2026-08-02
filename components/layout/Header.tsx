@@ -136,7 +136,7 @@ export default function Header() {
           {/* Extremidade Esquerda: Logo (Altura limitada h-[3.3rem]) */}
           <div className="min-w-0 flex max-w-[calc(100vw-5.25rem)] min-[1365px]:w-[420px] min-[1365px]:shrink-0 items-center h-[2.95rem] min-[1365px]:h-[3.3rem] z-10" data-header-logo>
             <a href="#inicio" onClick={(e) => handleLinkClick(e, "#inicio")} className="flex min-w-0 items-center gap-2 h-full py-1 min-[1365px]:gap-2.5">
-              <img src="/images/favicon-sem-fundo.png" alt={siteConfig.name} className="h-full object-contain" />
+              <img src="/images/favicon-sem-fundo.webp" alt={siteConfig.name} className="h-full object-contain" />
               <div className="flex min-w-0 flex-col justify-center h-full">
                 <span className="font-display font-extrabold text-[0.86rem] leading-tight text-[var(--color-primary)] line-clamp-1 min-[390px]:text-[0.92rem] min-[1365px]:text-[0.98rem] min-[1365px]:tracking-[-0.02em]">
                   {siteConfig.name}

@@ -63,7 +63,7 @@ section[id],
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
+  *:not(.pacman-signature):not(.pacman-signature *),
   *::before,
   *::after {
     animation-duration: 0.01ms !important;

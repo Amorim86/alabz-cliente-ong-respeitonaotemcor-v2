@@ -1,5 +1,8 @@
+"use client";
+
 import { HeartHandshake, MapPin } from "lucide-react";
 import { siteConfig } from "../../config/site";
+import { motion } from "framer-motion";
 
 export default function VisitInvitationSection() {
   const volunteerUrl = `${siteConfig.contact.phoneUrl}?text=${encodeURIComponent(
@@ -9,8 +12,8 @@ export default function VisitInvitationSection() {
   return (
     <section className="visit-invitation section-natural relative -mt-[6vh] min-h-[76dvh] w-full overflow-hidden bg-[#F7F4EA] pt-[6vh] lg:h-[calc(100dvh-var(--header-height))] lg:min-h-0" id="visite">
       <img
-        src="/images/footer.png"
-        alt="Pessoas formando um coração com as mãos"
+        src="/images/footer.webp"
+        alt="Pessoas forming um coração com as mãos"
         className="absolute inset-x-0 -top-1 h-[calc(100%+0.25rem)] w-full object-cover object-center"
         style={{
           WebkitMaskImage:
@@ -32,11 +35,17 @@ export default function VisitInvitationSection() {
       />
 
       <div className="relative z-10 mx-auto flex min-h-[70dvh] w-full max-w-[1400px] items-end px-4 pb-14 pt-24 md:px-12 md:pb-20 lg:h-full lg:min-h-0 lg:pb-10 lg:pt-[27vh]">
-        <div className="max-w-3xl text-white">
-          <p className="font-utility text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-3xl text-white"
+        >
+          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-secondary)]">
             Portas abertas para caminhar junto
           </p>
-          <h2 className="mt-4 font-display text-4xl font-semibold uppercase leading-[1.02] [text-shadow:0_2px_18px_rgba(0,0,0,0.32)] md:text-5xl lg:text-[clamp(2.5rem,3.8vw,3.75rem)]">
+          <h2 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.02] [text-shadow:0_2px_18px_rgba(0,0,0,0.32)] md:text-5xl lg:text-[clamp(2.5rem,3.8vw,3.75rem)]">
             A mudança fica mais forte quando vira presença.
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/84 [text-shadow:0_2px_16px_rgba(0,0,0,0.44)] md:text-lg lg:text-[0.95rem]">
@@ -64,7 +73,7 @@ export default function VisitInvitationSection() {
               Quero ser voluntário
             </a>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

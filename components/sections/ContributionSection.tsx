@@ -2,6 +2,7 @@
 
 import { Check, Copy, HeartHandshake } from "lucide-react";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const CONTRIBUTIONS = [
   {
@@ -44,26 +45,38 @@ export default function ContributionSection() {
     >
       <div className="absolute inset-x-0 top-0 h-px bg-[var(--color-primary)]/10" />
       <img
-        src="/images/maocoração.png"
+        src="/images/maocoração.webp"
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute right-[-18vw] top-8 z-0 h-auto w-[82vw] max-w-[360px] object-contain opacity-[0.14] lg:hidden"
       />
       <div className="relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-0 px-4 md:px-12 lg:grid-cols-12 lg:gap-14">
-        <div className="relative order-2 mx-auto hidden w-full max-w-md justify-center lg:order-1 lg:col-span-5 lg:flex">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative order-2 mx-auto hidden w-full max-w-md justify-center lg:order-1 lg:col-span-5 lg:flex"
+        >
           <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-secondary)]/30 blur-3xl" />
           <img
-            src="/images/maocoração.png"
+            src="/images/maocoração.webp"
             alt="Mão segurando um coração"
             className="relative z-10 h-auto w-full max-w-[360px] object-contain drop-shadow-[0_24px_44px_rgba(0,31,63,0.18)] lg:max-w-[290px]"
           />
-        </div>
+        </motion.div>
 
-        <div className="order-1 lg:order-2 lg:col-span-7">
-          <p className="font-utility text-[10px] font-semibold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.08 }}
+          className="order-1 lg:order-2 lg:col-span-7"
+        >
+          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
             Contribua com a nossa rede
           </p>
-          <h2 className="mt-2 max-w-3xl font-display text-3xl font-semibold uppercase leading-[1.02] text-[var(--color-primary)] md:text-5xl lg:mt-3 lg:text-[clamp(2rem,3.4vw,3.2rem)]">
+          <h2 className="mt-2 max-w-3xl font-display text-3xl font-bold uppercase leading-[1.02] text-[var(--color-primary)] md:text-5xl lg:mt-3 lg:text-[clamp(2rem,3.4vw,3.2rem)]">
             Toda ajuda vira cuidado chegando mais longe.
           </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--foreground)]/72 md:text-lg lg:mt-4 lg:text-[0.92rem]">
@@ -115,7 +128,7 @@ export default function ContributionSection() {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -168,7 +168,7 @@ export default function AboutFounderSection() {
             </div>
             <div className="flex min-w-0 flex-col items-center">
               <img
-                src="/images/assinatura-dirce.png"
+                src="/images/assinatura-dirce.webp"
                 alt="Assinatura de Dirce Almeida dos Santos"
                 className="h-auto w-[317px] max-w-full object-contain"
               />

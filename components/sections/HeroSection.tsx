@@ -64,13 +64,13 @@ export default function HeroSection() {
           href="https://wa.me/554198824878?text=Ol%C3%A1%2C%20preciso%20de%20atendimento%20e%20orienta%C3%A7%C3%A3o%20da%20ONG."
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-full bg-[var(--color-secondary)] px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] shadow-lg transition-transform duration-300 hover:scale-105 md:text-sm"
+          className="inline-flex items-center justify-center rounded-full bg-[var(--color-secondary)] px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl md:text-sm"
         >
           🤝 Preciso de atendimento
         </a>
         <a
           href="#contribua"
-          className="inline-flex items-center justify-center rounded-full border-2 border-white bg-black/40 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg backdrop-blur-md transition-transform duration-300 hover:scale-105 hover:bg-white hover:text-[var(--color-primary)] md:text-sm"
+          className="inline-flex items-center justify-center rounded-full border-2 border-white bg-black/40 px-7 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:bg-white hover:text-[var(--color-primary)] hover:shadow-xl md:text-sm"
         >
           💛 Quero apoiar um projeto
         </a>

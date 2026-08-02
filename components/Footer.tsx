@@ -20,7 +20,7 @@ export default function Footer() {
                   strokeWidth={1.4}
                 />
                 <img
-                  src="/images/favicon-sem-fundo.png"
+                  src="/images/favicon-sem-fundo.webp"
                   alt={siteConfig.name}
                   className="relative z-10 h-12 w-auto object-contain"
                 />
@@ -97,7 +97,7 @@ export default function Footer() {
               title="Desenvolvido por Alabz - Soluções Digitais"
             >
               <img
-                src="/Logofooter 1.png"
+                src="/Logofooter 1.webp"
                 alt="Desenvolvido por Alabz - Soluções Digitais"
                 className="h-[120px] w-auto object-contain"
               />

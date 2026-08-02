@@ -28,12 +28,18 @@ export default function LocationSection() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-[18vh] bg-[linear-gradient(to_bottom,transparent_0%,rgba(247,244,234,0.82)_65%,#F7F4EA_100%)]" />
 
       <div className="location-section__grid relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-stretch gap-8 px-4 md:px-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(360px,0.78fr)] lg:gap-10">
-        <div className="location-section__copy flex flex-col justify-between">
-          <p className="font-utility text-[10px] font-semibold uppercase tracking-[0.24em] text-[var(--color-accent)]">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="location-section__copy flex flex-col justify-between"
+        >
+          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-accent)]">
             Venha conhecer nossa casa
           </p>
 
-          <h2 className="mt-4 max-w-4xl bg-[linear-gradient(90deg,var(--color-primary)_0%,var(--color-primary)_42%,var(--color-secondary)_100%)] bg-clip-text font-display text-[clamp(2.6rem,5.5vw,5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.07em] text-transparent">
+          <h2 className="mt-4 max-w-4xl font-display text-[clamp(2.6rem,5.5vw,5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.07em] text-[var(--color-primary)]">
             Rua Almirante Alexandrino, 2032
           </h2>
 
@@ -75,7 +81,7 @@ export default function LocationSection() {
               Quero conhecer o trabalho
             </a>
           </div>
-        </div>
+        </motion.div>
 
         <div className="location-section__media overflow-hidden rounded-[1.35rem] border border-[var(--color-primary)]/12 bg-white shadow-[0_30px_90px_rgba(0,31,63,0.14)]">
           <div className="relative h-[260px] overflow-hidden border-b border-[var(--color-primary)]/10 md:h-[300px] lg:h-1/2">

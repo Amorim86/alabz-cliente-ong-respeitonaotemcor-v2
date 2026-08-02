@@ -40,7 +40,7 @@ export default function ComoAcolhemosSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-2xl"
         >
-          <h2 className="text-3xl font-semibold uppercase leading-none text-[var(--color-primary)] md:text-4xl lg:text-[clamp(1.7rem,2vw,2.5rem)]">
+          <h2 className="font-display text-3xl font-bold uppercase leading-tight text-[var(--color-primary)] md:text-4xl lg:text-[clamp(1.7rem,2vw,2.5rem)]">
             Como Acolhemos
           </h2>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-[var(--color-primary)]/78 lg:text-xs">
