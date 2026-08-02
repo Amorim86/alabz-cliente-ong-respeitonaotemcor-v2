@@ -15,9 +15,11 @@ export const siteConfig = {
   navigation: [
     { label: "Início", href: "#inicio" },
     { label: "Quem Somos", href: "#quem-somos" },
-    { label: "Nossa Origem", href: "#nossa-origem" },
     { label: "Projetos", href: "#projetos" },
-    { label: "Brechó Solidário", href: "#brecho" },
+    { label: "Brechó", href: "#brecho" },
+    { label: "Origem", href: "#nossa-origem" },
+    { label: "Depoimentos", href: "#depoimentos" },
+    { label: "Galeria", href: "#galeria" },
     { label: "Doações", href: "#contribua" },
     { label: "Contato", href: "#contato" },
   ],

@@ -37,10 +37,10 @@ export default function BrechoSection() {
               Sustentabilidade e Autonomia
             </p>
             <h2 className="mt-1 font-display text-3xl font-bold uppercase leading-tight text-[var(--color-primary)] md:text-5xl lg:text-[clamp(1.8rem,2.7vw,2.9rem)]">
-              Brechó Solidário
+              Brechó
             </h2>
             <p className="mt-2 text-xs leading-relaxed text-[var(--foreground)]/78 sm:text-sm md:text-base lg:text-[0.86rem]">
-              O <strong>Brechó Solidário</strong> é uma importante frente de sustentabilidade da ONG Respeito Não Tem Cor. Tanto a compra quanto a doação de roupas e móveis são formas diretas de apoiar nossa causa e fortalecer a manutenção das nossas atividades sociais.
+              O <strong>Brechó</strong> é uma importante frente de sustentabilidade da ONG Respeito Não Tem Cor. Tanto a compra quanto a doação de roupas e móveis são formas diretas de apoiar nossa causa e fortalecer a manutenção das nossas atividades sociais.
             </p>
 
             <div className="mt-4 space-y-2.5 lg:mt-4">
@@ -82,8 +82,8 @@ export default function BrechoSection() {
           {/* Visual Container with smooth blend */}
           <div className="relative h-[300px] overflow-hidden rounded-2xl border border-[var(--color-primary)]/15 shadow-2xl md:h-[380px] lg:col-span-6 lg:h-full lg:max-h-[380px] lg:min-h-[300px]">
             <img
-              src="/images/faixada noite.webp"
-              alt="Fachada da ONG e Brechó Solidário"
+              src="/images/brecho-roupas.png"
+              alt="Fachada da ONG e Brechó"
               className="h-full w-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 via-transparent to-transparent" />

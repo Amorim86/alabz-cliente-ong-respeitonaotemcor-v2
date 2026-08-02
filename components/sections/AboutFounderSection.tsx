@@ -121,7 +121,7 @@ export default function AboutFounderSection() {
             História e Liderança
           </p>
           <h2 className="font-display text-4xl font-bold leading-[0.98] text-[var(--color-primary)] md:text-5xl lg:text-[clamp(2.5rem,4.1vw,4.8rem)]">
-            Nossa Origem
+            Origem
           </h2>
           <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-[var(--foreground)]/78 md:text-lg lg:text-[0.96rem]">
             A ONG Respeito Não Tem Cor tem sua trajetória fundamentada pela dedicação de <strong>Negra Dirce</strong>, fundadora e presidente da instituição. Sua atuação transformou desafios em uma rede contínua de acolhimento social, justiça e emancipação comunitária em São José dos Pinhais.

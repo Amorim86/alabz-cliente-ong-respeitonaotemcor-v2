@@ -25,7 +25,7 @@ interface MobileDrawerProps {
 }
 
 export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }: MobileDrawerProps) {
-  const mobileNavigation = siteConfig.navigation.filter((item) => item.href !== "#galeria");
+  const mobileNavigation = siteConfig.navigation;
   const socialLinks = [
     siteConfig.socials?.facebook
       ? { label: "Facebook", href: siteConfig.socials.facebook, Icon: Facebook }

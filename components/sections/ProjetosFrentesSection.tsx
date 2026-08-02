@@ -12,7 +12,7 @@ const PROJETOS = [
       "Atendimento psicológico",
       "Apoio a mulheres vítimas de violência doméstica"
     ],
-    image: "/images/faixada dia.webp",
+    image: "/images/atendimento-psicologico.png",
   },
   {
     category: "PROTEÇÃO SOCIAL",
@@ -22,7 +22,7 @@ const PROJETOS = [
       "Acolhimento e orientação para imigrantes",
       "Varal Solidário"
     ],
-    image: "/images/faixada noite.webp",
+    image: "/images/doacao-cestas.png",
   },
   {
     category: "EDUCAÇÃO E CULTURA",
@@ -33,14 +33,14 @@ const PROJETOS = [
       "Jiu-jitsu para crianças",
       "Português para imigrantes"
     ],
-    image: "/images/footer.png",
+    image: "/images/educacao-livros.png",
   },
   {
     category: "SUSTENTABILIDADE",
     items: [
-      "Brechó Solidário"
+      "Brechó"
     ],
-    image: "/images/faixada dia.webp",
+    image: "/images/brecho-roupas.png",
   },
 ];
 

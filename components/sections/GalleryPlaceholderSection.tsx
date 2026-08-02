@@ -15,40 +15,40 @@ const CATEGORIES = [
 
 export const GALLERY_ITEMS = [
   {
-    src: "/images/faixada dia.webp",
-    title: "Acolhimento & Porta Aberta",
-    text: "Nossa sede comunitária de portas abertas em São José dos Pinhais para recepcionar e apoiar a comunidade.",
-    category: "Acolhimento",
-  },
-  {
-    src: "/images/faixada noite.webp",
-    title: "Encontros e Formações",
-    text: "Atividades noturnas, oficinas e grupos de apoio fortalecendo laços e promovendo emancipação social.",
-    category: "Oficinas",
-  },
-  {
-    src: "/images/footer.png",
-    title: "União e Solidariedade",
-    text: "Momentos de mobilização comunitária, arrecadação de doações e eventos culturais.",
-    category: "Comunidade",
-  },
-  {
-    src: "/images/faixada noite.webp",
-    title: "Brechó Solidário",
-    text: "Curadoria e comercialização acessível de roupas e itens que apoiam diretamente as ações da ONG.",
-    category: "Comunidade",
-  },
-  {
-    src: "/images/maocoração.png",
-    title: "Marcha do Orgulho Negro",
-    text: "Celebração da identidade, conscientização e luta pela igualdade de direitos.",
+    src: "/images/evento-natal.png",
+    title: "Eventos Comunitários",
+    text: "Ações festivas e distribuição de presentes para crianças da comunidade.",
     category: "Eventos",
   },
   {
-    src: "/images/faixada dia.webp",
-    title: "Atendimento & Assistência",
-    text: "Encaminhamentos sociais, apoio jurídico e escuta atenciosa para pessoas em vulnerabilidade.",
+    src: "/images/criancas-estudando.png",
+    title: "Acompanhamento Infantil",
+    text: "Atividades socioeducativas e reforço escolar para crianças e jovens.",
+    category: "Oficinas",
+  },
+  {
+    src: "/images/aula-formacao.png",
+    title: "Encontros e Formações",
+    text: "Aulas, cursos e rodas de conversa promovendo educação e emancipação.",
+    category: "Oficinas",
+  },
+  {
+    src: "/images/diversidade-mulheres.png",
+    title: "Rede de Apoio a Mulheres",
+    text: "Acolhimento, escuta e fortalecimento para mulheres em situação de vulnerabilidade.",
     category: "Rede de Apoio",
+  },
+  {
+    src: "/images/crianca-pintura.png",
+    title: "Alegria e Acolhimento",
+    text: "Promovemos momentos de lazer e descontração, garantindo o direito de brincar.",
+    category: "Acolhimento",
+  },
+  {
+    src: "/images/brecho-roupas.png",
+    title: "Brechó",
+    text: "Curadoria e comercialização acessível de roupas e itens que apoiam diretamente as ações da ONG.",
+    category: "Comunidade",
   },
 ];
 
