@@ -271,14 +271,14 @@ export default function GalleryPlaceholderSection() {
         <div className="flex flex-1 flex-col justify-between gap-2 min-h-0">
           {/* Main Visual Carousel with Drag */}
           <div
-            className="relative flex-1 w-full min-h-[340px] md:min-h-[440px] lg:h-[58vh] lg:min-h-0 rounded-2xl overflow-hidden bg-[var(--color-primary)] group shadow-2xl cursor-pointer"
+            className="relative flex-1 w-full min-h-[350px] sm:min-h-[420px] md:min-h-[460px] lg:h-[58vh] lg:min-h-0 rounded-2xl overflow-hidden bg-[var(--color-primary)] group shadow-2xl cursor-pointer"
             ref={containerRef}
             onClick={() => {
               if (!isDragging) setIsFullscreen(true);
             }}
           >
             <motion.div
-              className="flex w-full h-full"
+              className="absolute inset-0 flex w-full h-full"
               drag="x"
               dragElastic={0.2}
               dragMomentum={false}
@@ -301,22 +301,22 @@ export default function GalleryPlaceholderSection() {
               style={{ x }}
             >
               {GALLERY_ITEMS.map((item, i) => (
-                <div key={i} className="relative shrink-0 w-full h-full">
+                <div key={i} className="relative shrink-0 w-full h-full overflow-hidden">
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover pointer-events-none select-none"
+                    className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
                     draggable={false}
                   />
                   {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none z-10" />
 
                   {/* Fullscreen Hint Icon */}
-                  <div className="absolute top-4 right-4 p-2 rounded-full bg-black/40 text-white/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                  <div className="absolute top-4 right-4 p-2 rounded-full bg-black/40 text-white/80 backdrop-blur-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
                     <Maximize2 className="w-4 h-4" />
                   </div>
 
-                  <div className="absolute bottom-0 left-0 w-full p-5 md:p-8 flex flex-col pointer-events-none">
+                  <div className="absolute bottom-0 left-0 w-full p-5 md:p-8 flex flex-col pointer-events-none z-20">
                     <div className="max-w-2xl text-left">
                       <span className="text-[var(--color-secondary)] font-utility text-xs font-bold tracking-widest mb-1 block uppercase">
                         {item.category} • {String(i + 1).padStart(2, "0")} / {String(GALLERY_ITEMS.length).padStart(2, "0")}

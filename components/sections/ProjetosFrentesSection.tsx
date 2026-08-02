@@ -104,7 +104,7 @@ export default function ProjetosFrentesSection() {
 
         <div className="flex flex-col gap-3 sm:flex-row lg:gap-4">
           <a
-            href="https://wa.me/554198824878?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20como%20posso%20apoiar%20um%20projeto%20da%20ONG."
+            href="https://wa.me/5541998824878?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20como%20posso%20apoiar%20um%20projeto%20da%20ONG."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block rounded-full bg-[var(--color-secondary)] px-7 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] shadow-md transition-colors hover:bg-white lg:py-2.5"
@@ -112,7 +112,7 @@ export default function ProjetosFrentesSection() {
             Quero apoiar um projeto
           </a>
           <a
-            href="https://wa.me/554198824878?text=Ol%C3%A1%2C%20preciso%20de%20atendimento%20ou%20orienta%C3%A7%C3%A3o%20social."
+            href="https://wa.me/5541998824878?text=Ol%C3%A1%2C%20preciso%20de%20atendimento%20ou%20orienta%C3%A7%C3%A3o%20social."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block rounded-full border-2 border-white px-7 py-2.5 text-center text-xs font-bold uppercase tracking-wider text-white transition-colors hover:bg-white hover:text-[var(--color-primary)] lg:py-2.5"

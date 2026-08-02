@@ -5,14 +5,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import { siteConfig } from "../config/site";
 
 interface WhatsAppFloatingProps {
-  phoneNumber?: string; // Exemplo: "554198824878" (DDI + DDD + Número)
+  phoneNumber?: string; // Exemplo: "5541998824878" (DDI + DDD + Número)
   message?: string;     // Mensagem pré-definida
 }
 
 export default function WhatsAppFloating({
   phoneNumber = siteConfig?.contact?.phoneUrl
     ? siteConfig.contact.phoneUrl.replace(/[^0-9]/g, "")
-    : "554198824878",
+    : "5541998824878",
   message = siteConfig?.contact?.whatsappMessage ||
     "Olá, cheguei pelo site da ONG e gostaria de conversar.",
 }: WhatsAppFloatingProps) {
