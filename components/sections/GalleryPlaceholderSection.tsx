@@ -14,11 +14,31 @@ const CATEGORIES = [
 ];
 
 export const GALLERY_ITEMS = [
+  // ── ACOLHIMENTO ──────────────────────────────────────────────────────────
+  {
+    src: "/images/escuta-psicologica.webp",
+    title: "Escuta psicológica",
+    text: "Cena que simboliza o atendimento psicológico oferecido pela ONG, com foco na escuta, no cuidado emocional e no fortalecimento da saúde mental.",
+    category: "Acolhimento",
+  },
+  {
+    src: "/images/orientacao-juridica.webp",
+    title: "Orientação jurídica",
+    text: "Registro simbólico do atendimento jurídico, representando momentos de orientação e esclarecimento sobre direitos, documentos e demandas familiares.",
+    category: "Acolhimento",
+  },
   {
     src: "/images/crianca-pintura.webp",
     title: "Alegria e Acolhimento",
     text: "Promovemos momentos de lazer e descontração, garantindo o direito de brincar.",
     category: "Acolhimento",
+  },
+  // ── OFICINAS ─────────────────────────────────────────────────────────────
+  {
+    src: "/images/jiu-jitsu-infantil.webp",
+    title: "Jiu-jitsu infantil",
+    text: "Registro de uma aula de jiu-jitsu para crianças, mostrando a prática em grupo e o desenvolvimento de disciplina, foco, coordenação e convivência.",
+    category: "Oficinas",
   },
   {
     src: "/images/criancas-estudando.webp",
@@ -32,18 +52,27 @@ export const GALLERY_ITEMS = [
     text: "Aulas, cursos e rodas de conversa promovendo educação e emancipação.",
     category: "Oficinas",
   },
+  // ── COMUNIDADE ───────────────────────────────────────────────────────────
+  {
+    src: "/images/atendimento-social.webp",
+    title: "Atendimento social",
+    text: "Imagem que representa o atendimento social realizado pela ONG junto às famílias e pessoas em situação de vulnerabilidade.",
+    category: "Comunidade",
+  },
   {
     src: "/images/brecho-roupas.webp",
     title: "Brechó",
     text: "Curadoria e comercialização acessível de roupas e itens que apoiam diretamente as ações da ONG.",
     category: "Comunidade",
   },
+  // ── EVENTOS ──────────────────────────────────────────────────────────────
   {
     src: "/images/evento-natal.webp",
     title: "Eventos Comunitários",
     text: "Ações festivas e distribuição de presentes para crianças da comunidade.",
     category: "Eventos",
   },
+  // ── REDE DE APOIO ────────────────────────────────────────────────────────
   {
     src: "/images/diversidade-mulheres.webp",
     title: "Rede de Apoio a Mulheres",
