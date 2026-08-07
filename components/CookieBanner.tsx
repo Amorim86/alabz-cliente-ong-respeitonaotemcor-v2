@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { captureTrafficSource } from "@/lib/utm";
 
 const STORAGE_KEY = "alabz_cookies_accepted";
-const CLIENTE_ID = "alabz"; // slug fixo da Alabz
+const CLIENTE_ID = "ong-respeito-nao-tem-cor";
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -72,18 +72,18 @@ export default function CookieBanner() {
 
   return (
     <div 
-      className="fixed bottom-6 left-6 right-6 mx-auto max-w-[560px] z-[9999] border border-[#d9a928]/20 bg-[#0a0a0ae6] backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.6)] rounded-lg animate-fade-in-up"
+      className="fixed bottom-6 left-6 right-6 mx-auto max-w-[560px] z-[9999] border border-[#F5CF00]/30 bg-[#081D42]/95 backdrop-blur-md shadow-[0_15px_40px_rgba(0,0,0,0.6)] rounded-lg animate-fade-in-up"
       role="status"
       aria-live="polite"
     >
       <style dangerouslySetInnerHTML={{ __html: `
         @keyframes pulseGlow {
           0%, 100% {
-            box-shadow: 0 4px 12px rgba(217, 169, 40, 0.15);
+            box-shadow: 0 4px 12px rgba(245, 207, 0, 0.15);
             transform: scale(1);
           }
           50% {
-            box-shadow: 0 4px 20px rgba(217, 169, 40, 0.45), 0 0 15px rgba(217, 169, 40, 0.25);
+            box-shadow: 0 4px 20px rgba(245, 207, 0, 0.45), 0 0 15px rgba(245, 207, 0, 0.25);
             transform: scale(1.025);
           }
         }
@@ -93,20 +93,20 @@ export default function CookieBanner() {
       `}} />
 
       {/* Luz decorativa dourada sutil de fundo */}
-      <div className="absolute top-0 right-20 w-48 h-full bg-[#d9a928]/5 blur-[35px] pointer-events-none rounded-full" />
+      <div className="absolute top-0 right-20 w-48 h-full bg-[#F5CF00]/10 blur-[35px] pointer-events-none rounded-full" />
 
       {/* Wrapper fluido de conteúdo */}
       <div className="w-full px-6 py-5 md:py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6 relative z-10">
         
         {/* Conteúdo de Texto à esquerda */}
         <div className="flex flex-col gap-1.5 flex-1 text-left">
-          <h4 className="font-['Outfit',sans-serif] font-bold text-sm text-white uppercase tracking-wider flex items-center gap-2">
+          <h4 className="font-display font-bold text-sm text-white uppercase tracking-wider flex items-center gap-2">
             Vamos falar dos cookies 🍪
           </h4>
-          <p className="text-xs text-[#a49d92] leading-relaxed">
-            Utilizamos cookies essenciais para o funcionamento da Alabz.
+          <p className="text-xs text-[#F7F4EA]/80 leading-relaxed font-utility">
+            Utilizamos cookies essenciais para o funcionamento da ONG Respeito Não Tem Cor.
             <br />
-            Gostaríamos de melhorar e personalizar a sua experiência, no nosso site, mas somente se você permitir.
+            Gostaríamos de melhorar e personalizar a sua experiência no nosso site, mas somente se você permitir.
           </p>
         </div>
 
@@ -115,10 +115,10 @@ export default function CookieBanner() {
           <button
             onClick={handleAccept}
             disabled={loading}
-            className="w-full px-5 py-2.5 rounded-sm bg-[#d9a928] hover:bg-[#b0871d] text-black font-['Outfit',sans-serif] font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_4px_12px_rgba(217,169,40,0.15)] cursor-pointer disabled:opacity-50 flex items-center justify-center min-w-[110px] animate-pulse-glow"
+            className="w-full px-5 py-2.5 rounded-sm bg-[#F5CF00] hover:bg-[#e6c100] text-[#081D42] font-display font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_4px_12px_rgba(245,207,0,0.25)] cursor-pointer disabled:opacity-50 flex items-center justify-center min-w-[110px] animate-pulse-glow"
           >
             {loading ? (
-              <span className="inline-block w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+              <span className="inline-block w-4 h-4 border-2 border-[#081D42] border-t-transparent rounded-full animate-spin" />
             ) : (
               "Aceitar"
             )}
@@ -127,7 +127,7 @@ export default function CookieBanner() {
           <button
             onClick={handleDecline}
             disabled={loading}
-            className="px-4 py-1.5 text-[11px] font-mono text-[#a49d92] hover:text-white transition-colors duration-200 cursor-pointer disabled:opacity-50"
+            className="px-4 py-1.5 text-[11px] font-utility text-[#F7F4EA]/60 hover:text-white transition-colors duration-200 cursor-pointer disabled:opacity-50"
           >
             Recusar
           </button>
