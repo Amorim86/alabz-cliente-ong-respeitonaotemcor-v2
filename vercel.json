@@ -5,7 +5,7 @@
     {
       "source": "/sistema",
       "destination": "/sistema/index.php",
-      "permanent": false
+      "statusCode": 307
     }
   ],
   "headers": [
