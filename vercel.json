@@ -1,6 +1,13 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": false,
+  "redirects": [
+    {
+      "source": "/sistema",
+      "destination": "/sistema/",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/sistema",
@@ -19,12 +26,21 @@
           "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
         }
       ]
+    },
+    {
+      "source": "/login.php",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+        }
+      ]
     }
   ],
   "rewrites": [
     {
-      "source": "/sistema",
-      "destination": "https://respeito1.websiteseguro.com/sistema/"
+      "source": "/login.php",
+      "destination": "https://respeito1.websiteseguro.com/sistema/login.php"
     },
     {
       "source": "/sistema/",
