@@ -4,6 +4,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  async redirects() {
+    return [
+      {
+        source: "/sistema",
+        destination: "/sistema/",
+        permanent: true,
+      },
+    ];
+  },
   async headers() {
     return [
       {
@@ -29,7 +38,7 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/sistema",
+        source: "/sistema/",
         destination: "https://respeito1.websiteseguro.com/sistema/",
       },
       {
@@ -41,4 +50,5 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
 
