@@ -4,8 +4,8 @@
   "redirects": [
     {
       "source": "/sistema",
-      "destination": "/sistema/",
-      "permanent": true
+      "destination": "/sistema/index.php",
+      "permanent": false
     }
   ],
   "headers": [
