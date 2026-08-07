@@ -72,6 +72,7 @@ export default function Header() {
 
   // Fechar o menu móvel ao pressionar Escape
   useEffect(() => {
+    if (!isOpen) return;
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsOpen(false);
@@ -79,7 +80,7 @@ export default function Header() {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isOpen]);
 
   // Rolagem suave com desconto exato da altura do header
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {

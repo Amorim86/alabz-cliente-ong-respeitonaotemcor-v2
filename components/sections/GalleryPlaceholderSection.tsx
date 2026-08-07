@@ -386,21 +386,19 @@ export default function GalleryPlaceholderSection() {
 
 
   useEffect(() => {
-
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (!isFullscreen) return;
 
       if (e.key === "ArrowRight") goToNext();
-
       if (e.key === "ArrowLeft") goToPrev();
-
-      if (e.key === "Escape" && isFullscreen) setIsFullscreen(false);
-
+      if (e.key === "Escape") setIsFullscreen(false);
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    if (isFullscreen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-
   }, [goToNext, goToPrev, isFullscreen]);
 
 

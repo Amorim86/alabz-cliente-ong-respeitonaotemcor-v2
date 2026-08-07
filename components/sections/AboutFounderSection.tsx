@@ -68,16 +68,7 @@ export default function AboutFounderSection() {
     };
 
     checkViewport();
-    window.addEventListener("resize", checkViewport);
-
-    const moveParallax = (event: MouseEvent) => {
-      if (window.innerWidth < 1024) return;
-
-      pointerX.set((event.clientX / window.innerWidth) * 2 - 1);
-      pointerY.set((event.clientY / window.innerHeight) * 2 - 1);
-    };
-
-    window.addEventListener("mousemove", moveParallax);
+    window.addEventListener("resize", checkViewport, { passive: true });
 
     const timer = window.setInterval(() => {
       setCurrentImgIndex((prev) => (prev + 1) % FOUNDER_IMAGES.length);
@@ -85,17 +76,33 @@ export default function AboutFounderSection() {
 
     return () => {
       window.removeEventListener("resize", checkViewport);
-      window.removeEventListener("mousemove", moveParallax);
       window.clearInterval(timer);
     };
   }, [pointerX, pointerY]);
 
   const activeImage = FOUNDER_IMAGES[currentImgIndex];
 
+  const handlePointerMove = (event: React.PointerEvent) => {
+    if (isMobile || !sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+    pointerX.set(x);
+    pointerY.set(y);
+  };
+
+  const handlePointerLeave = () => {
+    if (isMobile) return;
+    pointerX.set(0);
+    pointerY.set(0);
+  };
+
   return (
     <section
       id="nossa-origem"
       ref={sectionRef}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
       className="laptop-compact relative w-full overflow-hidden bg-[#FDFBF7] py-12 md:py-16 lg:flex lg:min-h-[calc(100dvh-var(--header-height))] lg:items-center lg:py-0"
     >
       <motion.div
