@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const HERO_IMAGES = [
-  "/images/hero-1.webp",
+  "/images/hero-3.webp",
   "/images/hero-2.webp",
 ];
 
@@ -78,7 +78,7 @@ export default function HeroSection() {
               scale: { duration: 5.5, ease: "easeOut" },
             }}
             style={{
-              objectPosition: HERO_IMAGES[currentImageIndex].includes("hero-1") ? "150px center" : "center",
+              objectPosition: "center",
             }}
             className="h-full w-full object-cover"
           />
@@ -89,10 +89,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#081D42] via-[#081D42]/85 to-transparent lg:w-3/4 pointer-events-none" />
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#081D42] via-transparent to-[#081D42]/40 pointer-events-none" />
 
-      {/* Filtro Azul intenso na borda esquerda (exclusivo hero-1 para fundir suavemente a borda cortada da imagem no desktop) */}
-      {HERO_IMAGES[currentImageIndex].includes("hero-1") && (
-        <div className="absolute inset-y-0 left-0 z-[2] hidden lg:block w-72 md:w-[450px] bg-gradient-to-r from-[#081D42] via-[#081D42]/95 to-transparent pointer-events-none" />
-      )}
+
 
       {/* Conteúdo Textual Clássico (Esquerda) */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-col justify-center px-4 pt-[calc(var(--header-height)+2rem)] pb-12 md:px-12 lg:py-24">
