@@ -4,7 +4,6 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  skipTrailingSlashRedirect: true,
   async headers() {
     return [
       {
@@ -34,10 +33,6 @@ const nextConfig: NextConfig = {
         destination: "https://respeito1.websiteseguro.com/sistema/",
       },
       {
-        source: "/sistema/",
-        destination: "https://respeito1.websiteseguro.com/sistema/",
-      },
-      {
         source: "/sistema/:path*",
         destination: "https://respeito1.websiteseguro.com/sistema/:path*",
       },
@@ -50,6 +45,7 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
 
 
 
