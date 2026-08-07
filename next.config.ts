@@ -4,15 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
-  async redirects() {
-    return [
-      {
-        source: "/sistema",
-        destination: "/sistema/",
-        permanent: true,
-      },
-    ];
-  },
+  skipTrailingSlashRedirect: true,
   async headers() {
     return [
       {
@@ -38,6 +30,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/sistema",
+        destination: "https://respeito1.websiteseguro.com/sistema/",
+      },
+      {
         source: "/sistema/",
         destination: "https://respeito1.websiteseguro.com/sistema/",
       },
@@ -45,10 +41,15 @@ const nextConfig: NextConfig = {
         source: "/sistema/:path*",
         destination: "https://respeito1.websiteseguro.com/sistema/:path*",
       },
+      {
+        source: "/images/:path*",
+        destination: "https://respeito1.websiteseguro.com/sistema/images/:path*",
+      },
     ];
   },
 };
 
 export default nextConfig;
+
 
 
