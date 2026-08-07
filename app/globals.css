@@ -206,6 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Ocultar elementos globais flutuantes quando o menu mobile está aberto */
 body.menu-open .whatsapp-floating-btn {
-  opacity: 0;
-  pointer-events: none;
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

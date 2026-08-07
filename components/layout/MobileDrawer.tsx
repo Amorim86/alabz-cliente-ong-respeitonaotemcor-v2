@@ -117,16 +117,7 @@ export default function MobileDrawer({ isOpen, activeSection, handleLinkClick }:
               })}
             </nav>
 
-            {/* Botão CTA Centralizado */}
-            <motion.div variants={menuItemVariants} className="mt-4 flex w-full justify-center">
-              <a
-                href="#contato"
-                onClick={(e) => handleLinkClick(e, "#contato")}
-                className="w-full max-w-[280px] bg-[var(--color-secondary)] text-[var(--color-primary)] text-center px-6 py-4 rounded-[2px] font-display text-base font-extrabold uppercase tracking-wide hover:bg-white transition-colors shadow-lg"
-              >
-                Fale Conosco
-              </a>
-            </motion.div>
+
 
             {/* Redes Sociais no rodapé do Drawer com ícones e rótulos legíveis */}
             {socialLinks.length > 0 && (

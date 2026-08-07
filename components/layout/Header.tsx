@@ -143,7 +143,7 @@ export default function Header() {
                   {siteConfig.name}
                 </span>
                 {siteConfig.subtitle && (
-                  <span className="font-utility text-[7.5px] text-[var(--color-accent)] font-semibold tracking-[0.055em] uppercase leading-none mt-0.5 line-clamp-1 min-[390px]:text-[8px] min-[1365px]:text-[7.8px] min-[1365px]:tracking-[0.04em]">
+                  <span className="font-utility text-[6.2px] text-[var(--color-accent)] font-semibold tracking-[0.01em] uppercase leading-none mt-0.5 min-[360px]:text-[6.8px] min-[390px]:text-[7.5px] min-[1365px]:text-[7.8px] min-[1365px]:tracking-[0.04em]">
                     {siteConfig.subtitle}
                   </span>
                 )}
