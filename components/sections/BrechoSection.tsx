@@ -32,14 +32,14 @@ export default function BrechoSection() {
       <div className="mx-auto flex w-full max-w-[1400px] flex-col px-4 md:px-12">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-10">
           {/* Text Content */}
-          <div className="flex flex-col justify-center lg:col-span-6">
-            <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+          <div className="flex flex-col justify-center text-center lg:col-span-6 lg:text-left">
+            <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)] text-center lg:text-left">
               Sustentabilidade e Autonomia
             </p>
-            <h2 className="mt-1 font-display text-3xl font-bold uppercase leading-tight text-[var(--color-primary)] md:text-5xl lg:text-[clamp(1.8rem,2.7vw,2.9rem)]">
+            <h2 className="mt-1 font-display text-3xl font-bold uppercase leading-tight text-[var(--color-primary)] md:text-5xl lg:text-[clamp(1.8rem,2.7vw,2.9rem)] text-center lg:text-left">
               Brechó
             </h2>
-            <p className="mt-2 text-xs leading-relaxed text-[var(--foreground)]/78 sm:text-sm md:text-base lg:text-[0.86rem]">
+            <p className="mt-2 text-xs leading-relaxed text-[var(--foreground)]/78 sm:text-sm md:text-base lg:text-[0.86rem] text-center lg:text-left">
               O <strong>Brechó</strong> é uma importante frente de sustentabilidade da ONG Respeito Não Tem Cor. Tanto a compra quanto a doação de roupas e móveis são formas diretas de apoiar nossa causa e fortalecer a manutenção das nossas atividades sociais.
             </p>
 

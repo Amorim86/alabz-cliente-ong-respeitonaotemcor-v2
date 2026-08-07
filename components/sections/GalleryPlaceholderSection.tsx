@@ -481,21 +481,21 @@ export default function GalleryPlaceholderSection() {
 
         >
 
-          <div>
+          <div className="text-center lg:text-left">
 
-            <p className="font-utility text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-accent)]">
+            <p className="font-utility text-[10px] font-bold uppercase tracking-[0.24em] text-[var(--color-accent)] text-center lg:text-left">
 
               Registros e Memória
 
             </p>
 
-            <h2 className="mt-0.5 font-display text-2xl font-bold uppercase leading-tight text-[var(--color-primary)] md:text-3xl lg:text-[clamp(1.7rem,2.3vw,2.5rem)]">
+            <h2 className="mt-0.5 font-display text-2xl font-bold uppercase leading-tight text-[var(--color-primary)] md:text-3xl lg:text-[clamp(1.7rem,2.3vw,2.5rem)] text-center lg:text-left">
 
               Galeria da ONG
 
             </h2>
 
-            <p className="mt-0.5 text-xs text-[var(--foreground)]/72 max-w-xl">
+            <p className="mt-0.5 text-xs text-[var(--foreground)]/72 max-w-xl text-center lg:text-left mx-auto lg:mx-0">
 
               Registros reais das nossas ações, oficinas, encontros e momentos comunitários.
 

@@ -71,15 +71,15 @@ export default function ContributionSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: "easeOut", delay: 0.08 }}
-          className="order-1 lg:order-2 lg:col-span-7"
+          className="order-1 text-center lg:order-2 lg:col-span-7 lg:text-left"
         >
-          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)] text-center lg:text-left">
             Contribua com a nossa rede
           </p>
-          <h2 className="mt-2 max-w-3xl font-display text-3xl font-bold uppercase leading-[1.02] text-[var(--color-primary)] md:text-5xl lg:mt-3 lg:text-[clamp(2rem,3.4vw,3.2rem)]">
+          <h2 className="mt-2 max-w-3xl font-display text-3xl font-bold uppercase leading-[1.02] text-[var(--color-primary)] md:text-5xl lg:mt-3 lg:text-[clamp(2rem,3.4vw,3.2rem)] text-center lg:text-left mx-auto lg:mx-0">
             Toda ajuda vira cuidado chegando mais longe.
           </h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--foreground)]/72 md:text-lg lg:mt-4 lg:text-[0.92rem]">
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[var(--foreground)]/72 md:text-lg lg:mt-4 lg:text-[0.92rem] text-center lg:text-left mx-auto lg:mx-0">
             Quando alguém contribui, uma porta continua aberta: para escutar,
             orientar, acolher e fortalecer quem precisa reconstruir caminhos com
             dignidade. Escolha um valor ou doe via PIX — o gesto pode ser simples,

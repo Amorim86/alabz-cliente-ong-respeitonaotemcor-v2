@@ -71,16 +71,16 @@ export default function QuemSomosSection() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.34, ease: "easeOut", delay: 0.04 }}
-          className="flex flex-col justify-center lg:col-span-7"
+          className="flex flex-col justify-center text-center lg:col-span-7 lg:text-left"
         >
-          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)]">
+          <p className="font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)] text-center lg:text-left">
             Quem Somos
           </p>
-          <h2 className="mt-1 font-display text-2xl font-semibold uppercase leading-tight text-[var(--color-primary)] md:text-4xl lg:text-[clamp(1.7rem,2.3vw,2.5rem)]">
+          <h2 className="mt-1 font-display text-2xl font-semibold uppercase leading-tight text-[var(--color-primary)] md:text-4xl lg:text-[clamp(1.7rem,2.3vw,2.5rem)] text-center lg:text-left">
             Respeito começa quando alguém é ouvido
           </h2>
 
-          <p className="mt-2 text-xs leading-relaxed text-[var(--foreground)]/78 sm:text-sm md:text-base lg:text-[0.88rem]">
+          <p className="mt-2 text-xs leading-relaxed text-[var(--foreground)]/78 sm:text-sm md:text-base lg:text-[0.88rem] text-center lg:text-left">
             Fundada em 2019 sob a liderança de Negra Dirce, a <strong>ONG Respeito Não Tem Cor</strong> é uma instituição comunitária dedicada a apoiar famílias e pessoas em situação de vulnerabilidade social em São José dos Pinhais.
           </p>
 
@@ -93,15 +93,22 @@ export default function QuemSomosSection() {
               viewport={{ once: true }}
               whileHover={{ y: -4, scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="group relative overflow-hidden rounded-xl border-2 border-[var(--color-primary)]/35 bg-[#FBF4DA] p-3.5 shadow-sm hover:shadow-lg hover:border-[var(--color-primary)] hover:bg-[#F9EAB8] transition-all duration-300 lg:p-4"
+              className="group relative overflow-hidden rounded-xl border-2 border-[var(--color-primary)]/35 bg-[#FBF4DA] p-3.5 shadow-sm hover:shadow-lg hover:border-[var(--color-primary)] hover:bg-[#F9EAB8] transition-all duration-300 lg:p-4 text-left"
             >
-              <div className="mb-1.5 flex items-center gap-2 text-[var(--color-primary)]">
+              <div className="mb-2 flex items-center gap-2.5 text-[var(--color-primary)]">
                 <motion.div
-                  animate={{ scale: [1, 1.18, 1] }}
-                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--color-primary)] text-[var(--color-secondary)] shadow-xs"
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    boxShadow: [
+                      "0 0 0px rgba(245, 207, 0, 0)",
+                      "0 0 16px rgba(245, 207, 0, 0.6)",
+                      "0 0 0px rgba(245, 207, 0, 0)"
+                    ]
+                  }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[var(--color-secondary)] shadow-md group-hover:bg-[var(--color-accent)] transition-colors duration-300"
                 >
-                  <Target className="h-4 w-4" strokeWidth={2.2} />
+                  <Target className="h-5 w-5" strokeWidth={2} />
                 </motion.div>
                 <h3 className="font-display text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] lg:text-sm">Missão</h3>
               </div>
@@ -117,15 +124,22 @@ export default function QuemSomosSection() {
               viewport={{ once: true }}
               whileHover={{ y: -4, scale: 1.02 }}
               transition={{ duration: 0.3, delay: 0.1 }}
-              className="group relative overflow-hidden rounded-xl border-2 border-[var(--color-primary)]/35 bg-[#FBF4DA] p-3.5 shadow-sm hover:shadow-lg hover:border-[var(--color-primary)] hover:bg-[#F9EAB8] transition-all duration-300 lg:p-4"
+              className="group relative overflow-hidden rounded-xl border-2 border-[var(--color-primary)]/35 bg-[#FBF4DA] p-3.5 shadow-sm hover:shadow-lg hover:border-[var(--color-primary)] hover:bg-[#F9EAB8] transition-all duration-300 lg:p-4 text-left"
             >
-              <div className="mb-1.5 flex items-center gap-2 text-[var(--color-primary)]">
+              <div className="mb-2 flex items-center gap-2.5 text-[var(--color-primary)]">
                 <motion.div
-                  animate={{ scale: [1, 1.18, 1] }}
-                  transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                  className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--color-primary)] text-[var(--color-secondary)] shadow-xs"
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    boxShadow: [
+                      "0 0 0px rgba(245, 207, 0, 0)",
+                      "0 0 16px rgba(245, 207, 0, 0.6)",
+                      "0 0 0px rgba(245, 207, 0, 0)"
+                    ]
+                  }}
+                  transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-primary)] text-[var(--color-secondary)] shadow-md group-hover:bg-[var(--color-accent)] transition-colors duration-300"
                 >
-                  <Eye className="h-4 w-4" strokeWidth={2.2} />
+                  <Eye className="h-5 w-5" strokeWidth={2} />
                 </motion.div>
                 <h3 className="font-display text-xs font-bold uppercase tracking-wider text-[var(--color-primary)] lg:text-sm">Visão</h3>
               </div>
@@ -154,7 +168,7 @@ export default function QuemSomosSection() {
                 transition={{ duration: 0.3, delay: index * 0.08 }}
                 className="group relative flex flex-col items-center text-center rounded-xl border-2 border-[var(--color-primary)]/35 bg-[#FBF4DA] p-4 shadow-sm hover:shadow-xl hover:border-[var(--color-primary)] hover:bg-[#F9EAB8] transition-all duration-300 lg:p-3.5"
               >
-                {/* Ícone Centralizado e Pulsante */}
+                {/* Ícone Centralizado e Pulsante - Tamanho Linear Padronizado h-10 w-10 com ícone h-5 w-5 */}
                 <motion.div
                   animate={{
                     scale: [1, 1.15, 1],
@@ -170,9 +184,9 @@ export default function QuemSomosSection() {
                     ease: "easeInOut",
                     delay: index * 0.35
                   }}
-                  className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-primary)] text-[var(--color-secondary)] shadow-md group-hover:bg-[var(--color-accent)] transition-colors duration-300 lg:h-9 lg:w-9"
+                  className="mb-2.5 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-primary)] text-[var(--color-secondary)] shadow-md group-hover:bg-[var(--color-accent)] transition-colors duration-300"
                 >
-                  <valor.icon className="h-5 w-5 lg:h-4 lg:w-4" strokeWidth={2} />
+                  <valor.icon className="h-5 w-5" strokeWidth={2} />
                 </motion.div>
 
                 <h4 className="font-display text-xs font-bold uppercase tracking-wide text-[var(--color-primary)] lg:text-[0.8rem]">
