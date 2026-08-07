@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  trailingSlash: true,
   async headers() {
     return [
       {
@@ -36,15 +37,12 @@ const nextConfig: NextConfig = {
         source: "/sistema/:path*",
         destination: "https://respeito1.websiteseguro.com/sistema/:path*",
       },
-      {
-        source: "/images/:path*",
-        destination: "https://respeito1.websiteseguro.com/sistema/images/:path*",
-      },
     ];
   },
 };
 
 export default nextConfig;
+
 
 
 
