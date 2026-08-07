@@ -16,7 +16,7 @@ export default function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <div className="relative flex h-[62px] w-[62px] shrink-0 items-center justify-center">
                 <Heart
-                  className="absolute inset-0 h-full w-full fill-[#D62828] text-[#D62828] drop-shadow-[0_0_18px_rgba(214,40,40,0.38)]"
+                  className="absolute inset-0 h-full w-full fill-white text-white drop-shadow-[0_0_18px_rgba(255,255,255,0.35)]"
                   strokeWidth={1.4}
                 />
                 <img
@@ -46,7 +46,9 @@ export default function Footer() {
               Navegação
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-zinc-400 font-sans">
-              {siteConfig.navigation.map((item) => (
+              {siteConfig.navigation
+                .filter((item) => item.href !== "#contato" && item.label !== "Contato")
+                .map((item) => (
                 <li key={item.label}>
                   <a href={item.href} className="hover:text-white transition-colors">
                     {item.label}
