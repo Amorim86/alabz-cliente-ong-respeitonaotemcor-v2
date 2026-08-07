@@ -1,0 +1,38 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "headers": [
+    {
+      "source": "/sistema",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/sistema/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/sistema",
+      "destination": "https://respeito1.websiteseguro.com/sistema/"
+    },
+    {
+      "source": "/sistema/",
+      "destination": "https://respeito1.websiteseguro.com/sistema/"
+    },
+    {
+      "source": "/sistema/(.*)",
+      "destination": "https://respeito1.websiteseguro.com/sistema/$1"
+    }
+  ]
+}
