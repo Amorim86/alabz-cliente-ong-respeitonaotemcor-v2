@@ -211,6 +211,7 @@ export default function AboutFounderSection() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.985 }}
                   transition={{ duration: 1.5, ease: "easeInOut" }}
+                  loading="lazy"
                   className="founder-portrait absolute inset-0 h-full w-full object-contain object-bottom"
                 />
               </AnimatePresence>
