@@ -4,12 +4,10 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const HERO_IMAGES = [
-  "/images/hero-3.webp",
-  "/images/hero-2.webp",
+  "/images/roda_livro-v2.webp",
 ];
 
 const PILL_TAGS = [
-  "Luta Antirracista",
   "Acolhimento",
   "Empoderamento",
   "Transformação",
@@ -50,7 +48,7 @@ export default function HeroSection() {
       {/* Background Mobile Dedicado (hero-mobile.webp) */}
       <div className="absolute inset-0 z-0 block lg:hidden overflow-hidden">
         <img
-          src="/images/hero-mobile.webp"
+          src="/images/hero-mobile-v2.webp"
           alt="ONG Respeito Não Tem Cor Mobile"
           className="h-full w-full object-cover object-top"
           loading="eager"
@@ -131,10 +129,10 @@ export default function HeroSection() {
             </div>
 
             {/* Subtexto Descritivo curto */}
-            <p className="mb-10 max-w-2xl font-utility text-base leading-relaxed text-[#F7F4EA]/90 md:text-lg">
-              Promovemos a igualdade racial, o apoio social e a transformação comunitária.
-              Junte-se à nossa causa por uma sociedade mais justa e inclusiva.
-            </p>
+            <div className="mb-10 max-w-2xl font-utility text-base leading-relaxed text-[#F7F4EA]/90 md:text-lg space-y-2">
+              <p>Nossa missão é apoiar pessoas em situação de vulnerabilidade social.</p>
+              <p>Junte-se à nossa causa por uma sociedade mais justa e inclusiva.</p>
+            </div>
 
             {/* CTAs de Ação */}
             <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:items-center">

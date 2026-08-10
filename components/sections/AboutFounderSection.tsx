@@ -47,15 +47,15 @@ export default function AboutFounderSection() {
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
-  const smoothOptions = { damping: 20, stiffness: 100, mass: 0.5 };
+  const smoothOptions = { damping: 28, stiffness: 70, mass: 0.8 };
   const smoothX = useSpring(pointerX, smoothOptions);
   const smoothY = useSpring(pointerY, smoothOptions);
 
-  const backgroundX = useTransform(smoothX, [-1, 1], [-30, 30]);
-  const backgroundY = useTransform(smoothY, [-1, 1], [-30, 30]);
-  const backgroundScale = useTransform(smoothY, [-1, 1], [1.08, 1.04]);
-  const portraitX = useTransform(smoothX, [-1, 1], [-12, 12]);
-  const portraitY = useTransform(smoothY, [-1, 1], [-12, 12]);
+  const backgroundX = useTransform(smoothX, [-1, 1], [-42, 42]);
+  const backgroundY = useTransform(smoothY, [-1, 1], [-24, 24]);
+  const backgroundScale = useTransform(smoothY, [-1, 1], [1.22, 1.28]);
+  const portraitX = useTransform(smoothX, [-1, 1], [-14, 14]);
+  const portraitY = useTransform(smoothY, [-1, 1], [-10, 10]);
 
   useEffect(() => {
     const checkViewport = () => {
@@ -107,21 +107,21 @@ export default function AboutFounderSection() {
     >
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute -inset-20"
         style={{
           x: isMobile ? 0 : backgroundX,
           y: isMobile ? 0 : backgroundY,
-          scale: isMobile ? 1 : backgroundScale,
+          scale: isMobile ? 1.2 : backgroundScale,
         }}
       >
         <img
-          src="/images/founder_bg.webp"
+          src="/images/founder_bg.jpeg"
           alt=""
-          className="h-full w-full object-cover opacity-[0.28]"
+          className="h-full w-full object-cover opacity-[0.25] blur-[1px] mix-blend-multiply"
           loading="lazy"
           decoding="async"
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_32%,rgba(245,207,0,0.16),transparent_26%),linear-gradient(90deg,#FDFBF7_0%,rgba(253,251,247,0.94)_43%,rgba(253,251,247,0.62)_70%,rgba(253,251,247,0.18)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_32%,rgba(245,207,0,0.14),transparent_35%),linear-gradient(90deg,#FDFBF7_0%,rgba(253,251,247,0.92)_35%,rgba(253,251,247,0.55)_65%,rgba(253,251,247,0.15)_100%)]" />
       </motion.div>
 
       <div className="founder-grid relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-8 px-4 md:px-12 lg:min-h-[calc(100dvh-var(--header-height))] lg:grid-cols-12 lg:gap-8">
@@ -179,7 +179,7 @@ export default function AboutFounderSection() {
             </div>
             <div className="flex min-w-0 flex-col items-center">
               <img
-                src="/images/assinatura-dirce.webp"
+                src="/images/assinatura_negra_dirce_v2.png"
                 alt="Assinatura de Dirce Almeida dos Santos"
                 className="h-auto w-[317px] max-w-full object-contain"
                 loading="lazy"
