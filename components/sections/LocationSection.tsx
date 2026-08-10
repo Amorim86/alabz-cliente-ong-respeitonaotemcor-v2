@@ -90,6 +90,8 @@ export default function LocationSection() {
               alt="Faixada de dia da ONG Respeito Não Tem Cor"
               className="absolute inset-0 h-full w-full object-cover"
               style={{ objectPosition: "center top" }}
+              loading="lazy"
+              decoding="async"
             />
             <motion.img
               src="/images/faixada noite.webp"
@@ -98,6 +100,8 @@ export default function LocationSection() {
               style={{ objectPosition: "center top" }}
               animate={{ opacity: showNight ? 1 : 0 }}
               transition={{ duration: 2, ease: "easeInOut" }}
+              loading="lazy"
+              decoding="async"
             />
           </div>
 

@@ -266,15 +266,12 @@ function Thumbnails({
           >
 
             <img
-
               src={item.src}
-
               alt={item.title}
-
               className="w-full h-full object-cover pointer-events-none select-none"
-
               draggable={false}
-
+              loading="lazy"
+              decoding="async"
             />
 
             {i !== index && (
@@ -622,15 +619,12 @@ export default function GalleryPlaceholderSection() {
                 <div key={i} className="relative shrink-0 w-full h-full overflow-hidden">
 
                   <img
-
                     src={item.src}
-
                     alt={item.title}
-
                     className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-
                     draggable={false}
-
+                    loading="lazy"
+                    decoding="async"
                   />
 
                   {/* Gradient Overlay */}
@@ -800,13 +794,11 @@ export default function GalleryPlaceholderSection() {
               <div className="relative w-full max-w-6xl h-[65vh] md:h-[75vh]">
 
                 <img
-
                   src={currentItem.src}
-
                   alt={currentItem.title}
-
                   className="w-full h-full object-contain"
-
+                  loading="lazy"
+                  decoding="async"
                 />
 
               </div>

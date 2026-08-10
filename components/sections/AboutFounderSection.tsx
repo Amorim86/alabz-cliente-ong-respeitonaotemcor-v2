@@ -118,6 +118,8 @@ export default function AboutFounderSection() {
           src="/images/founder_bg.webp"
           alt=""
           className="h-full w-full object-cover opacity-[0.28]"
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_32%,rgba(245,207,0,0.16),transparent_26%),linear-gradient(90deg,#FDFBF7_0%,rgba(253,251,247,0.94)_43%,rgba(253,251,247,0.62)_70%,rgba(253,251,247,0.18)_100%)]" />
       </motion.div>
@@ -170,6 +172,8 @@ export default function AboutFounderSection() {
                   transition={{ duration: 1.5, ease: "easeInOut" }}
                   className="absolute inset-0 h-full w-full object-cover"
                   style={{ objectPosition: "50% 12%" }}
+                  loading="lazy"
+                  decoding="async"
                 />
               </AnimatePresence>
             </div>
@@ -178,6 +182,8 @@ export default function AboutFounderSection() {
                 src="/images/assinatura-dirce.webp"
                 alt="Assinatura de Dirce Almeida dos Santos"
                 className="h-auto w-[317px] max-w-full object-contain"
+                loading="lazy"
+                decoding="async"
               />
               <p className="mt-1 font-utility text-[10px] font-semibold uppercase tracking-[0.14em] text-[var(--color-primary)]/68">
                 Fundadora e Presidente — Respeito não tem cor

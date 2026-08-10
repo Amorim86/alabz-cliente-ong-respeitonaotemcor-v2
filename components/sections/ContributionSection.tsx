@@ -49,6 +49,8 @@ export default function ContributionSection() {
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute right-[-18vw] top-8 z-0 h-auto w-[82vw] max-w-[360px] object-contain opacity-[0.14] lg:hidden"
+        loading="lazy"
+        decoding="async"
       />
       <div className="relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-0 px-4 md:px-12 lg:grid-cols-12 lg:gap-14">
         <motion.div
@@ -63,6 +65,8 @@ export default function ContributionSection() {
             src="/images/maocoração.webp"
             alt="Mão segurando um coração"
             className="relative z-10 h-auto w-full max-w-[360px] object-contain drop-shadow-[0_24px_44px_rgba(0,31,63,0.18)] lg:max-w-[290px]"
+            loading="lazy"
+            decoding="async"
           />
         </motion.div>
 
