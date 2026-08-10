@@ -58,9 +58,17 @@ export function validateLegacySystem(vercelConfig, routingFilesMap = null) {
   const protectedSources = ['/sistema', '/sistema/(.*)', '/login.php'];
 
   for (const source of protectedSources) {
-    const headerEntry = headersList.find(h => h.source === source);
-    if (!headerEntry || !Array.isArray(headerEntry.headers)) {
+    const headerEntries = headersList.filter(h => h.source === source);
+    if (headerEntries.length === 0) {
       return { valid: false, error: `Bloco de headers protegidos para '${source}' não foi encontrado no vercel.json.` };
+    }
+    if (headerEntries.length > 1) {
+      return { valid: false, error: `Bloco de headers duplicado para '${source}'. Deve existir exatamente um.` };
+    }
+    
+    const headerEntry = headerEntries[0];
+    if (!Array.isArray(headerEntry.headers)) {
+      return { valid: false, error: `A propriedade 'headers' no bloco de headers protegidos para '${source}' não é um array válido.` };
     }
 
     const cacheControl = headerEntry.headers.find(h => h.key === 'Cache-Control');
@@ -154,15 +162,19 @@ export function validateLegacySystem(vercelConfig, routingFilesMap = null) {
     }
   }
 
-  const pendingLegacyRedirects = new Set(['/sistema']);
+  // Validação estrita de todos os redirects (antes ou depois das regras do legado)
+  const legacyProtectedPaths = ['/sistema', '/sistema/', '/sistema/(.*)', '/login.php'];
+  
   for (const r of redirects) {
-    if (pendingLegacyRedirects.has(r.source)) {
-      pendingLegacyRedirects.delete(r.source);
-    } else {
-      for (const pending of pendingLegacyRedirects) {
-        if (routeCanMatch(r.source, pending)) {
-          return { valid: false, error: `Foi detectada uma regra de redirect anterior (${r.source}) que interfere no roteamento do sistema legado (${pending}).` };
-        }
+    // Exceção permitida: o redirect oficial
+    if (r.source === '/sistema' && r.destination === '/sistema/index.php' && r.statusCode === 307) {
+      continue;
+    }
+    
+    // Nenhuma outra regra de redirect pode interceptar as rotas protegidas
+    for (const protectedPath of legacyProtectedPaths) {
+      if (routeCanMatch(r.source, protectedPath)) {
+        return { valid: false, error: `Foi detectada uma regra de redirect (${r.source}) que interfere no roteamento do sistema legado (${protectedPath}). Nenhuma regra de redirect pode capturar rotas do sistema.` };
       }
     }
   }

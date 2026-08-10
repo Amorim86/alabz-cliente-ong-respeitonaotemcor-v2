@@ -243,6 +243,57 @@ if (runTestWithTmpFile(mock18) !== false) {
 }
 console.log('✅ TESTE 18 PASSOU: Rewrite catch-all (/:slug*) causou FALHA corretamente.');
 
+// Teste 19: Adicionar redirect /:path* APÓS o redirect homologado /sistema -> FAIL
+const mock19 = JSON.parse(JSON.stringify(initialVercelObj));
+if (!mock19.redirects) mock19.redirects = [];
+mock19.redirects.push({ source: '/:path*', destination: '/manutencao' });
+if (runTestWithTmpFile(mock19) !== false) {
+  console.error('❌ FAIL Teste 19: Redirect catch-all após o legado não foi bloqueado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 19 PASSOU: Redirect catch-all (/:path*) após o legado causou FALHA corretamente.');
+
+// Teste 20: Adicionar redirect /sistema/:path* APÓS o redirect homologado -> FAIL
+const mock20 = JSON.parse(JSON.stringify(initialVercelObj));
+if (!mock20.redirects) mock20.redirects = [];
+mock20.redirects.push({ source: '/sistema/:path*', destination: '/manutencao' });
+if (runTestWithTmpFile(mock20) !== false) {
+  console.error('❌ FAIL Teste 20: Redirect /sistema/:path* após o legado não foi bloqueado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 20 PASSOU: Redirect subpasta legado (/sistema/:path*) após causou FALHA corretamente.');
+
+// Teste 21: Adicionar redirect /login.php -> FAIL
+const mock21 = JSON.parse(JSON.stringify(initialVercelObj));
+if (!mock21.redirects) mock21.redirects = [];
+mock21.redirects.push({ source: '/login.php', destination: '/outro-login' });
+if (runTestWithTmpFile(mock21) !== false) {
+  console.error('❌ FAIL Teste 21: Redirect para /login.php não foi bloqueado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 21 PASSOU: Redirect /login.php causou FALHA corretamente.');
+
+// Teste 22: Duplicar bloco headers source /sistema/(.*) -> FAIL
+const mock22 = JSON.parse(JSON.stringify(initialVercelObj));
+const originalHeader = mock22.headers.find(h => h.source === '/sistema/(.*)');
+mock22.headers.push(JSON.parse(JSON.stringify(originalHeader)));
+if (runTestWithTmpFile(mock22) !== false) {
+  console.error('❌ FAIL Teste 22: Duplicidade de headers para /sistema/(.*) não foi bloqueada!');
+  process.exit(1);
+}
+console.log('✅ TESTE 22 PASSOU: Duplicidade de headers /sistema/(.*) causou FALHA corretamente.');
+
+// Teste 23: Redirect legítimo /manutencao -> /status -> PASS
+const mock23 = JSON.parse(JSON.stringify(initialVercelObj));
+if (!mock23.redirects) mock23.redirects = [];
+mock23.redirects.push({ source: '/manutencao', destination: '/status', statusCode: 308 });
+const res23 = validateLegacySystem(mock23);
+if (!res23.valid) {
+  console.error(`❌ FAIL Teste 23: Redirect legítimo não relacionado falhou incorretamente! Erro: ${res23.error}`);
+  process.exit(1);
+}
+console.log('✅ TESTE 23 PASSOU: Redirect legítimo (/manutencao -> /status) foi PERMITIDO.');
+
 // -------------------------------------------------------------
 // VERIFICAÇÃO FINAL DE IMUTABILIDADE DO VERCEL.JSON REAL
 // -------------------------------------------------------------
@@ -252,5 +303,5 @@ if (initialVercelContent !== finalVercelContent) {
   process.exit(1);
 }
 console.log('\n🔒 COMPROVAÇÃO DE ISOLAMENTO: O arquivo vercel.json real permaneceu 100% INTATO e SOMENTE LEITURA durante todos os testes!');
-console.log('🎉 TODOS OS 18 CASOS DE TESTE PASSARAM COM SUCESSO!\n');
+console.log('🎉 TODOS OS 23 CASOS DE TESTE PASSARAM COM SUCESSO!\n');
 process.exit(0);
