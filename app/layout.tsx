@@ -8,11 +8,13 @@ import CookieBanner from "../components/CookieBanner";
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-lumi-display",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-lumi-body",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const APP_VERSION = 'v2';
