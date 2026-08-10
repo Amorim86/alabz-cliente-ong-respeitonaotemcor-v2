@@ -105,6 +105,8 @@ export default function ProjetosFrentesSection() {
                   onError={(event) => {
                     event.currentTarget.src = IMAGE_FALLBACK;
                   }}
+                  loading="lazy"
+                  decoding="async"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 via-black/20 to-transparent" />
                 

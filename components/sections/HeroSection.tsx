@@ -53,6 +53,9 @@ export default function HeroSection() {
           src="/images/hero-mobile.webp"
           alt="ONG Respeito Não Tem Cor Mobile"
           className="h-full w-full object-cover object-top"
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         {/* Overlay escuro em mobile para manter leitura nítida do texto */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#081D42] via-[#081D42]/80 to-[#081D42]/40 pointer-events-none" />

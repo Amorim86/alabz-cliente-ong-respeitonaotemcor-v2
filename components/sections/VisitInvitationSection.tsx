@@ -15,6 +15,8 @@ export default function VisitInvitationSection() {
         src="/images/footer.webp"
         alt="Pessoas forming um coração com as mãos"
         className="absolute inset-x-0 -top-1 h-[calc(100%+0.25rem)] w-full object-cover object-center"
+        loading="lazy"
+        decoding="async"
         style={{
           WebkitMaskImage:
             "linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.14) 5%, rgba(0,0,0,0.62) 14%, #000 27%)",

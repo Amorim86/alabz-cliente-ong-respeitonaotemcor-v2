@@ -35,6 +35,8 @@ export default function ZPatternSection() {
               height: "100%",
               objectFit: "cover",
             }}
+            loading="lazy"
+            decoding="async"
           />
           {/* Fusão → direita (desktop) */}
           <div className="absolute inset-y-0 right-0 w-[45%] hidden lg:block pointer-events-none z-10 bg-gradient-to-r from-transparent to-[#FDFBF7]" />
@@ -116,6 +118,8 @@ export default function ZPatternSection() {
               height: "100%",
               objectFit: "cover",
             }}
+            loading="lazy"
+            decoding="async"
           />
           {/* Fusão → esquerda (desktop) */}
           <div className="absolute inset-y-0 left-0 w-[45%] hidden lg:block pointer-events-none z-10 bg-gradient-to-l from-transparent to-[#FDFBF7]" />

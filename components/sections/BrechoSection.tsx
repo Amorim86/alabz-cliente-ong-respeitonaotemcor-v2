@@ -85,6 +85,8 @@ export default function BrechoSection() {
               src="/images/brecho-roupas.webp"
               alt="Fachada da ONG e Brechó"
               className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/80 via-transparent to-transparent" />
             <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-black/40 p-4 text-white backdrop-blur-md lg:bottom-5 lg:left-5 lg:right-5">

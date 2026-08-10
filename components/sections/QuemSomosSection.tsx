@@ -55,6 +55,8 @@ export default function QuemSomosSection() {
             src="/images/quem-somos-ong.webp"
             alt="Atividades e comunidade da ONG Respeito Não Tem Cor"
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.05]"
+            loading="lazy"
+            decoding="async"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary)]/90 via-[var(--color-primary)]/30 to-transparent" />
           <div className="absolute bottom-4 left-4 right-4 border-l-4 border-[var(--color-secondary)] pl-3 text-white lg:bottom-5 lg:left-5 lg:right-5">

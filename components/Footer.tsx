@@ -23,6 +23,8 @@ export default function Footer() {
                   src="/images/favicon-sem-fundo.webp"
                   alt={siteConfig.name}
                   className="relative z-10 h-12 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="flex flex-col text-left md:text-left">
@@ -102,6 +104,8 @@ export default function Footer() {
                 src="/Logofooter 1.webp"
                 alt="Desenvolvido por Alabz - Soluções Digitais"
                 className="h-[120px] w-auto object-contain"
+                loading="lazy"
+                decoding="async"
               />
             </a>
           </div>
