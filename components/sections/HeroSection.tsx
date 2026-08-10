@@ -69,10 +69,8 @@ export default function HeroSection() {
         }}
       >
         <AnimatePresence mode="popLayout">
-          <motion.img
+          <motion.div
             key={HERO_IMAGES[currentImageIndex]}
-            src={HERO_IMAGES[currentImageIndex]}
-            alt="ONG Respeito Não Tem Cor - Atividades e Apoio Comunitário"
             initial={{ opacity: 0, scale: 1.02 }}
             animate={{ opacity: 1, scale: 1.08 }}
             exit={{ opacity: 0, scale: 1.05 }}
@@ -80,11 +78,18 @@ export default function HeroSection() {
               opacity: { duration: 1.5, ease: "easeInOut" },
               scale: { duration: 5.5, ease: "easeOut" },
             }}
-            style={{
-              objectPosition: "center",
-            }}
-            className="h-full w-full object-cover"
-          />
+            className="absolute inset-0 h-full w-full"
+          >
+            <picture className="block h-full w-full">
+              <source media="(min-width: 1024px)" srcSet={HERO_IMAGES[currentImageIndex]} />
+              <img
+                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                alt="ONG Respeito Não Tem Cor - Atividades e Apoio Comunitário"
+                style={{ objectPosition: "center" }}
+                className="h-full w-full object-cover"
+              />
+            </picture>
+          </motion.div>
         </AnimatePresence>
       </div>
 
