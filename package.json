@@ -4,9 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run validate:legacy-system",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "validate:legacy-system": "node scripts/validate-legacy-system-routes.mjs",
+    "test:legacy-validator": "node scripts/test-legacy-validator.mjs",
     "fix:h2": "node scripts/fix_h2.js"
   },
   "dependencies": {

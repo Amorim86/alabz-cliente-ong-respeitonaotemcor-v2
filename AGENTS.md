@@ -12,6 +12,17 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Regras Absolutas e Inegociáveis de Operação
 
+## 🚨 CRITICAL IMMUTABLE INFRASTRUCTURE — ONG LEGACY /sistema
+
+- **SISTEMA EM PRODUÇÃO REAL**: O sistema PHP legado da ONG Respeito Não Tem Cor está ativo em produção, utilizado por usuários e gestores reais com dados em tempo real.
+- **HOMOLOGAÇÃO DEFINITIVA**: O fluxo de autenticação, login, navegação, cookies de sessão (`PHPSESSID`) e rotas para `/sistema` e `/login.php` foi 100% homologado.
+- **ROTAS RESERVADAS**: As rotas `/sistema`, `/sistema/*` e `/login.php` pertencem **exclusivamente** ao sistema legado PHP hospedado na Locaweb (`respeito1.websiteseguro.com`).
+- **PROIBIÇÃO DE ALTERAÇÃO**: Modificar as regras do `vercel.json` correspondentes a essas rotas pode PARAR imediatamente a operação da ONG.
+- **SEM AUTORIZAÇÃO IMPLÍCITA**: Nenhum agente de IA possui autorização implícita para alterar essas regras.
+- **PEDIDOS GENÉRICOS NÃO AUTORIZAM ALTERAÇÃO**: Tarefas de refatoração geral, "limpeza", "simplificação", "modernização", "migração para Next.js", "normalização de URLs", ou reformulação visual do site institucional **NÃO INCLUEM** autorização para alterar o contrato do sistema legado.
+- **PARADA OBRIGATÓRIA**: Se uma tarefa exigir modificação desse contrato, o agente DEVE PARAR IMEDIATAMENTE e solicitar autorização explícita do usuário.
+- **VETO DE CORREÇÃO AUTOMÁTICA**: Nunca altere automaticamente as rotas do legado para tentar "corrigir" supostos problemas sem aprovação prévia e explícita do usuário.
+
 ## Deploy de Infraestrutura
 É estritamente proibido usar a Vercel CLI ou tentar criar/nomear projetos diretamente na Vercel. O fluxo de deploy é 100% focado no repositório.
 
