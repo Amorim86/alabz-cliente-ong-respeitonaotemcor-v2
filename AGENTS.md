@@ -22,6 +22,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 - **PEDIDOS GENÉRICOS NÃO AUTORIZAM ALTERAÇÃO**: Tarefas de refatoração geral, "limpeza", "simplificação", "modernização", "migração para Next.js", "normalização de URLs", ou reformulação visual do site institucional **NÃO INCLUEM** autorização para alterar o contrato do sistema legado.
 - **PARADA OBRIGATÓRIA**: Se uma tarefa exigir modificação desse contrato, o agente DEVE PARAR IMEDIATAMENTE e solicitar autorização explícita do usuário.
 - **VETO DE CORREÇÃO AUTOMÁTICA**: Nunca altere automaticamente as rotas do legado para tentar "corrigir" supostos problemas sem aprovação prévia e explícita do usuário.
+- **PROTEÇÃO GITHUB**: A branch main é protegida por GitHub Ruleset e qualquer alteração de produção deve passar por Pull Request e obrigatoriamente ser aprovada pelo status check `Validate Immutable Legacy Routes`.
 
 ## Deploy de Infraestrutura
 É estritamente proibido usar a Vercel CLI ou tentar criar/nomear projetos diretamente na Vercel. O fluxo de deploy é 100% focado no repositório.
@@ -34,24 +35,38 @@ Quaisquer novas skills criadas a partir de agora na Alabz devem seguir estritame
 
 Skills internas, utilitárias ou embutidas que são executadas silenciosamente de forma automatizada por outras skills (como as ferramentas de checklist em cascata) não devem receber os prefixos e devem ser registradas na lista de exclusão do arquivo `.agents/skills.json` sob a chave `"exclude"`, impedindo que poluam o menu de comandos slash.
 
-## Controle de Versão e Fluxo de Deploy (Homologação vs. Produção)
-Antes de executar qualquer operação de commit ou push, você é ESTRITAMENTE PROIBIDO de agir por conta própria. A regra de exibição de "VersionBadge" na UI está DEFINITIVAMENTE REVOGADA; não crie ou exiba elementos visuais de versão na interface.
+## Controle de Versão e Fluxo Automático de Publicação (Main Protegida)
+O fluxo direto de commit e publicação na `main` (`git push origin main`) foi **EXTINTO** e **PROIBIDO**. O GitHub agora possui um Branch Ruleset ATIVO que exige Pull Request obrigatório, impedindo pushes diretos na `main`.
 
-Toda vez que o usuário solicitar de forma genérica o deploy/envio do código, você DEVE apresentar o menu de opções abaixo. **EXCEÇÃO ABSOLUTA: SE O USUÁRIO MANDAR EXPLICITAMENTE O COMANDO "push main"**, VOCÊ DEVE IGNORAR O MENU DE CONFIRMAÇÃO E EXECUTAR O COMMIT E PUSH DIRETAMENTE PARA A MAIN IMEDIATAMENTE (só pare se houver um risco flagrante de quebra).
+A regra de exibição de "VersionBadge" na UI permanece DEFINITIVAMENTE REVOGADA; não crie ou exiba elementos visuais de versão na interface.
 
-### Regra de Execução Atômica ("push main" sem atrito de múltiplos cliques)
-Para evitar que o usuário precise autorizar 4 passos sequenciais na IDE (ex: `git status` -> `npm build` -> `git add/commit` -> `git push`):
-1. **Comando Encadeado Único:** Ao receber "push main", o agente DEVE compor e executar toda a esteira em uma **única chamada de ferramenta atômica** encadeada (ex: `cmd /c "git add . && git commit -m \"...\" && git push origin main"`).
-2. **Sem Perguntas Intermediárias:** Não faça perguntas sobre branches de release ou menus de confirmação.
-3. **Relatório Pós-Push:** Assim que a chamada única terminar com sucesso, informe no chat a mensagem utilizada e o hash gerado.
+O agente NÃO DEVE fazer commit/push espontaneamente. A intenção de publicar deve ser explícita. No entanto, se o usuário fornecer comandos explícitos, o agente deve assumir a complexidade de forma invisível.
 
-1. **🔵 Apenas Commit Local (Sem Push):** Realiza apenas o commit na sua branch local para salvar o progresso atual.
-2. **🟡 Atualizar Homologação (Vercel Preview):** Envia o código exclusivamente para a branch `homologacao` para validação no preview do cliente.
-3. **🟢 Push para a Main (Vercel Production):** Envia diretamente para a rota principal (branch `main`), acionando o deploy oficial.
+### Fluxo Automático de Publicação (Gatilhos: "push" ou "push main")
+Quando o usuário disser claramente "push" ou "push main", isso NÃO significa push direto, mas sim **PUBLICAÇÃO AUTOMÁTICA EM PRODUÇÃO PELO FLUXO PROTEGIDO**. O agente NÃO deve apresentar menus adicionais nem exigir que o usuário lembre comandos Git.
 
-Nota: Para salvamentos intermediários rotineiros, faça-os localmente sem interromper perguntando por deploy. Se precisar do menu, aguarde a escolha do usuário e execute estritamente a opção selecionada.
+O fluxo que você DEVE executar autonomamente:
+1. **Status**: Executar `git status` e identificar a branch atual.
+2. **Checklists Pré-Deploy**: Executar TODOS os checklists (SEO, responsividade, build, assets, integridade visual, media) definidos neste AGENTS.md.
+3. **Validação Obrigatória**: Executar obrigatoriamente `npm run validate:legacy-system`, `npm run test:legacy-validator` e `npm run build`. Se qualquer validação falhar: PARAR. NÃO publicar. Informar o erro. Nunca tente contornar a proteção.
+4. **Isolamento de Branch**: Se estiver trabalhando na `main`, crie uma branch de trabalho (ex: `chore/descricao`, `feat/descricao`), PRESERVANDO todas as alterações locais e commits locais ainda não publicados (crie a branch a partir do HEAD atual). NUNCA descarte trabalho nem resete sem necessidade.
+5. **Stage Seletivo**: Fazer stage (`git add`) SOMENTE dos arquivos pertinentes à tarefa.
+6. **Commit Descritivo**: Criar commit com mensagem clara e detalhada.
+7. **Push da Branch**: Fazer push SOMENTE da branch de trabalho. O agente NUNCA deve tentar push direto para origin main.
+8. **Pull Request Automático**: Abrir PR da branch de trabalho para a `main` (usar GitHub CLI `gh pr create` etc.).
+9. **Status Check**: Aguardar o check obrigatório `Validate Immutable Legacy Routes` ficar em status `SUCCESS`. Se a branch ficar behind a main, atualizar de forma segura e revalidar.
+10. **Merge Automático**: Como não há exigência de aprovações (approvals = 0), após o SUCCESS dos checks, faça o merge do PR autonomamente. O pedido de "push" já engloba a aprovação de merge.
+11. **Limpeza**: Após o merge, faça o checkout para a `main`, puxe a versão mais atual (`pull --ff-only`), exclua as branches locais e remotas da tarefa e garanta a working tree limpa.
+12. **Relatório**: Ao final, relate ao usuário: a branch utilizada, mensagem de commit, hash, número/URL do PR, resultado do `Validate Immutable Legacy Routes`, confirmação do merge, hash final da main e o git status final.
 
-Ao realizar o commit, você OBRIGATORIAMENTE deve redigir uma mensagem descritiva (commit message) clara e detalhada sobre o que foi construído ou alterado. Após o push, você DEVE me informar no chat a mensagem utilizada e o hash exato do commit gerado para fins de rastreabilidade na esteira.
+### Comandos com Significado Específico
+Se o usuário pedir:
+- **"commit local"**: apenas execute o commit local, sem publicação.
+- **"homologação"**: mantenha o fluxo/envio exclusivamente para a branch de homologação.
+- **"não publique"**: não faça push.
+- **"abra PR mas não faça merge"**: crie a branch, PR, aguarde os checks e pare, não faça o merge.
+
+**PROIBIÇÕES ABSOLUTAS**: O agente nunca deve fazer push direto para a `main`, usar `--force` na `main`, tentar bypass do Ruleset, alterar a configuração do validador legado no Github ou alterar o `vercel.json` para facilitar a passagem nos checks de proteção. Trate todas as proteções como inegociáveis. Investigue falhas sem remover as travas.
 
 
 
@@ -98,8 +113,10 @@ Sempre que subir o ambiente local de um projeto, você DEVE expor o servidor par
 
 ## Arquitetura de Features e Roteamento
 
-### Centralização
-Use estritamente o `next.config.ts` para qualquer regra de roteamento. NUNCA crie ou edite `vercel.json`.
+### Centralização para Novas Rotas e Contrato Legado Intocável
+Para **NOVAS** rotas do site institucional, use a arquitetura Next.js apropriada (como `next.config.ts`).
+No entanto, o **`vercel.json` atual é uma EXCEÇÃO CRÍTICA EXISTENTE**. Ele contém o contrato homologado do sistema legado (`/sistema`, `/sistema/*`, `/login.php`). Estas regras DEVEM continuar no `vercel.json`.
+NUNCA mova essas regras legadas para o `next.config.ts`, `middleware.ts` ou `proxy.ts`. NUNCA as reescreva, normalize, simplifique ou remova. Novas rotas institucionais NÃO autorizam alterações nesse contrato.
 
 ### Proxy Invisível (Rewrites)
 Para rodar projetos Vercel separados como se fossem pastas do domínio principal (ex: app externo no `alabz.com.br/tableau`), use obrigatoriamente a função `rewrites()` para mascarar a URL.
