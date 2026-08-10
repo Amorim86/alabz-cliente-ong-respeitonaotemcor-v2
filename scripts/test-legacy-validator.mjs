@@ -167,6 +167,82 @@ if (res10.valid !== false) {
 }
 console.log('✅ TESTE 10 PASSOU: Matcher interceptando /login.php no middleware causou FALHA corretamente.');
 
+// Teste 11: Redirect catch-all conflitante -> FAIL
+const mock11 = JSON.parse(JSON.stringify(initialVercelObj));
+if (!mock11.redirects) mock11.redirects = [];
+mock11.redirects.unshift({ source: '/(.*)', destination: '/nova' });
+if (runTestWithTmpFile(mock11) !== false) {
+  console.error('❌ FAIL Teste 11: Redirect catch-all conflitante deveria ter falhado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 11 PASSOU: Redirect catch-all conflitante causou FALHA corretamente.');
+
+// Teste 12: Rewrite conflitante específico antes de /sistema/(.*) -> FAIL
+const mock12 = JSON.parse(JSON.stringify(initialVercelObj));
+const idx = mock12.rewrites.findIndex(r => r.source === '/sistema/(.*)');
+mock12.rewrites.splice(idx, 0, { source: '/sistema/admin', destination: '/interceptado' });
+if (runTestWithTmpFile(mock12) !== false) {
+  console.error('❌ FAIL Teste 12: Rewrite /sistema/admin antes do catch-all do sistema deveria ter falhado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 12 PASSOU: Rewrite /sistema/admin antes do catch-all do sistema causou FALHA corretamente.');
+
+// Teste 13: Duplicar rewrite do legado -> FAIL
+const mock13 = JSON.parse(JSON.stringify(initialVercelObj));
+mock13.rewrites.push({ source: '/login.php', destination: '/fake' });
+if (runTestWithTmpFile(mock13) !== false) {
+  console.error('❌ FAIL Teste 13: Duplicar rewrite /login.php deveria ter falhado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 13 PASSOU: Duplicar rewrite /login.php causou FALHA corretamente.');
+
+// Teste 14: Duplicar redirect do legado -> FAIL
+const mock14 = JSON.parse(JSON.stringify(initialVercelObj));
+mock14.redirects.push({ source: '/sistema', destination: '/fake', statusCode: 308 });
+if (runTestWithTmpFile(mock14) !== false) {
+  console.error('❌ FAIL Teste 14: Duplicar redirect /sistema deveria ter falhado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 14 PASSOU: Duplicar redirect /sistema causou FALHA corretamente.');
+
+// Teste 15: Rewrite catch-all após as regras do legado -> PASS
+const mock15 = JSON.parse(JSON.stringify(initialVercelObj));
+mock15.rewrites.push({ source: '/(.*)', destination: '/app' });
+if (runTestWithTmpFile(mock15) !== true) {
+  console.error('❌ FAIL Teste 15: Catch-all DEPOIS do legado não deveria falhar!');
+  process.exit(1);
+}
+console.log('✅ TESTE 15 PASSOU: Catch-all após regras do legado foi PERMITIDO (respeita a precedência).');
+
+// Teste 16: Rewrite não relacionado antes do legado (ex: /blog) -> PASS
+const mock16 = JSON.parse(JSON.stringify(initialVercelObj));
+mock16.rewrites.unshift({ source: '/blog', destination: '/novo-blog' });
+if (runTestWithTmpFile(mock16) !== true) {
+  console.error('❌ FAIL Teste 16: Rewrite não relacionado antes do legado não deveria falhar!');
+  process.exit(1);
+}
+console.log('✅ TESTE 16 PASSOU: Rewrite /blog antes do legado foi PERMITIDO.');
+
+// Teste 17: Regras do legado embaralhadas mas ainda válidas e não conflitantes -> PASS
+const mock17 = JSON.parse(JSON.stringify(initialVercelObj));
+const loginRew = mock17.rewrites.find(r => r.source === '/login.php');
+mock17.rewrites = mock17.rewrites.filter(r => r.source !== '/login.php');
+mock17.rewrites.unshift(loginRew);
+if (runTestWithTmpFile(mock17) !== true) {
+  console.error('❌ FAIL Teste 17: Alterar ordem entre regras independentes do legado não deveria falhar!');
+  process.exit(1);
+}
+console.log('✅ TESTE 17 PASSOU: Regras independentes do legado reordenadas foram PERMITIDAS.');
+
+// Teste 18: Express route param match conflitante /:slug* -> FAIL
+const mock18 = JSON.parse(JSON.stringify(initialVercelObj));
+mock18.rewrites.unshift({ source: '/:slug*', destination: '/fallback' });
+if (runTestWithTmpFile(mock18) !== false) {
+  console.error('❌ FAIL Teste 18: Express-style catch-all conflitante (/:slug*) deveria ter falhado!');
+  process.exit(1);
+}
+console.log('✅ TESTE 18 PASSOU: Rewrite catch-all (/:slug*) causou FALHA corretamente.');
+
 // -------------------------------------------------------------
 // VERIFICAÇÃO FINAL DE IMUTABILIDADE DO VERCEL.JSON REAL
 // -------------------------------------------------------------
@@ -176,5 +252,5 @@ if (initialVercelContent !== finalVercelContent) {
   process.exit(1);
 }
 console.log('\n🔒 COMPROVAÇÃO DE ISOLAMENTO: O arquivo vercel.json real permaneceu 100% INTATO e SOMENTE LEITURA durante todos os testes!');
-console.log('🎉 TODOS OS 10 CASOS DE TESTE PASSARAM COM SUCESSO!\n');
+console.log('🎉 TODOS OS 18 CASOS DE TESTE PASSARAM COM SUCESSO!\n');
 process.exit(0);

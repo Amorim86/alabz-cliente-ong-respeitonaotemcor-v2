@@ -81,20 +81,89 @@ export function validateLegacySystem(vercelConfig, routingFilesMap = null) {
     }
   }
 
-  // Invariante 7 & 8: Nenhuma regra conflitante ou catch-all anterior
-  const legacySources = new Set(['/sistema', '/sistema/', '/sistema/(.*)', '/login.php']);
-  const rewritesBeforeLegacy = [];
-
-  for (const r of rewrites) {
-    if (legacySources.has(r.source)) {
-      break; // Chegou nas regras do legado
+  // Helper para identificar conflitos
+  function routeCanMatch(sourcePattern, protectedPath) {
+    if (sourcePattern === protectedPath) return true;
+    if (['/(.*)', '(.*)', '/:path*', '/:slug*', '/(.*)/'].includes(sourcePattern)) return true;
+    
+    // Qualquer regra que comece com /sistema/ e não seja o próprio root intercepta o wildcard
+    if (protectedPath === '/sistema/(.*)' && sourcePattern.startsWith('/sistema/') && sourcePattern !== '/sistema/') {
+      return true;
     }
-    rewritesBeforeLegacy.push(r);
+
+    let regexStr = sourcePattern
+      .replace(/\/:[a-zA-Z0-9_]+\*/g, '(?:/.*)?')
+      .replace(/:[a-zA-Z0-9_]+/g, '[^/]+')
+      .replace(/\(\.\*\)/g, '.*');
+      
+    if (!regexStr.startsWith('^')) regexStr = '^' + regexStr;
+    if (!regexStr.endsWith('$') && !regexStr.endsWith('.*') && !regexStr.endsWith(')?')) regexStr = regexStr + '$';
+
+    try {
+      const re = new RegExp(regexStr);
+      const testCases = {
+        '/sistema': ['/sistema'],
+        '/sistema/': ['/sistema/'],
+        '/sistema/(.*)': ['/sistema/abc', '/sistema/index.php', '/sistema/admin'],
+        '/login.php': ['/login.php']
+      };
+      const casesToTest = testCases[protectedPath] || [protectedPath];
+      for (const tc of casesToTest) {
+        if (re.test(tc)) return true;
+      }
+    } catch (e) {
+      // Ignorar erros e falhar conservadoramente apenas para defaults
+    }
+    return false;
   }
 
-  for (const r of rewritesBeforeLegacy) {
-    if (r.source === '/(.*)' || r.source === '(.*)' || r.source === '/:path*' || r.source === '/sistema/:path*') {
-      return { valid: false, error: `Foi detectada uma regra de rewrite anterior (${r.source}) que interfere no roteamento do sistema legado.` };
+  // Checar duplicatas nas regras do legado
+  const legacySources = new Set(['/sistema', '/sistema/', '/sistema/(.*)', '/login.php']);
+  
+  const seenRedirects = new Set();
+  for (const r of redirects) {
+    if (legacySources.has(r.source)) {
+      if (seenRedirects.has(r.source)) {
+        return { valid: false, error: `Definição duplicada de redirect para a rota legada '${r.source}'.` };
+      }
+      seenRedirects.add(r.source);
+    }
+  }
+
+  const seenRewrites = new Set();
+  for (const r of rewrites) {
+    if (legacySources.has(r.source)) {
+      if (seenRewrites.has(r.source)) {
+        return { valid: false, error: `Definição duplicada de rewrite para a rota legada '${r.source}'.` };
+      }
+      seenRewrites.add(r.source);
+    }
+  }
+
+  // Invariante 7 & 8: Precedência - Nenhuma regra conflitante antes das regras do legado.
+  const pendingLegacyRewrites = new Set(['/sistema/', '/sistema/(.*)', '/login.php']);
+  for (const r of rewrites) {
+    if (pendingLegacyRewrites.has(r.source)) {
+      pendingLegacyRewrites.delete(r.source);
+    } else {
+      for (const pending of pendingLegacyRewrites) {
+        if (routeCanMatch(r.source, pending)) {
+          return { valid: false, error: `Foi detectada uma regra de rewrite anterior (${r.source}) que interfere no roteamento do sistema legado (${pending}).` };
+        }
+      }
+    }
+  }
+
+  const pendingLegacyRedirects = new Set(['/sistema']);
+  for (const r of redirects) {
+    if (pendingLegacyRedirects.has(r.source)) {
+      pendingLegacyRedirects.delete(r.source);
+    } else {
+      for (const pending of pendingLegacyRedirects) {
+        if (routeCanMatch(r.source, pending)) {
+          return { valid: false, error: `Foi detectada uma regra de redirect anterior (${r.source}) que interfere no roteamento do sistema legado (${pending}).` };
+        }
+      }
     }
   }
 
