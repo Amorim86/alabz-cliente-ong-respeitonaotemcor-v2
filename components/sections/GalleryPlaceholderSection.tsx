@@ -66,7 +66,7 @@ export const GALLERY_ITEMS = [
     category: "Comunidade",
   },
   {
-    src: "/images/comunidade-livro-solidario.webp",
+    src: "/images/roda_livro-v2.webp",
     title: "Livro Solidário",
     text: "Iniciativa comunitária para incentivo à leitura e circulação do conhecimento.",
     category: "Comunidade",
@@ -105,8 +105,8 @@ export const GALLERY_ITEMS = [
   // ── REDE DE APOIO ────────────────────────────────────────────────────────
   {
     src: "/images/rede-de-apoio.webp",
-    title: "Rede de Apoio",
-    text: "Acolhimento, escuta e fortalecimento comunitário para mulheres e famílias.",
+    title: "Projeto Amélias Jamais",
+    text: "Grupo terapêutico dedicado a ouvir, acolher e empoderar mulheres vítimas de violência doméstica e relacionamentos abusivos, promovendo autonomia, saúde psicológica, consciência de direitos e a superação da violência contra a mulher.",
     category: "Rede de Apoio",
   },
   {
@@ -382,21 +382,53 @@ export default function GalleryPlaceholderSection() {
 
 
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isInView, setIsInView] = useState(false);
+
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isFullscreen) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
 
-      if (e.key === "ArrowRight") goToNext();
-      if (e.key === "ArrowLeft") goToPrev();
-      if (e.key === "Escape") setIsFullscreen(false);
-    };
-
-    if (isFullscreen) {
-      window.addEventListener("keydown", handleKeyDown);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeElement = document.activeElement;
+      const isInputActive =
+        activeElement &&
+        (activeElement.tagName === "INPUT" ||
+          activeElement.tagName === "TEXTAREA" ||
+          (activeElement as HTMLElement).isContentEditable);
+
+      if (isInputActive) return;
+
+      if (isFullscreen || isInView) {
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          goToNext();
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          goToPrev();
+        }
+      }
+
+      if (isFullscreen && e.key === "Escape") {
+        setIsFullscreen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [goToNext, goToPrev, isFullscreen]);
+  }, [goToNext, goToPrev, isFullscreen, isInView]);
 
 
 
@@ -449,13 +481,10 @@ export default function GalleryPlaceholderSection() {
   return (
 
     <section
-
+      ref={sectionRef}
       className="laptop-compact relative flex w-full flex-col justify-between overflow-hidden bg-[#F7F4EA] py-4 md:py-6 lg:h-[calc(100dvh-var(--header-height))] lg:min-h-0 lg:py-4"
-
       id="galeria"
-
       tabIndex={-1}
-
     >
 
       <div className="mx-auto flex h-full w-full max-w-[1400px] flex-col justify-between px-4 md:px-12">
@@ -659,10 +688,8 @@ export default function GalleryPlaceholderSection() {
 
                       </h3>
 
-                      <p className="text-xs md:text-sm text-white/85 line-clamp-2">
-
+                      <p className="text-xs md:text-sm text-white/85 leading-relaxed">
                         {item.text}
-
                       </p>
 
                     </div>

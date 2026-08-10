@@ -11,10 +11,10 @@ const PROJETOS = [
     category: "SAÚDE E ACOLHIMENTO",
     icon: HeartPulse,
     items: [
-      "Atendimento psicológico e psicopedagógico",
-      "Assistência social (entrega de alimentos, agasalhos)",
       "Assistência ao imigrante",
       "Assistência jurídica",
+      "Assistência social (entrega de alimentos, agasalhos)",
+      "Atendimento psicológico e psicopedagógico",
       "Nutricionista e grupos terapêuticos"
     ],
     image: "/images/orientacao-juridica.webp",
@@ -23,10 +23,10 @@ const PROJETOS = [
     category: "PROTEÇÃO SOCIAL",
     icon: ShieldCheck,
     items: [
-      "Distribuição de cestas básicas",
       "Acolhimento e suporte familiar",
       "Apoio a mulheres vítimas de violência doméstica",
-      "Atendimento emergencial e doações"
+      "Atendimento emergencial e doações",
+      "Distribuição de cestas básicas"
     ],
     image: "/images/protecao-social.webp",
   },
@@ -35,20 +35,20 @@ const PROJETOS = [
     icon: BookOpenCheck,
     items: [
       "Acompanhamento infantil",
-      "Roda Livros",
       "Aulas de canto",
+      "Aulas de português para imigrantes",
       "Jiu-jitsu para crianças",
-      "Português para imigrantes"
+      "Roda Livros"
     ],
-    image: "/images/educacao-roda-livro.webp",
+    image: "/images/roda_livro-v2.webp",
   },
   {
     category: "SUSTENTABILIDADE",
     icon: Recycle,
     items: [
       "Brechó Solidário",
-      "Varal Solidário",
-      "Curadoria e reutilização consciente"
+      "Curadoria e reutilização consciente",
+      "Varal Solidário"
     ],
     image: "/images/sustentabilidade-brecho.webp",
   },

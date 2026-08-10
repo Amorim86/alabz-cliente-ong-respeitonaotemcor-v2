@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const HOURS = [
   { label: "Segunda a sexta", value: "08h — 18h" },
-  { label: "Sábado", value: "Atendimento sob orientação" },
+  { label: "Sábado", value: "08h — 16h" },
   { label: "Domingos/Feriados", value: "Fechado" },
 ];
 
