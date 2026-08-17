@@ -22,7 +22,7 @@ export const APP_VERSION = 'v2';
 export const metadata: Metadata = {
   metadataBase: new URL("https://respeito.org.br"),
   title: "ONG Respeito Não Tem Cor",
-  description: "Acolhimento, igualdade racial e apoio comunitário",
+  description: "Dignidade sem distinção",
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "ONG Respeito Não Tem Cor",
-    description: "Acolhimento, igualdade racial e apoio comunitário",
+    description: "Dignidade sem distinção",
     url: "https://respeito.org.br",
     siteName: "ONG Respeito Não Tem Cor",
     images: [
