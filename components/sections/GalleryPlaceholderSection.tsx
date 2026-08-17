@@ -24,13 +24,13 @@ export const GALLERY_ITEMS = [
   {
     src: "/images/escuta-psicologica.webp",
     title: "Escuta psicológica",
-    text: "Cena que simboliza o atendimento psicológico oferecido pela ONG, com foco na escuta, no cuidado emocional e no fortalecimento da saúde mental.",
+    text: "Atendimento psicológico clínico focado no acolhimento, na escuta qualificada, no suporte à saúde mental e no fortalecimento emocional.",
     category: "Acolhimento",
   },
   {
     src: "/images/orientacao-juridica.webp",
     title: "Orientação jurídica",
-    text: "Registro simbólico do atendimento jurídico, representando momentos de orientação e esclarecimento sobre direitos, documentos e demandas familiares.",
+    text: "Atendimento jurídico com orientação e esclarecimento sobre direitos, documentos e demandas familiares da comunidade.",
     category: "Acolhimento",
   },
   {
@@ -42,32 +42,32 @@ export const GALLERY_ITEMS = [
   // ── OFICINAS ─────────────────────────────────────────────────────────────
   {
     src: "/images/oficina-jiu-jitsu.webp",
-    title: "Oficina de Jiu-Jitsu",
+    title: "Curso de Jiu-Jitsu",
     text: "Prática esportiva e disciplina para o desenvolvimento integral de crianças e jovens.",
     category: "Oficinas",
   },
   {
     src: "/images/jiu-jitsu-infantil.webp",
     title: "Jiu-jitsu infantil",
-    text: "Registro de uma aula de jiu-jitsu para crianças, mostrando a prática em grupo e o desenvolvimento de disciplina, foco, coordenação e convivência.",
+    text: "Prática em grupo de jiu-jitsu para crianças, promovendo disciplina, foco, coordenação e convivência.",
     category: "Oficinas",
   },
   {
     src: "/images/oficina-aula.webp",
-    title: "Acompanhamento Infantil",
-    text: "Atividades socioeducativas e reforço escolar para crianças e jovens.",
+    title: "Cursos e Palestras",
+    text: "Cursos e palestras variadas voltados ao aprendizado, desenvolvimento e integração da comunidade.",
     category: "Oficinas",
   },
   // ── COMUNIDADE ───────────────────────────────────────────────────────────
   {
     src: "/images/atendimento-social.webp",
     title: "Atendimento social",
-    text: "Imagem que representa o atendimento social realizado pela ONG junto às famílias e pessoas em situação de vulnerabilidade.",
+    text: "Atendimento social dedicado ao acompanhamento e suporte contínuo de famílias e pessoas em situação de vulnerabilidade.",
     category: "Comunidade",
   },
   {
     src: "/images/roda_livro-v2.webp",
-    title: "Livro Solidário",
+    title: "Roda Livro",
     text: "Iniciativa comunitária para incentivo à leitura e circulação do conhecimento.",
     category: "Comunidade",
   },

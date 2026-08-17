@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: "ONG Respeito Não Tem Cor",
-  subtitle: "Acolhimento, igualdade racial e apoio comunitário",
+  subtitle: "Dignidade sem distinção",
   description:
     "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
   crm: "",

@@ -36,7 +36,7 @@ const PROJETOS = [
     items: [
       "Acompanhamento infantil",
       "Aulas de canto",
-      "Aulas de português para imigrantes",
+      "Aulas de Português para imigrantes",
       "Jiu-jitsu para crianças",
       "Roda Livros"
     ],
