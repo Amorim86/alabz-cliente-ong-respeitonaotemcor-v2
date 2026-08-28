@@ -198,8 +198,8 @@ export default function AboutFounderSection() {
           className="founder-scene relative hidden overflow-visible lg:col-span-5 lg:block lg:min-h-[calc(100dvh-var(--header-height))] lg:self-stretch"
         >
           <motion.div
-            className="absolute inset-x-0 bottom-0 mx-auto flex h-full max-h-[calc(100dvh-var(--header-height))] w-full items-end justify-center origin-bottom"
-            style={{ x: isMobile ? 0 : portraitX, y: isMobile ? 0 : portraitY, scale: isMobile ? 1 : 1.25 }}
+            className="absolute inset-x-0 bottom-0 mx-auto flex h-full max-h-[calc(100dvh-var(--header-height))] w-full items-end justify-center origin-bottom pt-4 lg:pt-8"
+            style={{ x: isMobile ? 0 : portraitX, y: isMobile ? 0 : portraitY }}
           >
             <div className="relative h-full w-full max-w-[760px] origin-bottom">
               <AnimatePresence initial={false} mode="wait">
