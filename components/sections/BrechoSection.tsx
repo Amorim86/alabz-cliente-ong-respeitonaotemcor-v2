@@ -82,7 +82,7 @@ export default function BrechoSection() {
           {/* Visual Container with smooth blend */}
           <div className="relative h-[300px] overflow-hidden rounded-2xl border border-[var(--color-primary)]/15 shadow-2xl md:h-[380px] lg:col-span-6 lg:h-full lg:max-h-[380px] lg:min-h-[300px]">
             <img
-              src="/images/brecho-roupas.webp"
+              src="/images/brecho.webp"
               alt="Fachada da ONG e Brechó"
               className="h-full w-full object-cover"
               loading="lazy"

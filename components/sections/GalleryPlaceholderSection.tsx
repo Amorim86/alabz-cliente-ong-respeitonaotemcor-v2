@@ -84,7 +84,7 @@ export const GALLERY_ITEMS = [
     category: "Comunidade",
   },
   {
-    src: "/images/brecho-roupas.webp",
+    src: "/images/brecho.webp",
     title: "Brechó Solidário",
     text: "Curadoria e comercialização acessível de roupas e itens que apoiam diretamente as ações da ONG.",
     category: "Comunidade",
