@@ -50,7 +50,7 @@ const PROJETOS = [
       "Curadoria e reutilização consciente",
       "Varal Solidário"
     ],
-    image: "/images/sustentabilidade-brecho.webp",
+    image: "/images/varal-solidario.webp",
   },
 ];
 
