@@ -45,22 +45,9 @@ export default function HeroSection() {
       onPointerLeave={handlePointerLeave}
       className="relative flex min-h-dvh w-full flex-col justify-center overflow-hidden bg-[#081D42] text-[#F7F4EA]"
     >
-      {/* Background Mobile Dedicado (hero-mobile.webp) */}
-      <div className="absolute inset-0 z-0 block lg:hidden overflow-hidden">
-        <img
-          src="/images/hero-mobile-v2.webp"
-          alt="ONG Respeito Não Tem Cor Mobile"
-          className="h-full w-full object-cover object-top"
-          loading="eager"
-          fetchPriority="high"
-        />
-        {/* Overlay escuro em mobile para manter leitura nítida do texto */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#081D42] via-[#081D42]/80 to-[#081D42]/40 pointer-events-none" />
-      </div>
-
-      {/* Background Carousel Desktop com Efeito Ken Burns & Parallax */}
+      {/* Background Hero Responsivo Unificado com Parallax & Ken Burns */}
       <div 
-        className="absolute inset-0 z-0 hidden lg:block overflow-hidden transition-transform duration-700 ease-out"
+        className="absolute inset-0 z-0 overflow-hidden transition-transform duration-700 ease-out"
         style={{
           transform: `translate3d(${parallax.x}px, ${parallax.y}px, 0)`,
         }}
@@ -78,16 +65,21 @@ export default function HeroSection() {
             className="absolute inset-0 h-full w-full"
           >
             <picture className="block h-full w-full">
+              <source media="(max-width: 1023px)" srcSet="/images/hero-mobile-v2.webp" />
               <source media="(min-width: 1024px)" srcSet={HERO_IMAGES[currentImageIndex]} />
               <img
-                src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                src={HERO_IMAGES[currentImageIndex]}
                 alt="ONG Respeito Não Tem Cor - Atividades e Apoio Comunitário"
-                style={{ objectPosition: "center" }}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-top lg:object-center"
+                loading="eager"
+                fetchPriority="high"
               />
             </picture>
           </motion.div>
         </AnimatePresence>
+
+        {/* Overlay escuro dedicado para mobile mantendo contraste e nitidez do texto */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#081D42] via-[#081D42]/80 to-[#081D42]/40 pointer-events-none block lg:hidden" />
       </div>
 
       {/* Overlays de Fusão / Blend Layout (Gradiente da esquerda para a direita e de baixo para cima) */}

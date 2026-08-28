@@ -121,6 +121,42 @@ export const GALLERY_ITEMS = [
     text: "Movimento idealizado pela Negra Dirce em 2020 para o engajamento na luta antirracista. Presente no calendário oficial do município, a marcha acontece anualmente no segundo sábado de novembro em São José dos Pinhais.",
     category: "Rede de Apoio",
   },
+  {
+    src: "/images/marcha-orgulho-negro-1.webp",
+    title: "Marcha do Orgulho Negro — Concentração",
+    text: "Ponto de encontro inicial para organização dos coletivos, alinhamento dos estandartes e acolhida dos participantes da marcha.",
+    category: "Rede de Apoio",
+  },
+  {
+    src: "/images/marcha-orgulho-negro-2.webp",
+    title: "Marcha do Orgulho Negro — Participantes",
+    text: "Famílias, jovens e voluntários reunidos em caminhada pacífica e vibrante pelas ruas de São José dos Pinhais.",
+    category: "Rede de Apoio",
+  },
+  {
+    src: "/images/marcha-orgulho-negro-3.webp",
+    title: "Marcha do Orgulho Negro — Mobilização e Faixas",
+    text: "Exibição de faixas e mensagens de conscientização social, combate ao racismo e valorização cultural.",
+    category: "Rede de Apoio",
+  },
+  {
+    src: "/images/marcha-orgulho-negro-4.webp",
+    title: "Marcha do Orgulho Negro — Presença Comunitária",
+    text: "Engajamento coletivo e participação ativa da comunidade em defesa dos direitos humanos e da equidade racial.",
+    category: "Rede de Apoio",
+  },
+  {
+    src: "/images/marcha-orgulho-negro-5.webp",
+    title: "Marcha do Orgulho Negro — Vozes e Liderança",
+    text: "Mobilização de lideranças comunitárias e movimentos sociais promovendo conscientização e representatividade.",
+    category: "Rede de Apoio",
+  },
+  {
+    src: "/images/marcha-orgulho-negro-6.webp",
+    title: "Marcha do Orgulho Negro — Celebração e União",
+    text: "Encerramento e momento de integração coletiva reforçando a união e a continuidade das ações afirmativas.",
+    category: "Rede de Apoio",
+  },
 ];
 
 const FULL_WIDTH_PX = 120;
@@ -152,6 +188,27 @@ function Thumbnails({
 }) {
 
   const thumbnailsRef = useRef<HTMLDivElement>(null);
+
+  // Janela fluida de miniaturas: carrega miniaturas visíveis e acumula conforme o usuário navega (zero piscadas)
+  const [loadedThumbs, setLoadedThumbs] = useState<Set<number>>(() => {
+    const initial = new Set<number>();
+    const total = items.length;
+    for (let offset = -4; offset <= 4; offset++) {
+      initial.add((offset + total) % total);
+    }
+    return initial;
+  });
+
+  useEffect(() => {
+    setLoadedThumbs((prev) => {
+      const next = new Set(prev);
+      const total = items.length;
+      for (let offset = -4; offset <= 4; offset++) {
+        next.add((index + offset + total) % total);
+      }
+      return next;
+    });
+  }, [index, items.length]);
 
 
 
@@ -217,7 +274,9 @@ function Thumbnails({
 
       <div className="flex gap-1 h-[60px] md:h-[68px] py-1 mx-auto" style={{ width: "fit-content" }}>
 
-        {items.map((item, i) => (
+        {items.map((item, i) => {
+          const isThumbLoaded = loadedThumbs.has(i);
+          return (
 
           <motion.button
 
@@ -257,7 +316,7 @@ function Thumbnails({
 
             transition={{ duration: 0.3, ease: "easeOut" }}
 
-            className={`relative shrink-0 h-full overflow-hidden rounded-lg border shadow-sm bg-white transition-colors duration-300 ${
+            className={`relative shrink-0 h-full overflow-hidden rounded-lg border shadow-sm bg-[#081D42]/20 transition-colors duration-300 ${
 
               i === index ? "border-[var(--color-secondary)] ring-2 ring-[var(--color-secondary)]/40" : "border-white/20 opacity-70 hover:opacity-100"
 
@@ -265,14 +324,18 @@ function Thumbnails({
 
           >
 
-            <img
-              src={item.src}
-              alt={item.title}
-              className="w-full h-full object-cover pointer-events-none select-none"
-              draggable={false}
-              loading="lazy"
-              decoding="async"
-            />
+            {isThumbLoaded ? (
+              <img
+                src={item.src}
+                alt={item.title}
+                className="w-full h-full object-cover pointer-events-none select-none"
+                draggable={false}
+                loading="lazy"
+                decoding="async"
+              />
+            ) : (
+              <div className="w-full h-full bg-[#081D42]/30" />
+            )}
 
             {i !== index && (
 
@@ -282,7 +345,8 @@ function Thumbnails({
 
           </motion.button>
 
-        ))}
+        );
+        })}
 
       </div>
 
@@ -311,6 +375,27 @@ export default function GalleryPlaceholderSection() {
   const safeIndex = Math.min(Math.max(0, index), GALLERY_ITEMS.length - 1);
 
   const currentItem = GALLERY_ITEMS[safeIndex];
+
+  // Janela fluida de slides do carrossel principal: carrega ativo e adjacentes imediatos, acumulando sem descarregar
+  const [activeWindow, setActiveWindow] = useState<Set<number>>(() => {
+    const initial = new Set<number>();
+    const total = GALLERY_ITEMS.length;
+    for (let offset = -2; offset <= 2; offset++) {
+      initial.add((offset + total) % total);
+    }
+    return initial;
+  });
+
+  useEffect(() => {
+    setActiveWindow((prev) => {
+      const next = new Set(prev);
+      const total = GALLERY_ITEMS.length;
+      for (let offset = -2; offset <= 2; offset++) {
+        next.add((safeIndex + offset + total) % total);
+      }
+      return next;
+    });
+  }, [safeIndex]);
 
 
 
@@ -643,18 +728,24 @@ export default function GalleryPlaceholderSection() {
 
             >
 
-              {GALLERY_ITEMS.map((item, i) => (
+              {GALLERY_ITEMS.map((item, i) => {
+                const shouldLoadSlide = activeWindow.has(i);
+                return (
 
                 <div key={i} className="relative shrink-0 w-full h-full overflow-hidden">
 
-                  <img
-                    src={item.src}
-                    alt={item.title}
-                    className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
-                    draggable={false}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {shouldLoadSlide ? (
+                    <img
+                      src={item.src}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none select-none"
+                      draggable={false}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-[#081D42]/90" />
+                  )}
 
                   {/* Gradient Overlay */}
 
@@ -698,7 +789,8 @@ export default function GalleryPlaceholderSection() {
 
                 </div>
 
-              ))}
+              );
+              })}
 
             </motion.div>
 
