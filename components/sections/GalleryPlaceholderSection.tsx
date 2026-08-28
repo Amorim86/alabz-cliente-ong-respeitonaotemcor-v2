@@ -189,27 +189,6 @@ function Thumbnails({
 
   const thumbnailsRef = useRef<HTMLDivElement>(null);
 
-  // Janela fluida de miniaturas: carrega miniaturas visíveis e acumula conforme o usuário navega (zero piscadas)
-  const [loadedThumbs, setLoadedThumbs] = useState<Set<number>>(() => {
-    const initial = new Set<number>();
-    const total = items.length;
-    for (let offset = -4; offset <= 4; offset++) {
-      initial.add((offset + total) % total);
-    }
-    return initial;
-  });
-
-  useEffect(() => {
-    setLoadedThumbs((prev) => {
-      const next = new Set(prev);
-      const total = items.length;
-      for (let offset = -4; offset <= 4; offset++) {
-        next.add((index + offset + total) % total);
-      }
-      return next;
-    });
-  }, [index, items.length]);
-
 
 
   useEffect(() => {
@@ -274,9 +253,7 @@ function Thumbnails({
 
       <div className="flex gap-1 h-[60px] md:h-[68px] py-1 mx-auto" style={{ width: "fit-content" }}>
 
-        {items.map((item, i) => {
-          const isThumbLoaded = loadedThumbs.has(i);
-          return (
+        {items.map((item, i) => (
 
           <motion.button
 
@@ -324,29 +301,24 @@ function Thumbnails({
 
           >
 
-            {isThumbLoaded ? (
-              <img
-                src={item.src}
-                alt={item.title}
-                className="w-full h-full object-cover pointer-events-none select-none"
-                draggable={false}
-                loading="lazy"
-                decoding="async"
-              />
-            ) : (
-              <div className="w-full h-full bg-[#081D42]/30" />
-            )}
+            <img
+              src={item.src}
+              alt={item.title}
+              className="w-full h-full object-cover pointer-events-none select-none"
+              draggable={false}
+              loading="lazy"
+              decoding="async"
+            />
 
             {i !== index && (
 
-              <div className="absolute inset-0 bg-black/40 hover:bg-black/10 transition-colors" />
+              <div className="absolute inset-0 bg-black/20 hover:bg-black/5 transition-colors" />
 
             )}
 
           </motion.button>
 
-        );
-        })}
+        ))}
 
       </div>
 
@@ -747,9 +719,9 @@ export default function GalleryPlaceholderSection() {
                     <div className="absolute inset-0 bg-[#081D42]/90" />
                   )}
 
-                  {/* Gradient Overlay */}
+                  {/* Gradient Overlay - suave na base para legibilidade do texto com fotos claras e luminosas */}
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent pointer-events-none z-10" />
+                  <div className="absolute inset-x-0 bottom-0 h-3/5 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none z-10" />
 
 
 
@@ -960,7 +932,7 @@ export default function GalleryPlaceholderSection() {
 
             {/* Text at Bottom inside Modal */}
 
-            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 bg-gradient-to-t from-black via-black/80 to-transparent">
+            <div className="absolute bottom-0 left-0 w-full p-6 md:p-8 bg-gradient-to-t from-black/80 via-black/35 to-transparent">
 
               <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-end justify-between gap-4">
 

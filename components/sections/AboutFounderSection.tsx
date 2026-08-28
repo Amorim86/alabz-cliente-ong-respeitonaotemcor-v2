@@ -124,8 +124,8 @@ export default function AboutFounderSection() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_76%_32%,rgba(245,207,0,0.14),transparent_35%),linear-gradient(90deg,#FDFBF7_0%,rgba(253,251,247,0.92)_35%,rgba(253,251,247,0.55)_65%,rgba(253,251,247,0.15)_100%)]" />
       </motion.div>
 
-      <div className="founder-grid relative z-10 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-8 px-4 md:px-12 lg:min-h-[calc(100dvh-var(--header-height))] lg:grid-cols-12 lg:gap-8">
-        <motion.div {...reveal} className="lg:col-span-7 lg:pr-8">
+      <div className="founder-grid relative z-10 mx-auto grid w-full max-w-[1400px] 2xl:max-w-[1600px] grid-cols-1 items-center gap-8 px-4 md:px-12 lg:min-h-[calc(100dvh-var(--header-height))] lg:grid-cols-12 lg:gap-8">
+        <motion.div {...reveal} className="lg:col-span-7 xl:col-span-7 2xl:col-span-6 lg:pr-8">
           <p className="mb-3 font-utility text-[10px] font-bold uppercase tracking-[0.22em] text-[var(--color-accent)] text-center lg:text-left">
             História e Liderança
           </p>
@@ -195,13 +195,13 @@ export default function AboutFounderSection() {
         <motion.div
           {...reveal}
           transition={{ duration: 0.42, ease: "easeOut", delay: 0.08 }}
-          className="founder-scene relative hidden overflow-visible lg:col-span-5 lg:block lg:min-h-[calc(100dvh-var(--header-height))] lg:self-stretch"
+          className="founder-scene relative hidden overflow-visible lg:col-span-5 xl:col-span-5 2xl:col-span-6 lg:block lg:min-h-[calc(100dvh-var(--header-height))] lg:self-stretch"
         >
           <motion.div
             className="absolute inset-x-0 bottom-0 mx-auto flex h-full max-h-[calc(100dvh-var(--header-height))] w-full items-end justify-center origin-bottom pt-4 lg:pt-8"
             style={{ x: isMobile ? 0 : portraitX, y: isMobile ? 0 : portraitY }}
           >
-            <div className="relative h-full w-full max-w-[760px] origin-bottom">
+            <div className="founder-portrait-wrapper relative h-full w-full max-w-[760px] 2xl:max-w-[880px] origin-bottom">
               <AnimatePresence initial={false} mode="wait">
                 <motion.img
                   key={activeImage}
