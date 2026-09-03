@@ -2,70 +2,56 @@
 
 import { useEffect, useState } from "react";
 import { captureTrafficSource } from "@/lib/utm";
-
-const STORAGE_KEY = "alabz_cookies_accepted";
-const CLIENTE_ID = "ong-respeito-nao-tem-cor";
+import {
+  getCookieConsent,
+  setCookieConsent,
+  revokeConsentAndReload,
+  OPEN_BANNER_EVENT,
+} from "@/lib/cookieConsent";
 
 export default function CookieBanner() {
   const [visible, setVisible] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Captura as UTMs e Referrer da URL no carregamento inicial
     captureTrafficSource();
 
-    // Checa se o usuário já aceitou os cookies anteriormente
-    const accepted = localStorage.getItem(STORAGE_KEY);
-    if (!accepted) {
-      // Pequeno delay para a experiência de carregamento ficar mais premium
+    // Checa se o usuário já tomou uma decisão de consentimento anteriormente
+    const consent = getCookieConsent();
+    if (consent === null) {
+      // Delay suave para exibição inicial não agressiva
       const timer = setTimeout(() => {
         setVisible(true);
       }, 1500);
       return () => clearTimeout(timer);
     }
+
+    // Escuta evento para reabertura sob demanda ("Gerenciar cookies")
+    const handleOpenBanner = () => {
+      setVisible(true);
+    };
+
+    window.addEventListener(OPEN_BANNER_EVENT, handleOpenBanner);
+    return () => {
+      window.removeEventListener(OPEN_BANNER_EVENT, handleOpenBanner);
+    };
   }, []);
 
-  const handleAccept = async () => {
-    setLoading(true);
-    try {
-      // Dispara o consentimento para o Firestore
-      const response = await fetch("/api/forms/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          clienteId: CLIENTE_ID,
-          form_type: "cookies_consent",
-          payload: {
-            accepted: true,
-            version: "1.0",
-            source_url: window.location.href,
-          },
-        }),
-      });
-
-      if (!response.ok) {
-        console.warn("[CookieBanner] Erro ao salvar consentimento no Firestore:", response.statusText);
-      }
-    } catch (err) {
-      console.error("[CookieBanner] Falha de rede ao registrar consentimento:", err);
-    } finally {
-      // Independente do sucesso no banco de dados, marcamos o consentimento local 
-      // para não travar a experiência do usuário
-      localStorage.setItem(STORAGE_KEY, "true");
-      setLoading(false);
-      setVisible(false);
-
-      // Dispara o evento de aceitação para inicializar os scripts de rastreamento
-      window.dispatchEvent(new Event("alabz_cookies_accepted"));
-    }
+  const handleAccept = () => {
+    setCookieConsent(true);
+    setVisible(false);
   };
 
   const handleDecline = () => {
-    // Apenas esconde e marca como recusado localmente (sessionOnly ou permanente para não incomodar)
-    localStorage.setItem(STORAGE_KEY, "false");
-    setVisible(false);
+    const previousConsent = getCookieConsent();
+    if (previousConsent === "granted") {
+      // Se o usuário já havia concedido consentimento e agora está recusando/revogando:
+      // Atualiza Consent Mode para denied, limpa cookies do GA e recarrega a página
+      revokeConsentAndReload();
+    } else {
+      setCookieConsent(false);
+      setVisible(false);
+    }
   };
 
   if (!visible) return null;
@@ -114,20 +100,14 @@ export default function CookieBanner() {
         <div className="flex flex-col items-center gap-2 flex-shrink-0 self-end md:self-auto min-w-[120px]">
           <button
             onClick={handleAccept}
-            disabled={loading}
-            className="w-full px-5 py-2.5 rounded-sm bg-[#F5CF00] hover:bg-[#e6c100] text-[#081D42] font-display font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_4px_12px_rgba(245,207,0,0.25)] cursor-pointer disabled:opacity-50 flex items-center justify-center min-w-[110px] animate-pulse-glow"
+            className="w-full px-5 py-2.5 rounded-sm bg-[#F5CF00] hover:bg-[#e6c100] text-[#081D42] font-display font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-[0_4px_12px_rgba(245,207,0,0.25)] cursor-pointer flex items-center justify-center min-w-[110px] animate-pulse-glow"
           >
-            {loading ? (
-              <span className="inline-block w-4 h-4 border-2 border-[#081D42] border-t-transparent rounded-full animate-spin" />
-            ) : (
-              "Aceitar"
-            )}
+            Aceitar
           </button>
 
           <button
             onClick={handleDecline}
-            disabled={loading}
-            className="px-4 py-1.5 text-[11px] font-utility text-[#F7F4EA]/60 hover:text-white transition-colors duration-200 cursor-pointer disabled:opacity-50"
+            className="px-4 py-1.5 text-[11px] font-utility text-[#F7F4EA]/60 hover:text-white transition-colors duration-200 cursor-pointer"
           >
             Recusar
           </button>

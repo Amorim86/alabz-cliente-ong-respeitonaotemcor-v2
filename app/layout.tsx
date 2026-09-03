@@ -22,7 +22,15 @@ export const APP_VERSION = 'v2';
 export const metadata: Metadata = {
   metadataBase: new URL("https://respeito.org.br"),
   title: "ONG Respeito Não Tem Cor",
-  description: "Dignidade sem distinção",
+  description:
+    "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
+  alternates: {
+    canonical: "https://respeito.org.br",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
@@ -33,19 +41,28 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "ONG Respeito Não Tem Cor",
-    description: "Dignidade sem distinção",
+    description:
+      "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
     url: "https://respeito.org.br",
     siteName: "ONG Respeito Não Tem Cor",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "ONG Respeito Não Tem Cor - Acolhimento e Igualdade Racial",
-      },
-    ],
     locale: "pt_BR",
     type: "website",
+    images: [
+      {
+        url: "https://respeito.org.br/og-image.jpg",
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
+        alt: "ONG Respeito Não Tem Cor — Acolhimento, formação e igualdade racial",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ONG Respeito Não Tem Cor",
+    description:
+      "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
+    images: ["https://respeito.org.br/og-image.jpg"],
   },
 };
 
