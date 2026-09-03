@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://respeito.org.br/sitemap.xml',
+    sitemap: 'https://www.respeito.org.br/sitemap.xml',
   }
 }

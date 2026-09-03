@@ -20,12 +20,12 @@ const inter = Inter({
 export const APP_VERSION = 'v2';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://respeito.org.br"),
+  metadataBase: new URL("https://www.respeito.org.br"),
   title: "ONG Respeito Não Tem Cor",
   description:
     "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
   alternates: {
-    canonical: "https://respeito.org.br",
+    canonical: "https://www.respeito.org.br",
   },
   robots: {
     index: true,
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
     title: "ONG Respeito Não Tem Cor",
     description:
       "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
-    url: "https://respeito.org.br",
+    url: "https://www.respeito.org.br",
     siteName: "ONG Respeito Não Tem Cor",
     locale: "pt_BR",
     type: "website",
     images: [
       {
-        url: "https://respeito.org.br/og-image.jpg",
+        url: "https://www.respeito.org.br/og-image.jpg",
         width: 1200,
         height: 630,
         type: "image/jpeg",
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: "ONG Respeito Não Tem Cor",
     description:
       "Aqui, respeito é prática: escuta, orientação, formação e rede para quem precisa recomeçar ou caminhar junto.",
-    images: ["https://respeito.org.br/og-image.jpg"],
+    images: ["https://www.respeito.org.br/og-image.jpg"],
   },
 };
 
