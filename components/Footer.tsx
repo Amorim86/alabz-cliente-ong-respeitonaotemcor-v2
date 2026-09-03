@@ -1,6 +1,7 @@
 import { Heart, Mail, Phone, MapPin } from "lucide-react";
 import { siteConfig } from "../config/site";
 import PacmanSignature from "./PacmanSignature";
+import ManageCookiesButton from "./ManageCookiesButton";
 
 // Importação dinâmica do ícone correspondente ao Header do site (com fallback seguro)
 export default function Footer() {
@@ -114,11 +115,14 @@ export default function Footer() {
         {/* Legal and Compliance Footer */}
         <div className="text-[11px] text-brand-footer-text/50 leading-relaxed">
           <div className="border-t border-brand-primary/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-brand-footer-text/80">
-            <p className="font-bold">
-              {siteConfig.name} | Todos os direitos reservados
-            </p>
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1">
+              <p className="font-bold">
+                {siteConfig.name} | Todos os direitos reservados
+              </p>
+              <span className="hidden sm:inline text-zinc-600">·</span>
+              <ManageCookiesButton />
+            </div>
 
-            
             <PacmanSignature />
           </div>
         </div>

@@ -1,61 +1,63 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { GoogleTagManager } from "@next/third-parties/google";
+import { useSyncExternalStore } from "react";
 import Script from "next/script";
+import { getCookieConsent, CONSENT_CHANGE_EVENT } from "@/lib/cookieConsent";
 
-const STORAGE_KEY = "alabz_cookies_accepted";
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
+
+function subscribe(callback: () => void) {
+  if (typeof window === "undefined") {
+    return () => {};
+  }
+  window.addEventListener(CONSENT_CHANGE_EVENT, callback);
+  return () => {
+    window.removeEventListener(CONSENT_CHANGE_EVENT, callback);
+  };
+}
+
+function getSnapshot(): boolean {
+  return getCookieConsent() === "granted";
+}
+
+function getServerSnapshot(): boolean {
+  return false;
+}
 
 export default function AnalyticsLoader() {
-  const [accepted, setAccepted] = useState(false);
+  // Sincronização reativa e sem cascading renders com o estado de consentimento
+  const isGranted = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
-  useEffect(() => {
-    // 1. Checa se o usuário já aceitou cookies anteriormente
-    const consent = localStorage.getItem(STORAGE_KEY);
-    if (consent === "true") {
-      setAccepted(true);
-    }
-
-    // 2. Escuta o evento customizado disparado pelo CookieBanner em caso de aceite em tempo real
-    const handleConsentAccepted = () => {
-      setAccepted(true);
-    };
-
-    window.addEventListener("alabz_cookies_accepted", handleConsentAccepted);
-    return () => {
-      window.removeEventListener("alabz_cookies_accepted", handleConsentAccepted);
-    };
-  }, []);
-
-  // Só injeta se houver consentimento
-  if (!accepted) {
+  // Sem consentimento concedido ou sem ID válido: zero scripts montados
+  if (!isGranted || !GA_MEASUREMENT_ID) {
     return null;
   }
 
   return (
     <>
-      {/* Google Tag Manager (GTM) */}
-      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
-
-      {/* Google Analytics 4 (GA4) */}
-      {GA_ID && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-            strategy="afterInteractive"
-          />
-          <Script id="google-analytics" strategy="afterInteractive">
-            {`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${GA_ID}');
-            `}
-          </Script>
-        </>
-      )}
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics-consent" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied',
+            'ad_user_data': 'denied',
+            'ad_personalization': 'denied'
+          });
+          gtag('consent', 'update', {
+            'analytics_storage': 'granted'
+          });
+          gtag('js', new Date());
+          gtag('config', '${GA_MEASUREMENT_ID}', {
+            anonymize_ip: true
+          });
+        `}
+      </Script>
     </>
   );
 }

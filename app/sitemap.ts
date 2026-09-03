@@ -1,12 +1,12 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: 'https://respeito.org.br',
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 1,
+      lastModified: '2026-09-03',
+      changeFrequency: 'monthly',
+      priority: 1.0,
     },
-  ]
+  ];
 }
