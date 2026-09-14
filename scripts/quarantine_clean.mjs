@@ -13,7 +13,6 @@ const preservedFiles = [
 
 // Unused orphan files in public/
 const publicOrphans = [
-  'googlea6c222725a2053b9.html',
   'images/assinatura-dirce.webp',
   'images/assinatura_negra_dirce.png',
   'images/atendimento-psicologico.webp',
