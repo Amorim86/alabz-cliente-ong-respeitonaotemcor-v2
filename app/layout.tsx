@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  verification: {
+    google: "googlea6c222725a2053b9.html",
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
